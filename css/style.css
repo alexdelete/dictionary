@@ -674,3 +674,33 @@ blockquote {
 .hidden {
   display: none;
 }
+.search-input-wrapper {
+  position: relative;
+  flex-grow: 1;
+}
+
+.autocomplete-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  margin-top: -16px; /* Компенсация для скругления */
+  padding-top: 16px; /* Чтобы перекрыть скругление input */
+}
+
+.search-input {
+  border-radius: 40px;
+  padding-right: 60px; /* Чтобы кнопка не наезжала */
+}
+
+.search-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
