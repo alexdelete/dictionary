@@ -780,3 +780,52 @@ blockquote {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* Дополнительные исправления */
+#word-page {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+#word-page.show {
+  display: block;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+#suggestions {
+  position: absolute;
+  top: calc(100% - 10px);
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--glass-shadow);
+  z-index: 100;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none;
+  border: 1px solid var(--glass-border);
+}
+
+#suggestions.show {
+  display: block;
+}
+
+.suggestion {
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.suggestion:hover {
+  background: var(--primary-light);
+}
+
+.example {
+  margin: 8px 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--primary);
+}
