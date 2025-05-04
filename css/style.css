@@ -618,3 +618,59 @@ header {
   color: var(--text);
 }
 
+/* Виртуальные страницы */
+#word-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.word-meta {
+  margin-bottom: 20px;
+}
+
+.transcription {
+  color: #666;
+  font-style: italic;
+}
+
+.tags span {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-right: 5px;
+  font-size: 0.8em;
+}
+
+.definition {
+  margin-bottom: 30px;
+}
+
+blockquote {
+  border-left: 3px solid #0060EA;
+  padding-left: 10px;
+  margin: 10px 0;
+  color: #555;
+}
+
+/* Поиск с подсказками */
+.suggestion {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.suggestion:hover {
+  background-color: #f5f5f5;
+}
+
+.suggestion mark {
+  background-color: #ffeb3b;
+  color: inherit;
+}
+
+.hidden {
+  display: none;
+}
