@@ -32,8 +32,8 @@ function handleRoute() {
 
 // Показать страницу слова
 function showWordPage(word) {
-  document.getElementById('search-container').classList.add('hidden');
-  document.getElementById('word-page').classList.remove('hidden');
+document.querySelector('.search-section').classList.remove('hidden');
+document.getElementById('word-page').classList.add('hidden');
   
   fetch('data/words.json')
     .then(response => response.json())
