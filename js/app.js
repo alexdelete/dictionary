@@ -1,85 +1,51 @@
-// Получение случайного слова
-function getRandomWord() {
-  fetch('data/words.json')
-    .then(response => response.json())
-    .then(data => {
-      const randomWord = data.words[Math.floor(Math.random() * data.words.length)];
-      displayWord(randomWord);
+// Обработчик выбора подсказки
+function setupSuggestions() {
+  document.querySelectorAll('.suggestion').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const word = item.dataset.word;
+      window.location.hash = encodeURIComponent(word);
+      document.getElementById('search-input').value = word;
     });
+  });
 }
 
-// Поиск по тегам
-function searchByTag(tag) {
-  fetch('data/words.json')
-    .then(response => response.json())
-    .then(data => {
-      const filtered = data.words.filter(word => 
-        word.tags.includes(tag)
-      );
-      console.log(`Слова с тегом "${tag}":`, filtered);
-    });
-}
-// Роутер
-function handleRoute() {
-  const hash = window.location.hash.substring(1);
+// В функции showSuggestions:
+function showSuggestions(results) {
+  const container = document.getElementById('suggestions');
+  container.innerHTML = results.map(word => `
+    <div class="suggestion" data-word="${word.word}">
+      <strong>${word.word}</strong>
+      <span>${word.transcription}</span>
+    </div>
+  `).join('');
   
-  if (hash) {
-    showWordPage(hash);
+  setupSuggestions();
+}
+// Обработчик хеша
+function handleHashChange() {
+  const word = decodeURIComponent(window.location.hash.substring(1));
+  
+  if (word) {
+    showWordPage(word);
   } else {
     showSearchPage();
   }
 }
 
-// Показать страницу слова
-function showWordPage(word) {
-document.querySelector('.search-section').classList.remove('hidden');
-document.getElementById('word-page').classList.add('hidden');
+// Показ страницы слова
+async function showWordPage(word) {
+  const response = await fetch('data/words.json');
+  const data = await response.json();
+  const wordData = data.words.find(w => w.word.toLowerCase() === word.toLowerCase());
   
-  fetch('data/words.json')
-    .then(response => response.json())
-    .then(data => {
-      const wordData = data.words.find(w => w.word.toLowerCase() === word.toLowerCase());
-      if (wordData) {
-        renderWord(wordData);
-      } else {
-        document.getElementById('word-content').innerHTML = `
-          <p>Слово не найдено. Попробуйте <a href="#">другой запрос</a>.</p>
-        `;
-      }
-    });
+  if (wordData) {
+    document.querySelector('.search-section').classList.add('hidden');
+    document.getElementById('word-page').classList.remove('hidden');
+    renderWord(wordData);
+  }
 }
-
-// Рендер слова
-function renderWord(wordData) {
-  document.getElementById('word-title').textContent = wordData.word;
-  
-  let html = `
-    <div class="word-meta">
-      <span class="transcription">${wordData.transcription}</span>
-      <div class="tags">${wordData.tags.map(t => `<span>${t}</span>`).join('')}</div>
-    </div>
-  `;
-  
-  wordData.definitions.forEach((def, i) => {
-    html += `
-      <div class="definition">
-        <h3>Значение ${i+1}:</h3>
-        <p>${def.meaning}</p>
-        ${def.examples.map(ex => `<blockquote>${ex}</blockquote>`).join('')}
-      </div>
-    `;
-  });
-  
-  document.getElementById('word-content').innerHTML = html;
-}
-
-// Назад к поиску
-document.getElementById('back-link').addEventListener('click', (e) => {
-  e.preventDefault();
-  window.location.hash = '';
-  showSearchPage();
-});
 
 // Инициализация
-window.addEventListener('hashchange', handleRoute);
-handleRoute();
+window.addEventListener('hashchange', handleHashChange);
+window.addEventListener('load', handleHashChange);
