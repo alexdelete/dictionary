@@ -101,6 +101,11 @@
       const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
       localStorage.setItem('theme', theme);
     });
+    <script>
+  // Инициализация после загрузки DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    new Autocomplete('search-input', 'suggestions');
+  });
   </script>
   
   <script src="js/autocomplete.js"></script>
