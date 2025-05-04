@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rech’ — Современный словарь 2025</title>
+  <meta name="description" content="Самый современный словарь интернет-сленга и новых слов 2025 года">
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header">
+        <div class="logo-container animate__animated animate__fadeIn">
+          <img src="logo.svg" alt="Rech’" class="logo-image">
+          <div class="logo-text">Rech’</div>
+        </div>
+        <nav class="nav">
+          <a href="#" class="nav-link">Главная</a>
+          <a href="#" class="nav-link">О проекте</a>
+          <a href="#" class="nav-link">Категории</a>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <section class="search-section">
+    <div class="container">
+      <div class="search-wrapper animate__animated animate__fadeInUp">
+        <input type="text" placeholder="Найти слово или выражение..." class="search-input" />
+        <button class="search-button" aria-label="Поиск">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 21L16.65 16.65" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <main class="main">
+      <div class="cards">
+        <div class="card large animate__animated animate__fadeInLeft">
+          <p class="label">Всего слов</p>
+          <h1 class="total">1,429</h1>
+          <p class="subtext">в нашей базе<br />+23 за неделю</p>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+        <div class="card small animate__animated animate__fadeInRight">
+          <p class="card-label">Слово дня</p>
+          <h2 class="word-title">Кринж</h2>
+          <p class="definition">(от англ. cringe — съеживаться)</p>
+          <a href="#" class="more-link">
+            Подробнее
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <section class="about animate__animated animate__fadeInUp">
+        <h3>О проекте</h3>
+        <p><strong>Rech’</strong> — это не просто словарь, а путеводитель по современному языку 🌍</p>
+        <p>Мы собираем самые актуальные слова 2025 года:</p>
+        <ul class="about-list">
+          <li>🔥 Самые свежие слова и мемы</li>
+          <li>💬 Интернет-сленг и соцсетевой жаргон</li>
+          <li>🔄 Англицизмы и заимствования</li>
+          <li>🧩 Неочевидные значения привычных слов</li>
+          <li>🤖 Термины из мира AI и технологий</li>
+          <li>🌐 Глобальные интернет-тренды</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <button class="dark-mode-toggle" aria-label="Переключить темный режим">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </button>
+
+  <script>
+    // Dark mode toggle
+    const toggle = document.querySelector('.dark-mode-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = localStorage.getItem('theme');
+    
+    if (currentTheme === 'dark' || (!currentTheme && prefersDark)) {
+      document.body.classList.add('dark-mode');
+    }
+    
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.setItem('theme', theme);
+    });
+  </script>
+</body>
+</html>
