@@ -654,22 +654,7 @@ blockquote {
   color: #555;
 }
 
-/* Поиск с подсказками */
-.suggestion {
-  padding: 8px 12px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-}
 
-.suggestion:hover {
-  background-color: #f5f5f5;
-}
-
-.suggestion mark {
-  background-color: #ffeb3b;
-  color: inherit;
-}
 
 .hidden {
   display: none;
@@ -704,51 +689,13 @@ blockquote {
   transform: translateY(-50%);
   z-index: 2;
 }
-.autocomplete-suggestions {
-  transition: all 0.3s ease;
-  transform-origin: top;
-}
 
-.suggestion {
-  padding: 12px 24px;
-  transition: background 0.2s;
-}
 /* ФИКС ПОДСКАЗОК */
 .search-wrapper {
   position: relative;
 }
 
-#suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  max-height: 300px;
-  overflow-y: auto;
-  display: none;
-  margin-top: -10px;
-  padding-top: 10px;
-}
 
-#suggestions.show {
-  display: block;
-}
-
-.suggestion {
-  padding: 12px 24px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.suggestion:hover {
-  background: #f8f8f8;
-}
 
 /* ФИКС КНОПКИ ПОИСКА */
 .search-button {
@@ -795,19 +742,28 @@ blockquote {
   flex: 1;
 }
 
+
+
+.example {
+  margin: 8px 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--primary);
+}
 #suggestions {
   position: absolute;
-  top: calc(100% - 10px);
+  top: calc(100% + 5px); /* Отступ от поля ввода */
   left: 0;
   right: 0;
   background: var(--card-bg);
-  border-radius: 0 0 16px 16px;
-  box-shadow: var(--glass-shadow);
-  z-index: 100;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000; /* Важно: выше кнопки поиска */
   max-height: 300px;
   overflow-y: auto;
   display: none;
   border: 1px solid var(--glass-border);
+  margin-top: 0; /* Убираем отрицательный отступ */
+  padding: 10px 0; /* Внутренние отступы */
 }
 
 #suggestions.show {
@@ -822,10 +778,4 @@ blockquote {
 
 .suggestion:hover {
   background: var(--primary-light);
-}
-
-.example {
-  margin: 8px 0;
-  padding-left: 16px;
-  border-left: 2px solid var(--primary);
 }
