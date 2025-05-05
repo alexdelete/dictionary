@@ -14,7 +14,7 @@
     <header>
       <div class="header">
         <div class="logo-container animate__animated animate__fadeIn">
-          <img src="logo.svg" alt="Rech’" class="logo-image">
+          <img src="logo.svg" alt="Логотип Rech’ — словарь" class="logo-image">
           <div class="logo-text">Rech’</div>
         </div>
         <nav class="nav">
@@ -24,48 +24,42 @@
         </nav>
       </div>
     </header>
-  </div>
-<div id="app">
-  <section class="search-section">
-    <div class="container">
-      <div class="search-wrapper">
-        <div class="search-input-wrapper">
-          <input type="text" 
-                 id="search-input"
-                 placeholder="Найти слово или выражение..." 
-                 class="search-input" 
-                 autocomplete="off" />
-          <div id="suggestions" class="autocomplete-suggestions"></div>
+
+    <div id="app">
+      <section class="search-section">
+        <div class="search-wrapper">
+          <div class="search-input-wrapper">
+            <input type="text" 
+                   id="search-input"
+                   placeholder="Найти слово или выражение..." 
+                   class="search-input" 
+                   autocomplete="off" />
+            <div id="suggestions" class="autocomplete-suggestions"></div>
+          </div>
+          <button class="search-button" aria-label="Поиск">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 21L16.65 16.65" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
-        <button class="search-button" aria-label="Поиск">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M21 21L16.65 16.65" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-               </button>
-      </div>
+      </section>
+
+      <!-- Контейнер для виртуальной страницы слова -->
+      <section id="word-page" class="word-page hidden">
+        <div class="word-card">
+          <h1 id="word-title"></h1>
+          <div id="word-content"></div>
+          <a href="#" id="back-link" class="more-link">
+            ← Назад к поиску
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </section>
     </div>
-  </section>
 
-
-  <!-- Контейнер для виртуальной страницы слова -->
-  <section id="word-page" class="word-page hidden">
-    <div class="container">
-      <div class="word-card">
-        <h1 id="word-title"></h1>
-        <div id="word-content"></div>
-        <a href="#" id="back-link" class="more-link">
-          ← Назад к поиску
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
-</div>
-
-  <div class="container">
     <main class="main">
       <div class="cards">
         <div class="card large animate__animated animate__fadeInLeft">
@@ -80,7 +74,7 @@
           <p class="card-label">Слово дня</p>
           <h2 class="word-title">Кринж</h2>
           <p class="definition">(от англ. cringe — съеживаться)</p>
-          <a href="#" class="more-link">
+          <a href="#Кринж" class="more-link">
             Подробнее
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -88,7 +82,7 @@
           </a>
         </div>
       </div>
-      
+
       <section class="about animate__animated animate__fadeInUp">
         <h3>О проекте</h3>
         <p><strong>Rech’</strong> — это не просто словарь, а путеводитель по современному языку 🌍</p>
@@ -104,6 +98,11 @@
       </section>
     </main>
 
+    <footer class="footer">
+      <p>© 2025 Rech’. Все права защищены.</p>
+    </footer>
+  </div>
+
   <button class="dark-mode-toggle" aria-label="Переключить темный режим">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -115,19 +114,16 @@
     const toggle = document.querySelector('.dark-mode-toggle');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const currentTheme = localStorage.getItem('theme');
-    
+
     if (currentTheme === 'dark' || (!currentTheme && prefersDark)) {
       document.body.classList.add('dark-mode');
     }
-    
+
     toggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
       const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
       localStorage.setItem('theme', theme);
     });
-  // Инициализация после загрузки DOM
-  document.addEventListener('DOMContentLoaded', () => {
-  });
   </script>
 
   <script src="js/app.js"></script>
