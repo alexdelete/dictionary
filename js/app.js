@@ -102,23 +102,23 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function showSuggestions(query) {
-    const results = wordsData.filter(word => 
-      word.word.toLowerCase().includes(query.toLowerCase()) || 
-      (word.transcription && word.transcription.toLowerCase().includes(query.toLowerCase()))
-    ).slice(0, 5);
-    
-    if (results.length > 0) {
-      suggestions.innerHTML = results.map(word => `
-        <div class="suggestion" data-word="${word.word}">
-          <strong>${highlight(word.word, query)}</strong>
-          <span>${word.transcription || ''}</span>
-        </div>
-      `).join('');
-      suggestions.classList.add('show');
-    } else {
-      hideSuggestions();
-    }
+  const results = wordsData.filter(word => 
+    word.word.toLowerCase().includes(query.toLowerCase()) || 
+    (word.transcription && word.transcription.toLowerCase().includes(query.toLowerCase()))
+  ).slice(0, 5);
+  
+  if (results.length > 0) {
+    suggestions.innerHTML = results.map(word => `
+      <div class="suggestion" data-word="${word.word}">
+        <strong>${highlight(word.word, query)}</strong>
+        ${word.transcription ? `<span>${word.transcription}</span>` : ''}
+      </div>
+    `).join('');
+    suggestions.classList.add('show');
+  } else {
+    hideSuggestions();
   }
+}
 
   function highlight(text, query) {
     const index = text.toLowerCase().indexOf(query.toLowerCase());
