@@ -659,23 +659,6 @@ blockquote {
 .hidden {
   display: none;
 }
-.search-input-wrapper {
-  position: relative;
-  flex-grow: 1;
-}
-
-.autocomplete-suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  margin-top: -16px; /* Компенсация для скругления */
-  padding-top: 16px; /* Чтобы перекрыть скругление input */
-}
 
 .search-input {
   border-radius: 40px;
@@ -725,9 +708,7 @@ blockquote {
   display: block;
 }
 
-.search-input-wrapper {
-  position: relative;
-  flex: 1;
+
 }
 .example {
   margin: 8px 0;
@@ -736,30 +717,42 @@ blockquote {
 }
 
 .search-input-wrapper {
-  position: relative; /* Ключ к абсолютному позиционированию подсказок */
-  width: 100%;
+  position: relative;
 }
 
-#suggestions,
 .autocomplete-suggestions {
   position: absolute;
-  top: 100%;
+  top: 100%; /* появится сразу под полем */
   left: 0;
   right: 0;
-  background: white;
+  z-index: 999;
+  background: #fff;
   border: 1px solid #ccc;
   border-top: none;
-  max-height: 250px;
+  max-height: 220px;
   overflow-y: auto;
-  z-index: 999;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: none; /* по умолчанию скрыто */
 }
 
-.autocomplete-suggestions div {
-  padding: 10px;
+.autocomplete-suggestions.show {
+  display: block;
+}
+
+.suggestion {
+  padding: 10px 12px;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
 }
 
-.autocomplete-suggestions div:hover {
+.suggestion:hover {
   background-color: #f0f0f0;
+}
+
+.suggestion span {
+  color: #888;
+  font-size: 14px;
 }
