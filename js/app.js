@@ -132,3 +132,9 @@ document.addEventListener('DOMContentLoaded', function() {
     suggestions.classList.remove('show');
   }
 });
+document.querySelector('.search-button').addEventListener('click', () => {
+  const query = searchInput.value.trim();
+  if (query) {
+    window.location.hash = encodeURIComponent(query);
+  }
+});
