@@ -7,9 +7,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const wordContent = document.getElementById('word-content');
   const backLink = document.getElementById('back-link');
   const searchSection = document.querySelector('.search-section');
+  const searchInput = document.getElementById('search-input');
+  const searchButton = document.querySelector('.search-button');
   
   let wordsData = [];
 
+  searchButton.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      window.location.hash = encodeURIComponent(query);
+    }
+  });
+  
   // Загрузка данных
   fetch('data/words.json')
     .then(response => response.json())
@@ -130,11 +139,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function hideSuggestions() {
     suggestions.classList.remove('show');
-  }
-});
-document.querySelector('.search-button').addEventListener('click', () => {
-  const query = searchInput.value.trim();
-  if (query) {
-    window.location.hash = encodeURIComponent(query);
   }
 });
