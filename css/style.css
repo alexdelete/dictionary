@@ -698,14 +698,35 @@ blockquote {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-/* Дополнительные исправления */
-#word-page {
-  display: none;
-  animation: fadeIn 0.3s ease;
+.word-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
 }
 
-#word-page.show {
-  display: block;
+.word-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.definition-block {
+  margin-bottom: 1.5rem;
+}
+
+.definition-block ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.tags, .rating {
+  margin-top: 1rem;
+  color: var(--text-secondary);
+}
+
+.hidden {
+  display: none !important;
 }
 
 
