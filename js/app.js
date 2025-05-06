@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let words = [];
 
-  fetch("data/words.json")
+fetch("https://alexdelete.github.io/dictionary/data/words.json")
     .then(res => res.json())
     .then(data => {
       words = data.words;
