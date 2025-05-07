@@ -69,26 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSuggestions(filtered);
   }
 
-  // Отображение подсказок
-  function renderSuggestions(words) {
-    suggestions.innerHTML = words.map(word => `
-      <div class="suggestion" data-word="${word.word}">
-        <strong>${highlight(word.word, searchInput.value)}</strong>
-        <span>${word.definition}</span>
-      </div>
-    `).join('');
-    
-    suggestions.classList.toggle("show", words.length > 0);
-  }
-  suggestions.addEventListener("click", (e) => {
-  const suggestion = e.target.closest(".suggestion");
-  if (suggestion) {
-    const word = suggestion.dataset.word;
-    location.hash = encodeURIComponent(word);
-    suggestions.classList.remove("show"); // <-- Добавить
-    document.querySelector('.search-input-wrapper').style.borderRadius = '40px'; // <-- И это
-  }
-});
+
 
   // Подсветка совпадений
   function highlight(text, query) {
