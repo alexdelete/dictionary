@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const suggestions = document.getElementById("suggestions");
   const categorySelect = document.getElementById("category-select");
   const app = document.getElementById("app");
-  
-  let words = []; // Здесь будут храниться все слова
 
   // Загрузка данных
   async function loadWords() {
