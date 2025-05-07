@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const suggestions = document.getElementById("suggestions");
   const categorySelect = document.getElementById("category-select");
   const app = document.getElementById("app");
+  categorySelect.addEventListener('focus');
 
   // Загрузка данных
   async function loadWords() {
@@ -22,6 +23,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("Ошибка загрузки словаря:", err);
       wordContainer.innerHTML = "Ошибка загрузки словаря. Пожалуйста, попробуйте позже.";
     }
+  }
+   // Подсветка совпадений
+  function highlight(text, query) {
+    if (!query) return text;
+    const index = text.toLowerCase().indexOf(query.toLowerCase());
+    if (index >= 0) {
+      return text.substring(0, index) + 
+        '<mark>' + text.substring(index, index + query.length) + '</mark>' + 
+        text.substring(index + query.length);
+    }
+    return text;
   }
 
   // Инициализация "Слова дня"
@@ -65,20 +77,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }).slice(0, 5);
     
     renderSuggestions(filtered);
-  }
-
-
-
-  // Подсветка совпадений
-  function highlight(text, query) {
-    if (!query) return text;
-    const index = text.toLowerCase().indexOf(query.toLowerCase());
-    if (index >= 0) {
-      return text.substring(0, index) + 
-        '<mark>' + text.substring(index, index + query.length) + '</mark>' + 
-        text.substring(index + query.length);
-    }
-    return text;
   }
 
   // Показать страницу слова
