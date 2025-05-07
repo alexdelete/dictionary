@@ -15,6 +15,20 @@ defEl.textContent = wordObj.definition;
 linkEl.setAttribute("href", "#" + encodeURIComponent(wordObj.word));
 
   let words = [];
+function showWordOfTheDay(selector, word) {
+  const el = document.querySelector(selector);
+  const link = document.querySelector("#word-link");
+
+  if (el) {
+    el.innerHTML = `<h2 class="word-title">${word.word}</h2>
+                    <p class="definition">${word.definition}</p>`;
+  }
+
+  if (link) {
+    link.setAttribute("href", "#" + encodeURIComponent(word.word));
+  }
+}
+
 
   // Загрузка данных из локального файла
   fetch("data/words.json")
