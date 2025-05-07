@@ -171,3 +171,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Загрузка данных
   loadWords();
 });
+// Анимация при фокусе/ховере на селекторе
+categorySelect.addEventListener('focus', () => {
+  categorySelect.parentElement.style.transform = 'translateY(-2px)';
+  categorySelect.parentElement.style.boxShadow = '0 8px 40px rgba(0, 0, 0, 0.2)';
+});
+
+categorySelect.addEventListener('blur', () => {
+  categorySelect.parentElement.style.transform = '';
+  categorySelect.parentElement.style.boxShadow = '';
+});
+
+categorySelect.addEventListener('mouseenter', () => {
+  categorySelect.parentElement.style.transform = 'translateY(-2px)';
+});
+
+categorySelect.addEventListener('mouseleave', () => {
+  if (document.activeElement !== categorySelect) {
+    categorySelect.parentElement.style.transform = '';
+  }
+});
