@@ -81,3 +81,67 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+const input = document.getElementById('search-input');
+const select = document.getElementById('category-select');
+const suggestions = document.getElementById('suggestions');
+const wordTitle = document.getElementById('word-title');
+const wordContent = document.getElementById('word-content');
+const wordPage = document.getElementById('word-page');
+const app = document.getElementById('app');
+const backLink = document.getElementById('back-link');
+
+// Фильтрация
+function updateSuggestions() {
+  const query = input.value.toLowerCase();
+  const selectedCategory = select.value;
+
+  const filtered = words.filter(({ word, category }) => {
+    const matchesQuery = word.includes(query);
+    const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+    return matchesQuery && matchesCategory;
+  });
+
+  suggestions.innerHTML = filtered.map(({ word, definition }) =>
+    `<div class="suggestion-item" data-word="${word}"><strong>${word}</strong>: ${definition}</div>`
+  ).join('');
+}
+
+// Обработка клика на слово
+suggestions.addEventListener('click', (e) => {
+  const item = e.target.closest('.suggestion-item');
+  if (item) {
+    const selectedWord = item.dataset.word;
+    window.location.hash = selectedWord;
+  }
+});
+
+// Отображение слова по хешу
+function showWordFromHash() {
+  const hash = decodeURIComponent(location.hash.slice(1));
+  const entry = words.find(w => w.word === hash);
+  if (entry) {
+    wordTitle.textContent = entry.word;
+    wordContent.textContent = entry.definition;
+    wordPage.classList.remove('hidden');
+    app.classList.add('hidden');
+  } else {
+    wordPage.classList.add('hidden');
+    app.classList.remove('hidden');
+  }
+}
+
+// Назад
+backLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  history.pushState(null, '', '#');
+  showWordFromHash();
+});
+
+window.addEventListener('hashchange', showWordFromHash);
+window.addEventListener('DOMContentLoaded', () => {
+  updateSuggestions();
+  showWordFromHash();
+});
+
+input.addEventListener('input', updateSuggestions);
+select.addEventListener('change', updateSuggestions);
