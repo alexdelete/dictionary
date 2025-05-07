@@ -1,44 +1,499 @@
 {
   "words": [
     {
-      "id": 1,
-      "word": "кринж",
-      "transcription": "кринж",
+      "word": "nevermind",
+      "definition": "забудь, забей",
+      "category": "сокращения",
+      "transcription": "nvm",
+      "date_added": "2025-05-07",
+      "tags": ["чат", "сленг"],
+      "rating": 5,
       "definitions": [
         {
-          "meaning": "Чувство неловкости за чужие действия",
-          "examples": [
-            "Этот мем — полный кринж!",
-            "Я кринжую с его поведения"
-          ]
+          "meaning": "забудь, неважно",
+          "examples": ["Nvm, уже не надо.", "Ой, забей – nevermind."]
         }
-      ],
-      "tags": ["интернет", "эмоции"],
-      "rating": 245,
-      "date_added": "2023-05-15"
+      ]
     },
     {
-      "id": 2,
-      "word": "флекс",
-      "transcription": "флекс",
+      "word": "period",
+      "definition": "и точка (в ссоре)",
+      "category": "эмоции",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["утверждение", "эмоции"],
+      "rating": 7,
       "definitions": [
         {
-          "meaning": "Показное хвастовство",
-          "examples": [
-            "Он постоянно флексит своими часами",
-            "Перестань флексить, это раздражает"
-          ]
-        },
-        {
-          "meaning": "Демонстрация навыков",
-          "examples": [
-            "Устроил флекс в тиктоке с трюками"
-          ]
+          "meaning": "и точка",
+          "examples": ["Я права, period!"]
         }
-      ],
-      "tags": ["сленг", "соцсети"],
-      "rating": 189,
-      "date_added": "2023-05-10"
+      ]
+    },
+    {
+      "word": "lowkey",
+      "definition": "немного, чуть-чуть",
+      "category": "наречие",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["сленг", "разговорный"],
+      "rating": 6,
+      "definitions": [
+        {
+          "meaning": "чуть-чуть не хочу",
+          "examples": ["Lowkey не хочу идти.", "Он lowkey завидует."]
+        }
+      ]
+    },
+    {
+      "word": "like",
+      "definition": "типо",
+      "category": "паразит",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["разговорный", "англицизм"],
+      "rating": 4,
+      "definitions": [
+        {
+          "meaning": "вроде, как бы",
+          "examples": ["Она такая like 'вау'", "Это like круто"]
+        }
+      ]
+    },
+    {
+      "word": "yikes",
+      "definition": "ой, капец (негатив)",
+      "category": "эмоции",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["реакция", "негатив"],
+      "rating": 8,
+      "definitions": [
+        {
+          "meaning": "ужас, капец",
+          "examples": ["Yikes, что это было?!", "Ой, yikes..."]
+        }
+      ]
+    },
+    {
+      "word": "shoot",
+      "definition": "блин",
+      "category": "эмоции",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["разговорный", "эвфемизм"],
+      "rating": 4,
+      "definitions": [
+        {
+          "meaning": "выражение досады",
+          "examples": ["Shoot, я забыл!", "Ой, shoot..."]
+        }
+      ]
+    },
+    {
+      "word": "for real",
+      "definition": "реально, серьезно",
+      "category": "утверждение",
+      "transcription": "fr",
+      "date_added": "2025-05-07",
+      "tags": ["подтверждение", "сленг"],
+      "rating": 9,
+      "definitions": [
+        {
+          "meaning": "действительно",
+          "examples": ["— Ты правда уходишь? — For real.", "Fr, это правда."]
+        }
+      ]
+    },
+    {
+      "word": "bounce",
+      "definition": "свалить, уйти",
+      "category": "действие",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["сленг", "разговорный"],
+      "rating": 6,
+      "definitions": [
+        {
+          "meaning": "уходить с места",
+          "examples": ["Я bounce, мне пора.", "Они уже bounced."]
+        }
+      ]
+    },
+    {
+      "word": "literally",
+      "definition": "буквально",
+      "category": "наречие",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["формальное", "усиление"],
+      "rating": 3,
+      "definitions": [
+        {
+          "meaning": "в прямом смысле",
+          "examples": ["Я literally умер от смеха."]
+        }
+      ]
+    },
+    {
+      "word": "nvm",
+      "definition": "nevermind (сокращение)",
+      "category": "сокращения",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["чат", "сообщения"],
+      "rating": 7,
+      "definitions": [
+        {
+          "meaning": "забудь",
+          "examples": ["Nvm, я разобрался."]
+        }
+      ]
+    },
+    {
+      "word": "omw",
+      "definition": "on my way (я в пути)",
+      "category": "сокращения",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["чат", "сообщения"],
+      "rating": 8,
+      "definitions": [
+        {
+          "meaning": "уже иду",
+          "examples": ["OMW, жди через 5 мин."]
+        }
+      ]
+    },
+    {
+      "word": "ig",
+      "definition": "I guess (я думаю)",
+      "category": "сокращения",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["чат", "неуверенность"],
+      "rating": 5,
+      "definitions": [
+        {
+          "meaning": "наверное",
+          "examples": ["Ig, он не придет."]
+        }
+      ]
+    },
+    {
+      "word": "gtg",
+      "definition": "got to go (мне идти)",
+      "category": "сокращения",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["чат", "сообщения"],
+      "rating": 7,
+      "definitions": [
+        {
+          "meaning": "мне пора",
+          "examples": ["Gtg, созвонимся завтра."]
+        }
+      ]
+    },
+    {
+      "word": "imy",
+      "definition": "I miss you (скучаю)",
+      "category": "сокращения",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["чат", "эмоции"],
+      "rating": 6,
+      "definitions": [
+        {
+          "meaning": "скучаю по тебе",
+          "examples": ["Imy, когда встретимся?"]
+        }
+      ]
+    },
+    {
+      "word": "pmo",
+      "definition": "piss me off (бесит)",
+      "category": "сокращения",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["чат", "негатив"],
+      "rating": 5,
+      "definitions": [
+        {
+          "meaning": "раздражает",
+          "examples": ["Этот шум меня PMO."]
+        }
+      ]
+    },
+    {
+      "word": "glaze",
+      "definition": "подлизываться",
+      "category": "действие",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["негатив", "поведение"],
+      "rating": 4,
+      "definitions": [
+        {
+          "meaning": "льстить ради выгоды",
+          "examples": ["Хватит glaze начальника."]
+        }
+      ]
+    },
+    {
+      "word": "ride or die",
+      "definition": "преданный человек",
+      "category": "характеристика",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["дружба", "сленг"],
+      "rating": 7,
+      "definitions": [
+        {
+          "meaning": "друг до конца",
+          "examples": ["Она мой ride or die."]
+        }
+      ]
+    },
+    {
+      "word": "besty",
+      "definition": "лучшая подружка",
+      "category": "характеристика",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["дружба", "лайт-сленг"],
+      "rating": 6,
+      "definitions": [
+        {
+          "meaning": "лучшая подруга",
+          "examples": ["Моя besty знает всё."]
+        }
+      ]
+    },
+    {
+      "word": "goated",
+      "definition": "очень крутой",
+      "category": "характеристика",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["комплимент", "сленг"],
+      "rating": 8,
+      "definitions": [
+        {
+          "meaning": "лучший (от GOAT — greatest of all time)",
+          "examples": ["Ты goated в этом деле!"]
+        }
+      ]
+    },
+    {
+      "word": "nailed it",
+      "definition": "отлично справился",
+      "category": "похвала",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["успех", "комплимент"],
+      "rating": 7,
+      "definitions": [
+        {
+          "meaning": "сделал идеально",
+          "examples": ["Ты nailed it с этим проектом!"]
+        }
+      ]
+    },
+    {
+      "word": "huzz/chuzz",
+      "definition": "красивый/некрасивый",
+      "category": "оценка",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["внешность", "сленг"],
+      "rating": 5,
+      "definitions": [
+        {
+          "meaning": "huzz — красивый, chuzz — нет",
+          "examples": ["Он такой huzz!", "Этот цвет — полный chuzz."]
+        }
+      ]
+    },
+    {
+      "word": "chopped",
+      "definition": "выглядит плохо",
+      "category": "оценка",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["внешность", "негатив"],
+      "rating": 4,
+      "definitions": [
+        {
+          "meaning": "неудачный образ",
+          "examples": ["Он сегодня chopped.", "Эта стрижка — chopped."]
+        }
+      ]
+    },
+    {
+      "word": "im cooked",
+      "definition": "мне капец",
+      "category": "эмоции",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["проблемы", "сленг"],
+      "rating": 6,
+      "definitions": [
+        {
+          "meaning": "я в беде",
+          "examples": ["I'm cooked — завалил экзамен."]
+        }
+      ]
+    },
+    {
+      "word": "you cooked",
+      "definition": "ты молодец / тебе капец",
+      "category": "эмоции",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["двусмысленность", "сленг"],
+      "rating": 5,
+      "definitions": [
+        {
+          "meaning": "зависит от контекста",
+          "examples": ["You cooked! (похвала)", "You're cooked... (угроза)"]
+        }
+      ]
+    },
+    {
+      "word": "cap",
+      "definition": "враньё",
+      "category": "негатив",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["обман", "сленг"],
+      "rating": 9,
+      "definitions": [
+        {
+          "meaning": "лгать",
+          "examples": ["Не cap!", "Это pure cap."]
+        }
+      ]
+    },
+    {
+      "word": "yapping",
+      "definition": "много говорить не по делу",
+      "category": "поведение",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["негатив", "разговорный"],
+      "rating": 5,
+      "definitions": [
+        {
+          "meaning": "треп",
+          "examples": ["Хватит yapping, дело говори."]
+        }
+      ]
+    },
+    {
+      "word": "deadass",
+      "definition": "я серьёзно",
+      "category": "утверждение",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["уверенность", "сленг"],
+      "rating": 7,
+      "definitions": [
+        {
+          "meaning": "без шуток",
+          "examples": ["Deadass, я видел это своими глазами."]
+        }
+      ]
+    },
+    {
+      "word": "ate",
+      "definition": "хорошо сделала",
+      "category": "похвала",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["комплимент", "сленг"],
+      "rating": 8,
+      "definitions": [
+        {
+          "meaning": "справилась на 100%",
+          "examples": ["Ты ate этот образ!", "Она ate на выступлении."]
+        }
+      ]
+    },
+    {
+      "word": "rizz",
+      "definition": "харизма, флирт",
+      "category": "характеристика",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["романтика", "сленг"],
+      "rating": 9,
+      "definitions": [
+        {
+          "meaning": "умение нравиться",
+          "examples": ["У него мощный rizz.", "Она rizzит всех парней."]
+        }
+      ]
+    },
+    {
+      "word": "opp",
+      "definition": "враг",
+      "category": "негатив",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["конфликт", "сленг"],
+      "rating": 6,
+      "definitions": [
+        {
+          "meaning": "недруг (от opponent)",
+          "examples": ["Это мой opp.", "Он с oppами связался."]
+        }
+      ]
+    },
+    {
+      "word": "lock in",
+      "definition": "сфокусируйся",
+      "category": "действие",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["мотивация", "сленг"],
+      "rating": 7,
+      "definitions": [
+        {
+          "meaning": "сосредоточься",
+          "examples": ["Lock in, завтра экзамен!", "Он locked in на работе."]
+        }
+      ]
+    },
+    {
+      "word": "hit it off",
+      "definition": "поладить",
+      "category": "действие",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["общение", "позитив"],
+      "rating": 6,
+      "definitions": [
+        {
+          "meaning": "найти общий язык",
+          "examples": ["Мы сразу hit it off."]
+        }
+      ]
+    },
+    {
+      "word": "fire",
+      "definition": "круто (досл. 'огонь')",
+      "category": "оценка",
+      "transcription": "",
+      "date_added": "2025-05-07",
+      "tags": ["комплимент", "сленг"],
+      "rating": 10,
+      "definitions": [
+        {
+          "meaning": "очень хорошо",
+          "examples": ["Этот трек — fire!", "Твой стиль fire."]
+        }
+      ]
     }
   ]
 }
