@@ -26,26 +26,29 @@
     </header>
       </div>
 <section class="search-section">
-  <div class="search-wrapper">
-    <div class="category-dropdown" id="category-dropdown">
-      <div class="category-option" data-value="all">Все категории</div>
-      <div class="category-option" data-value="emotion">😊 Эмоции</div>
-      <div class="category-option" data-value="social">💬 Общение</div>
-      <div class="category-option" data-value="character">👤 Отношения</div>
-      <div class="category-option" data-value="status">⭐ Оценка</div>
+  <div class="container">
+    <div class="search-wrapper">
+      <div class="category-select-wrapper">
+        <select id="category-select" class="category-select">
+          <option value="all">Все категории</option>
+          <option value="emotion">😊 Эмоции</option>
+          <option value="social">💬 Общение</option>
+          <option value="character">👤 Отношения</option>
+          <option value="status">⭐ Оценка</option>
+        </select>
+      </div>
+      
+      <div class="search-input-wrapper">
+        <input type="text" id="search-input" placeholder="Найти слово..." class="search-input" autocomplete="off">
+        <div id="suggestions" class="autocomplete-suggestions"></div>
+        <button class="search-button" aria-label="Поиск">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" stroke-width="2"/>
+            <path d="M21 21L16.65 16.65" stroke="white" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
     </div>
-    
-    <div class="search-input-wrapper">
-      <input type="text" 
-             id="search-input"
-placeholder="Найти слово..." class="search-input" autocomplete="off">
-      <div id="suggestions" class="autocomplete-suggestions"></div>
-     <button class="search-button" aria-label="Поиск">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" stroke-width="2"/>
-        <path d="M21 21L16.65 16.65" stroke="white" stroke-width="2"/>
-      </svg>
-    </button>
   </div>
 </section>
     <section id="word-page" class="word-page hidden">
