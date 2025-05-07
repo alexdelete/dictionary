@@ -181,13 +181,23 @@ categorySelect.addEventListener('mouseleave', () => {
 });
 // В функции renderSuggestions обновите стиль подсказок
 function renderSuggestions(words) {
-  const suggestions = document.getElementById('suggestions');
-  suggestions.innerHTML = words.map(word => `
+  const suggestionsContainer = document.getElementById('suggestions');
+  suggestionsContainer.innerHTML = words.map(word => `
     <div class="suggestion" data-word="${word.word}">
       <strong>${highlight(word.word, searchInput.value)}</strong>
       <span>${word.definition}</span>
     </div>
   `).join('');
+  
+  suggestionsContainer.classList.toggle('show', words.length > 0);
+
+  if (words.length > 0) {
+    document.querySelector('.search-input-wrapper').style.borderRadius = '20px 20px 0 0';
+  } else {
+    document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
+  }
+}
+
   
   // Плавное появление
   suggestions.classList.toggle('show', words.length > 0);
