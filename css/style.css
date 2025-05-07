@@ -165,13 +165,10 @@ header {
 .search-wrapper {
   width: 100%;
   position: relative;
-  display: flex;
-  gap: 12px;
-  align-items: center;
 }
 
 .search-input-wrapper {
-  position: relative;
+   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
@@ -182,11 +179,10 @@ header {
   box-shadow: var(--glass-shadow);
   border: 1px solid var(--glass-border);
   transition: var(--transition);
-  flex-grow: 1;
 }
 
 .search-input {
-  flex: 1;
+ flex: 1;
   height: 100%;
   padding: 0 20px;
   border: none;
@@ -200,11 +196,6 @@ header {
   outline: none;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
   transform: translateY(-4px);
-}
-
-.search-input:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 4px;
 }
 
 .search-input::placeholder {
@@ -244,87 +235,26 @@ header {
   transform: scale(1.1);
 }
 
-/* Category Select */
-.category-select-wrapper {
-  position: relative;
-  min-width: 200px;
-}
-
-.category-select {
-  width: 100%;
-  height: 56px;
-  padding: 0 40px 0 16px;
-  font-size: 16px;
-  border-radius: 28px;
-  border: none;
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--glass-shadow);
-  transition: var(--transition);
-  color: var(--text);
-  border: 1px solid var(--glass-border);
-  appearance: none;
-  cursor: pointer;
-}
-
-/* Category Dropdown */
-.category-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 16px;
-  width: 240px;
-  background: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  padding: 8px 0;
-}
-
-.category-dropdown.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.category-option {
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.category-option:hover {
-  background: var(--primary-light);
-}
-
 /* Autocomplete Suggestions */
 .autocomplete-suggestions {
   position: absolute;
-  top: 100%;
+  top: calc(100% - 20px);
   left: 0;
   right: 0;
-  z-index: 1000;
   background: var(--card-bg);
   border-radius: 0 0 20px 20px;
   max-height: 0;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(-10px);
   transition: all 0.3s ease;
   box-shadow: var(--shadow);
+  z-index: 999;
   border: 1px solid var(--glass-border);
   border-top: none;
+  margin-top: -1px;
 }
 
 .autocomplete-suggestions.show {
   max-height: 300px;
-  opacity: 1;
-  transform: translateY(0);
-  overflow-y: auto;
   padding: 20px 0 10px;
 }
 
@@ -521,26 +451,26 @@ header {
   .cards {
     flex-direction: column;
   }
-
+  
   .card.large,
   .card.small {
     width: 100%;
   }
-
+  
   .container {
     padding: 0 24px;
   }
-
+  
   .search-section {
     height: 200px;
     margin: 24px 0 40px;
   }
-
+  
   .search-input {
     height: 64px;
     padding: 0 64px 0 24px;
   }
-
+  
   .search-button {
     width: 48px;
     height: 48px;
@@ -553,38 +483,142 @@ header {
     height: auto;
     gap: 20px;
   }
-
+  
   .nav {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
   }
-
+  
   .search-section {
-    height: auto;
-    padding: 24px;
-    flex-direction: column;
+    height: 180px;
   }
+  
+  .search-input {
+    height: 56px;
+    font-size: 16px;
+  }
+  
+  .card {
+    padding: 32px 24px;
+  }
+  
+  .word-title {
+    font-size: 2rem;
+  }
+}
+/* Новые стили для компактного селектора */
+.search-section {
+  flex-direction: column; /* Меняем на колонку */
+  align-items: stretch;
+  padding: 24px 40px; /* Добавляем отступы */
+}
 
+.search-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.category-select-wrapper {
+  position: relative;
+  min-width: 200px; /* Фиксированная ширина */
+}
+
+.category-select {
+  width: 100%;
+  height: 56px;
+  padding: 0 40px 0 16px;
+  font-size: 16px;
+  border-radius: 28px;
+  border: none;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition);
+  color: var(--text);
+  border: 1px solid var(--glass-border);
+  appearance: none;
+  cursor: pointer;
+}
+
+.search-input-wrapper {
+  flex-grow: 1; /* Растягиваем на всё доступное пространство */
+  position: relative;
+}
+
+/* Улучшенные подсказки с анимацией */
+.autocomplete-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--card-bg);
+  border-radius: 0 0 20px 20px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--glass-border);
+  border-top: none;
+}
+
+.autocomplete-suggestions.show {
+  max-height: 300px;
+  opacity: 1;
+  transform: translateY(0);
+  overflow-y: auto;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
   .search-wrapper {
     flex-direction: column;
   }
-
+  
   .category-select-wrapper {
     width: 100%;
     min-width: auto;
   }
-
+  
   .category-select,
   .search-input {
     height: 48px;
   }
+}
+/* Выпадающее меню категорий */
+.category-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 16px;
+  width: 240px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  padding: 8px 0;
+}
 
-  .card {
-    padding: 32px 24px;
-  }
+.category-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 
-  .word-title {
-    font-size: 2rem;
-  }
+.category-option {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.category-option:hover {
+  background: var(--primary-light);
 }
