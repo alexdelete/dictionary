@@ -168,23 +168,28 @@ header {
 }
 
 .search-input-wrapper {
-  position: relative;
+   position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 72px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 40px;
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+  transition: var(--transition);
 }
 
 .search-input {
-  width: 100%;
-  height: 72px;
-  padding: 0 72px 0 32px;
-  font-size: 18px;
-  border-radius: 40px;
+ flex: 1;
+  height: 100%;
+  padding: 0 20px;
   border: none;
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--glass-shadow);
-  transition: var(--transition);
+  background: transparent;
+  font-size: 18px;
   color: var(--text);
-  border: 1px solid var(--glass-border);
+  outline: none;
 }
 
 .search-input:focus {
@@ -233,36 +238,33 @@ header {
 /* Autocomplete Suggestions */
 .autocomplete-suggestions {
   position: absolute;
-  top: 100%;
+  top: calc(100% - 20px);
   left: 0;
   right: 0;
-  z-index: 999;
   background: var(--card-bg);
+  border-radius: 0 0 20px 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  z-index: 999;
   border: 1px solid var(--glass-border);
   border-top: none;
-  border-radius: 0 0 20px 20px;
-  max-height: 220px;
-  overflow-y: auto;
-  box-shadow: var(--shadow);
-  display: none;
+  margin-top: -1px;
 }
 
 .autocomplete-suggestions.show {
-  display: block;
+  max-height: 300px;
+  padding: 20px 0 10px;
 }
 
 .suggestion {
   padding: 12px 24px;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 16px;
-  transition: var(--transition);
 }
 
 .suggestion:hover {
-  background-color: var(--primary-light);
+  background: var(--primary-light);
 }
 
 .suggestion strong {
@@ -587,4 +589,36 @@ header {
   .search-input {
     height: 48px;
   }
+}
+/* Выпадающее меню категорий */
+.category-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 16px;
+  width: 240px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  padding: 8px 0;
+}
+
+.category-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.category-option {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.category-option:hover {
+  background: var(--primary-light);
 }
