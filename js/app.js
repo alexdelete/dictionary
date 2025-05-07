@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", async () => {
   // Элементы интерфейса
   const wordContainer = document.getElementById("word-content");
