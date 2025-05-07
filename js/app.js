@@ -7,10 +7,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const searchButton = document.querySelector(".search-button");
   const backLink = document.getElementById("back-link");
   const suggestions = document.getElementById("suggestions");
-  const categorySelect = document.getElementById("category-select");
   const app = document.getElementById("app");
   
+  // Элементы для выбора категории
+  const categoryToggle = document.getElementById("category-toggle");
+  const categoryDropdown = document.getElementById("category-dropdown");
+  const categoryCurrent = document.querySelector(".category-current");
+  const categoryOptions = document.querySelectorAll(".category-option");
+  
   let words = []; // Здесь будут храниться все слова
+  let currentCategory = 'all'; // Текущая выбранная категория
 
   // Загрузка данных
   async function loadWords() {
@@ -57,12 +63,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Обновление подсказок
   function updateSuggestions() {
     const query = searchInput.value.toLowerCase();
-    const selectedCategory = categorySelect.value;
     
     const filtered = words.filter(word => {
       const matchesQuery = word.word.toLowerCase().includes(query) || 
                          word.definition.toLowerCase().includes(query);
-      const matchesCategory = selectedCategory === 'all' || word.category === selectedCategory;
+      const matchesCategory = currentCategory === 'all' || word.category === currentCategory;
       return matchesQuery && matchesCategory;
     }).slice(0, 5);
     
@@ -79,6 +84,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     `).join('');
     
     suggestions.classList.toggle("show", words.length > 0);
+    
+    // Изменяем скругление углов у поисковой строки
+    const searchWrapper = document.querySelector('.search-input-wrapper');
+    searchWrapper.style.borderRadius = words.length > 0 
+      ? '40px 40px 0 0' 
+      : '40px';
   }
 
   // Подсветка совпадений
@@ -141,9 +152,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Инициализация
+  // Инициализация выбора категории
+  categoryToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    categoryDropdown.classList.toggle('show');
+    categoryToggle.classList.toggle('active');
+  });
+
+  categoryOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      currentCategory = option.dataset.value;
+      categoryCurrent.textContent = option.textContent;
+      categoryDropdown.classList.remove('show');
+      categoryToggle.classList.remove('active');
+      updateSuggestions();
+    });
+  });
+
+  // Закрытие выпадающего меню при клике вне его
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.category-toggle') && !e.target.closest('.category-dropdown')) {
+      categoryDropdown.classList.remove('show');
+      categoryToggle.classList.remove('active');
+    }
+    
+    // Закрытие подсказок при клике вне поисковой строки
+    if (!e.target.closest('.search-input-wrapper')) {
+      suggestions.classList.remove('show');
+      document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
+    }
+  });
+
+  // Инициализация поиска
   searchInput.addEventListener("input", updateSuggestions);
-  categorySelect.addEventListener("change", updateSuggestions);
   searchButton.addEventListener("click", searchHandler);
   searchInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") searchHandler();
@@ -170,52 +211,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   // Загрузка данных
   loadWords();
-});
-// Анимация при фокусе/ховере на селекторе
-categorySelect.addEventListener('focus', () => {
-  categorySelect.parentElement.style.transform = 'translateY(-2px)';
-  categorySelect.parentElement.style.boxShadow = '0 8px 40px rgba(0, 0, 0, 0.2)';
-});
-
-categorySelect.addEventListener('blur', () => {
-  categorySelect.parentElement.style.transform = '';
-  categorySelect.parentElement.style.boxShadow = '';
-});
-
-categorySelect.addEventListener('mouseenter', () => {
-  categorySelect.parentElement.style.transform = 'translateY(-2px)';
-});
-
-categorySelect.addEventListener('mouseleave', () => {
-  if (document.activeElement !== categorySelect) {
-    categorySelect.parentElement.style.transform = '';
-  }
-});
-// В функции renderSuggestions обновите стиль подсказок
-function renderSuggestions(words) {
-  const suggestions = document.getElementById('suggestions');
-  suggestions.innerHTML = words.map(word => `
-    <div class="suggestion" data-word="${word.word}">
-      <strong>${highlight(word.word, searchInput.value)}</strong>
-      <span>${word.definition}</span>
-    </div>
-  `).join('');
-  
-  // Плавное появление
-  suggestions.classList.toggle('show', words.length > 0);
-  
-  // Расширяем поисковую строку
-  if (words.length > 0) {
-    document.querySelector('.search-input-wrapper').style.borderRadius = '20px 20px 0 0';
-  } else {
-    document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
-  }
-}
-
-// Добавьте обработчик закрытия подсказок
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.search-input-wrapper')) {
-    suggestions.classList.remove('show');
-    document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
-  }
 });
