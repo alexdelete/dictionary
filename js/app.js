@@ -5,6 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search-input");
   const searchButton = document.querySelector(".search-button");
   const backLink = document.getElementById("back-link");
+  const titleEl = document.getElementById("word-title");
+const defEl = document.getElementById("word-definition");
+const linkEl = document.getElementById("word-link");
+
+titleEl.textContent = wordObj.word;
+defEl.textContent = wordObj.definition;
+linkEl.setAttribute("href", "#" + encodeURIComponent(wordObj.word));
 
   let words = [];
 
