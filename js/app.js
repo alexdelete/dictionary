@@ -191,3 +191,31 @@ categorySelect.addEventListener('mouseleave', () => {
     categorySelect.parentElement.style.transform = '';
   }
 });
+// В функции renderSuggestions обновите стиль подсказок
+function renderSuggestions(words) {
+  const suggestions = document.getElementById('suggestions');
+  suggestions.innerHTML = words.map(word => `
+    <div class="suggestion" data-word="${word.word}">
+      <strong>${highlight(word.word, searchInput.value)}</strong>
+      <span>${word.definition}</span>
+    </div>
+  `).join('');
+  
+  // Плавное появление
+  suggestions.classList.toggle('show', words.length > 0);
+  
+  // Расширяем поисковую строку
+  if (words.length > 0) {
+    document.querySelector('.search-input-wrapper').style.borderRadius = '20px 20px 0 0';
+  } else {
+    document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
+  }
+}
+
+// Добавьте обработчик закрытия подсказок
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-input-wrapper')) {
+    suggestions.classList.remove('show');
+    document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
+  }
+});
