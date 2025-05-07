@@ -80,6 +80,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     suggestions.classList.toggle("show", words.length > 0);
   }
+  suggestions.addEventListener("click", (e) => {
+  const suggestion = e.target.closest(".suggestion");
+  if (suggestion) {
+    const word = suggestion.dataset.word;
+    location.hash = encodeURIComponent(word);
+    suggestions.classList.remove("show"); // <-- Добавить
+    document.querySelector('.search-input-wrapper').style.borderRadius = '40px'; // <-- И это
+  }
+});
 
   // Подсветка совпадений
   function highlight(text, query) {
