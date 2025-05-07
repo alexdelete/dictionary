@@ -145,3 +145,46 @@ window.addEventListener('DOMContentLoaded', () => {
 
 input.addEventListener('input', updateSuggestions);
 select.addEventListener('change', updateSuggestions);
+async function loadWords() {
+  const response = await fetch("data/words.json");
+  const data = await response.json();
+  return data.words;
+}
+
+function getTodayDate() {
+  return new Date().toISOString().split("T")[0];
+}
+
+function getStoredWord() {
+  return JSON.parse(localStorage.getItem("wordOfTheDay") || "{}");
+}
+
+function storeWordOfTheDay(wordObj) {
+  localStorage.setItem("wordOfTheDay", JSON.stringify({
+    date: getTodayDate(),
+    word: wordObj
+  }));
+}
+
+function showWordOfTheDay(selector, word) {
+  const el = document.querySelector(selector);
+  if (el) {
+    el.textContent = `${word.word} — ${word.definition}`;
+  }
+}
+
+async function initWordOfTheDay(selector) {
+  const today = getTodayDate();
+  const stored = getStoredWord();
+
+  if (stored.date === today) {
+    showWordOfTheDay(selector, stored.word);
+    return;
+  }
+
+  const words = await loadWords();
+  const randomWord = words[Math.floor(Math.random() * words.length)];
+  storeWordOfTheDay(randomWord);
+  showWordOfTheDay(selector, randomWord);
+}
+
