@@ -505,3 +505,63 @@ header {
     font-size: 2rem;
   }
 }
+/* Стили для селектора категорий */
+.category-select-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.category-select {
+  width: 100%;
+  height: 56px;
+  padding: 0 24px;
+  font-size: 16px;
+  border-radius: 28px;
+  border: none;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition);
+  color: var(--text);
+  border: 1px solid var(--glass-border);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.category-select:focus {
+  outline: none;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.category-select-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
+  transform: translateY(-60%) rotate(45deg);
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+.category-select-wrapper:hover::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .category-select {
+    height: 48px;
+    padding: 0 20px;
+    font-size: 15px;
+  }
+}
