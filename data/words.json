@@ -3,8 +3,8 @@
     {
       "word": "goated",
       "definition": "очень крутой",
-      "category": "оценка",
-      "transcription": "",
+      "category": "status",
+      "transcription": "[гоутэд]",
       "date_added": "2025-05-07",
       "tags": ["похвала", "сленг"],
       "rating": 7,
@@ -18,8 +18,8 @@
     {
       "word": "nailed it",
       "definition": "отлично справился",
-      "category": "оценка",
-      "transcription": "",
+      "category": "status",
+      "transcription": "[нэйлд ит]",
       "date_added": "2025-05-07",
       "tags": ["успех", "оценка"],
       "rating": 6,
@@ -33,8 +33,8 @@
     {
       "word": "huzz",
       "definition": "красивый",
-      "category": "оценка",
-      "transcription": "",
+      "category": "status",
+      "transcription": "[хъюз]",
       "date_added": "2025-05-07",
       "tags": ["внешность", "позитив"],
       "rating": 5,
@@ -48,8 +48,8 @@
     {
       "word": "chuzz",
       "definition": "некрасивый",
-      "category": "оценка",
-      "transcription": "",
+      "category": "status",
+      "transcription": "[чъюз]",
       "date_added": "2025-05-07",
       "tags": ["внешность", "негатив"],
       "rating": 4,
@@ -63,8 +63,8 @@
     {
       "word": "chopped",
       "definition": "выглядит плохо",
-      "category": "оценка",
-      "transcription": "",
+      "category": "status",
+      "transcription": "[чопт]",
       "date_added": "2025-05-07",
       "tags": ["внешность", "сленг"],
       "rating": 5,
@@ -78,8 +78,8 @@
     {
       "word": "check",
       "definition": "проверь, посмотри",
-      "category": "речь",
-      "transcription": "",
+      "category": "social",
+      "transcription": "[чек]",
       "date_added": "2025-05-07",
       "tags": ["команда", "разговор"],
       "rating": 4,
@@ -93,8 +93,8 @@
     {
       "word": "im cooked",
       "definition": "мне капец",
-      "category": "эмоции",
-      "transcription": "",
+      "category": "emotion",
+      "transcription": "[айм кукт]",
       "date_added": "2025-05-07",
       "tags": ["усталость", "сленг"],
       "rating": 6,
@@ -108,8 +108,8 @@
     {
       "word": "you cooked",
       "definition": "ты крутой, молодец",
-      "category": "оценка",
-      "transcription": "",
+      "category": "status",
+      "transcription": "[ю кукт]",
       "date_added": "2025-05-07",
       "tags": ["похвала", "ирония"],
       "rating": 6,
@@ -123,8 +123,8 @@
     {
       "word": "you're cooked",
       "definition": "тебе капец",
-      "category": "эмоции",
-      "transcription": "",
+      "category": "emotion",
+      "transcription": "[юр кукт]",
       "date_added": "2025-05-07",
       "tags": ["угроза", "прикол"],
       "rating": 5,
@@ -135,35 +135,34 @@
         }
       ]
     },
-{
-  "word": "cap",
-  "definition": "враньё",
-  "category": "оценка",
-  "transcription": "",
-  "date_added": "2025-05-07",
-  "tags": ["лживость", "сленг"],
-  "rating": 6,
-  "definitions": [
     {
-      "meaning": "неправда, ложь",
-      "examples": ["Это cap, он так не делал."]
+      "word": "cap",
+      "definition": "враньё",
+      "category": "status",
+      "transcription": "[кэп]",
+      "date_added": "2025-05-07",
+      "tags": ["лживость", "сленг"],
+      "rating": 6,
+      "definitions": [
+        {
+          "meaning": "неправда, ложь",
+          "examples": ["Это cap, он так не делал."]
+        },
+        {
+          "meaning": "no cap — говорю правду",
+          "examples": ["Это было круто, no cap."]
+        },
+        {
+          "meaning": "you're capping — ты врёшь",
+          "examples": ["Ты явно capping."]
+        }
+      ]
     },
-    {
-      "meaning": "no cap — говорю правду",
-      "examples": ["Это было круто, no cap."]
-    },
-    {
-      "meaning": "you're capping — ты врёшь",
-      "examples": ["Ты явно capping."]
-    }
-  ]
-}
-
     {
       "word": "yapping",
       "definition": "много говорить не по делу",
-      "category": "общение",
-      "transcription": "",
+      "category": "social",
+      "transcription": "[япин]",
       "date_added": "2025-05-07",
       "tags": ["речь", "негатив"],
       "rating": 4,
@@ -177,8 +176,8 @@
     {
       "word": "rizz",
       "definition": "умение флиртовать, харизма",
-      "category": "отношения",
-      "transcription": "",
+      "category": "character",
+      "transcription": "[риз]",
       "date_added": "2025-05-07",
       "tags": ["флирт", "характер"],
       "rating": 7,
@@ -192,8 +191,8 @@
     {
       "word": "opp",
       "definition": "враг",
-      "category": "отношения",
-      "transcription": "",
+      "category": "character",
+      "transcription": "[оп]",
       "date_added": "2025-05-07",
       "tags": ["вражда", "отношения"],
       "rating": 5,
@@ -207,8 +206,8 @@
     {
       "word": "lock in",
       "definition": "сфокусируйся",
-      "category": "эмоции",
-      "transcription": "",
+      "category": "emotion",
+      "transcription": "[лок ин]",
       "date_added": "2025-05-07",
       "tags": ["мотивация", "настрой"],
       "rating": 6,
@@ -222,8 +221,8 @@
     {
       "word": "hit it off",
       "definition": "поладить с кем-то",
-      "category": "отношения",
-      "transcription": "",
+      "category": "character",
+      "transcription": "[хит ит оф]",
       "date_added": "2025-05-07",
       "tags": ["дружба", "отношения"],
       "rating": 6,
