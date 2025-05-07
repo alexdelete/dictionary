@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const titleEl = document.getElementById("word-title");
 const defEl = document.getElementById("word-definition");
 const linkEl = document.getElementById("word-link");
- 
+   initWordOfTheDay("#word-of-the-day");
+});
 
 
   // Загрузка данных из локального файла
@@ -168,43 +169,20 @@ function storeWordOfTheDay(wordObj) {
     word: wordObj
   }));
 }
-
-function showWordOfTheDay(selector, word) {
-  const el = document.querySelector(selector);
-  if (el) {
-    el.textContent = `${word.word} — ${word.definition}`;
-  }
-}
-
-async function initWordOfTheDay(selector) {
-  const today = getTodayDate();
-  const stored = getStoredWord();
-
-  if (stored.date === today) {
-    showWordOfTheDay(selector, stored.word);
-    return;
-  }
-
-  const words = await loadWords();
-  const randomWord = words[Math.floor(Math.random() * words.length)];
-  storeWordOfTheDay(randomWord);
-  showWordOfTheDay(selector, randomWord);
-}
- // Показываем слово дня
-  initWordOfTheDay("#word-of-the-day");
-});
-
-  let words = [];
 function showWordOfTheDay(selector, word) {
   const el = document.querySelector(selector);
   const link = document.querySelector("#word-link");
 
   if (el) {
-    el.innerHTML = `<h2 class="word-title">${word.word}</h2>
-                    <p class="definition">${word.definition}</p>`;
+    el.innerHTML = `
+      <h2 class="word-title">${word.word}</h2>
+      <p class="definition">${word.definition}</p>
+    `;
   }
 
   if (link) {
     link.setAttribute("href", "#" + encodeURIComponent(word.word));
   }
 }
+
+
