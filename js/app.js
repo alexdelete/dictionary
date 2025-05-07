@@ -8,24 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const titleEl = document.getElementById("word-title");
 const defEl = document.getElementById("word-definition");
 const linkEl = document.getElementById("word-link");
-  // Показываем слово дня
-  initWordOfTheDay("#word-of-the-day");
-});
-
-  let words = [];
-function showWordOfTheDay(selector, word) {
-  const el = document.querySelector(selector);
-  const link = document.querySelector("#word-link");
-
-  if (el) {
-    el.innerHTML = `<h2 class="word-title">${word.word}</h2>
-                    <p class="definition">${word.definition}</p>`;
-  }
-
-  if (link) {
-    link.setAttribute("href", "#" + encodeURIComponent(word.word));
-  }
-}
+ 
 
 
   // Загрузка данных из локального файла
@@ -207,4 +190,21 @@ async function initWordOfTheDay(selector) {
   storeWordOfTheDay(randomWord);
   showWordOfTheDay(selector, randomWord);
 }
+ // Показываем слово дня
+  initWordOfTheDay("#word-of-the-day");
+});
 
+  let words = [];
+function showWordOfTheDay(selector, word) {
+  const el = document.querySelector(selector);
+  const link = document.querySelector("#word-link");
+
+  if (el) {
+    el.innerHTML = `<h2 class="word-title">${word.word}</h2>
+                    <p class="definition">${word.definition}</p>`;
+  }
+
+  if (link) {
+    link.setAttribute("href", "#" + encodeURIComponent(word.word));
+  }
+}
