@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const titleEl = document.getElementById("word-title");
 const defEl = document.getElementById("word-definition");
 const linkEl = document.getElementById("word-link");
-
+ initWordOfTheDay("#word-of-the-day"); // <-- ЭТО ДОБАВЬ
+});
 titleEl.textContent = wordObj.word;
 defEl.textContent = wordObj.definition;
 linkEl.setAttribute("href", "#" + encodeURIComponent(wordObj.word));
