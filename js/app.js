@@ -170,19 +170,13 @@ function storeWordOfTheDay(wordObj) {
   }));
 }
 function showWordOfTheDay(selector, word) {
-  const el = document.querySelector(selector);
-  const link = document.querySelector("#word-link");
+  const title = document.getElementById("wotd-title");
+  const definition = document.getElementById("wotd-definition");
+  const link = document.getElementById("wotd-link");
 
-  if (el) {
-    el.innerHTML = `
-      <h2 class="word-title">${word.word}</h2>
-      <p class="definition">${word.definition}</p>
-    `;
-  }
-
-  if (link) {
-    link.setAttribute("href", "#" + encodeURIComponent(word.word));
-  }
+  if (title) title.textContent = word.word;
+  if (definition) definition.textContent = word.definition;
+  if (link) link.setAttribute("href", "#" + encodeURIComponent(word.word));
 }
 
 
