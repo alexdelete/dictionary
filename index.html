@@ -25,24 +25,25 @@
       </div>
     </header>
       </div>
-  <section class="search-section">
-<div class="category-select-wrapper">
-  <select id="category-select" class="category-select">
-    <option value="all">Все категории</option>
-    <option value="emotion">😊 Эмоции и реакции</option>
-    <option value="social">💬 Общение</option>
-    <option value="character">👤 Характер и отношения</option>
-    <option value="status">⭐ Оценка/Статус</option>
-  </select>
-</div>
-      <div class="search-input-wrapper">
-        <input type="text" 
-               id="search-input"
-               placeholder="Найти слово или выражение..." 
-               class="search-input" 
-               autocomplete="off" />
-        <div id="suggestions" class="autocomplete-suggestions"></div>
-      </div>
+<section class="search-section">
+  <div class="search-wrapper">
+    <div class="category-select-wrapper">
+      <select id="category-select" class="category-select">
+        <option value="all">Все категории</option>
+        <option value="emotion">😊 Эмоции</option>
+        <option value="social">💬 Общение</option>
+        <option value="character">👤 Отношения</option>
+        <option value="status">⭐ Оценка</option>
+      </select>
+    </div>
+    
+    <div class="search-input-wrapper">
+      <input type="text" 
+             id="search-input"
+             placeholder="Найти слово или выражение..." 
+             class="search-input" 
+             autocomplete="off" />
+      <div id="suggestions" class="autocomplete-suggestions"></div>
       <button class="search-button" aria-label="Поиск">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -50,7 +51,8 @@
         </svg>
       </button>
     </div>
-  </section>
+  </div>
+</section>
     <section id="word-page" class="word-page hidden">
     <div class="word-card">
       <h1 id="word-title"></h1>
