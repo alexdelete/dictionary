@@ -25,9 +25,11 @@ function initWordOfTheDay() {
   }
 
   const word = words[localStorage.getItem('wotd-index')];
-  wotdTitle.textContent = word.word;
-  wotdDefinition.textContent = word.definition;
-  wotdLink.href = `#${word.word}`;
+  if (word) {
+    wotdTitle.textContent = word.word;
+    wotdDefinition.textContent = word.definition;
+    wotdLink.href = `#${encodeURIComponent(word.word)}`;
+  }
 }
 
 // 2. Поиск с подсказками и категориями
