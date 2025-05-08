@@ -2,51 +2,46 @@
 let wordsData = {};
 let currentWordOfTheDay = null;
 
-// Инициализация приложения
-document.addEventListener('DOMContentLoaded', async function() {
-    // Загрузка данных слов
-    await loadWordsData();
-    
-    // Инициализация функционала
-    initWordOfTheDay();
-    initSearch();
-    initRouting();
-    initDarkMode();
-});
-
-// Загрузка данных из words.json
+// Загрузка данных
 async function loadWordsData() {
     try {
         const response = await fetch('data/words.json');
         wordsData = await response.json();
-        console.log('Данные слов успешно загружены');
+        console.log('Данные загружены, слов:', Object.keys(wordsData).length);
     } catch (error) {
-        console.error('Ошибка загрузки данных слов:', error);
+        console.error('Ошибка загрузки words.json:', error);
     }
 }
 
-// Слово дня (одинаковое для всех устройств)
-function initWordOfTheDay() {
-    if (!wordsData || Object.keys(wordsData).length === 0) return;
+// Инициализация приложения
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadWordsData();
+    initWordOfTheDay();
+    initSearch();
+    initRouting();
+    
+    // Проверяем хэш при загрузке (на случай, если пользователь зашёл по прямой ссылке)
+    setTimeout(checkHash, 100); // Небольшая задержка для надёжности
+});
 
-    // Получаем детерминированное слово дня на основе даты
+// Слово дня
+function initWordOfTheDay() {
+    if (!wordsData) return;
+
     const today = new Date();
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
     const words = Object.keys(wordsData);
-    const index = seededRandom(seed) % words.length;
+    const index = Math.floor(seededRandom(seed) * words.length);
     currentWordOfTheDay = words[index];
     
-    // Обновляем UI
     updateWordOfTheDayUI(currentWordOfTheDay);
 }
 
-// Генератор псевдослучайных чисел с seed
 function seededRandom(seed) {
     const x = Math.sin(seed) * 10000;
     return x - Math.floor(x);
 }
 
-// Обновление UI слова дня
 function updateWordOfTheDayUI(word) {
     if (!word || !wordsData[word]) return;
     
@@ -56,76 +51,66 @@ function updateWordOfTheDayUI(word) {
     
     const wotdLink = document.getElementById('wotd-link');
     wotdLink.href = `#word/${encodeURIComponent(word)}`;
-    wotdLink.onclick = (e) => {
+    wotdLink.onclick = function(e) {
         e.preventDefault();
-        showWordPage(word);
+        window.location.hash = `word/${encodeURIComponent(word)}`;
     };
 }
 
-// Инициализация поиска с подсказками
+// Поиск и подсказки
 function initSearch() {
     const searchInput = document.getElementById('search-input');
     const suggestionsContainer = document.getElementById('suggestions');
-    const categorySelect = document.getElementById('category-select');
+    const searchButton = document.querySelector('.search-button');
     
+    if (!searchInput) {
+        console.error('Элемент search-input не найден!');
+        return;
+    }
+
     searchInput.addEventListener('input', function() {
         const query = this.value.trim().toLowerCase();
-        const category = categorySelect.value;
+        const category = document.getElementById('category-select').value;
         
-        if (query.length === 0) {
+        if (!query) {
             suggestionsContainer.innerHTML = '';
             suggestionsContainer.classList.remove('visible');
             return;
         }
         
-        // Фильтрация слов по запросу и категории
         const filteredWords = Object.keys(wordsData).filter(word => {
-            const matchesQuery = word.toLowerCase().includes(query) || 
-                               wordsData[word].definition.toLowerCase().includes(query);
-            const matchesCategory = category === 'all' || wordsData[word].category === category;
-            return matchesQuery && matchesCategory;
-        }).slice(0, 5); // Ограничиваем 5 подсказками
+            const wordMatch = word.toLowerCase().includes(query);
+            const definitionMatch = wordsData[word].definition.toLowerCase().includes(query);
+            const categoryMatch = category === 'all' || wordsData[word].category === category;
+            return (wordMatch || definitionMatch) && categoryMatch;
+        }).slice(0, 5);
         
         showSuggestions(filteredWords);
     });
-    
-    // Обработка выбора подсказки
+
+    // Обработка клика по подсказке
     suggestionsContainer.addEventListener('click', function(e) {
         if (e.target.classList.contains('suggestion-item')) {
-            const word = e.target.textContent;
+            const word = e.target.getAttribute('data-word');
             searchInput.value = word;
             suggestionsContainer.innerHTML = '';
-            showWordPage(word);
+            window.location.hash = `word/${encodeURIComponent(word)}`;
         }
     });
-    
-    // Обработка нажатия Enter в поиске
+
+    // Поиск по Enter
     searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            const query = this.value.trim();
-            if (query && wordsData[query]) {
-                showWordPage(query);
-            }
+            performSearch(this.value.trim());
         }
     });
-    
-    // Кнопка поиска
-    document.querySelector('.search-button').addEventListener('click', function() {
-        const query = searchInput.value.trim();
-        if (query && wordsData[query]) {
-            showWordPage(query);
-        }
-    });
-    
-    // Фильтрация по категории
-    categorySelect.addEventListener('change', function() {
-        if (searchInput.value.trim().length > 0) {
-            searchInput.dispatchEvent(new Event('input'));
-        }
+
+    // Поиск по кнопке
+    searchButton.addEventListener('click', function() {
+        performSearch(searchInput.value.trim());
     });
 }
 
-// Показать подсказки
 function showSuggestions(words) {
     const suggestionsContainer = document.getElementById('suggestions');
     suggestionsContainer.innerHTML = '';
@@ -139,28 +124,51 @@ function showSuggestions(words) {
         const suggestion = document.createElement('div');
         suggestion.className = 'suggestion-item';
         suggestion.textContent = word;
+        suggestion.setAttribute('data-word', word);
         suggestionsContainer.appendChild(suggestion);
     });
     
     suggestionsContainer.classList.add('visible');
 }
 
-// Инициализация роутинга с хешами
-function initRouting() {
-    // Обработка начального URL
-    checkHash();
+function performSearch(query) {
+    if (!query) return;
     
-    // Обработка изменений hash
+    // Закрываем подсказки
+    document.getElementById('suggestions').classList.remove('visible');
+    
+    // Проверяем, есть ли точное совпадение со словом
+    if (wordsData[query]) {
+        window.location.hash = `word/${encodeURIComponent(query)}`;
+        return;
+    }
+    
+    // Ищем частичные совпадения
+    const foundWord = Object.keys(wordsData).find(word => 
+        word.toLowerCase() === query.toLowerCase()
+    );
+    
+    if (foundWord) {
+        window.location.hash = `word/${encodeURIComponent(foundWord)}`;
+    } else {
+        alert('Слово не найдено. Попробуйте другой запрос.');
+    }
+}
+
+// Роутинг
+function initRouting() {
     window.addEventListener('hashchange', checkHash);
     
     // Кнопка "Назад"
-    document.getElementById('back-link').addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.hash = '';
-    });
+    const backLink = document.getElementById('back-link');
+    if (backLink) {
+        backLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.hash = '';
+        });
+    }
 }
 
-// Проверка hash в URL
 function checkHash() {
     const hash = window.location.hash;
     
@@ -172,18 +180,15 @@ function checkHash() {
     }
 }
 
-// Показать страницу слова
 function showWordPage(word) {
     if (!wordsData[word]) {
         showMainPage();
         return;
     }
     
-    // Скрыть главную страницу и показать страницу слова
     document.querySelector('.main').classList.add('hidden');
     document.getElementById('word-page').classList.remove('hidden');
     
-    // Заполнить данные слова
     const wordData = wordsData[word];
     document.getElementById('word-title').textContent = word;
     
@@ -194,9 +199,9 @@ function showWordPage(word) {
         </div>
         ${wordData.examples ? `
         <div class="word-examples">
-            <h3>Примеры использования:</h3>
+            <h3>Примеры:</h3>
             <ul>
-                ${wordData.examples.map(example => `<li>${example}</li>`).join('')}
+                ${wordData.examples.map(ex => `<li>${ex}</li>`).join('')}
             </ul>
         </div>
         ` : ''}
@@ -205,18 +210,18 @@ function showWordPage(word) {
         </div>
     `;
     
-    // Прокрутка вверх
+    // Прокрутка вверх и фокус на заголовок для accessibility
     window.scrollTo(0, 0);
+    document.getElementById('word-title').focus();
 }
 
-// Показать главную страницу
 function showMainPage() {
     document.querySelector('.main').classList.remove('hidden');
     document.getElementById('word-page').classList.add('hidden');
     window.scrollTo(0, 0);
 }
 
-// Вспомогательные функции для категорий
+// Вспомогательные функции
 function getCategoryEmoji(category) {
     const emojis = {
         'emotion': '😊',
@@ -235,23 +240,4 @@ function getCategoryName(category) {
         'status': 'Оценка'
     };
     return names[category] || 'Другое';
-}
-
-// Инициализация темной темы (если не добавлено в HTML)
-function initDarkMode() {
-    const toggle = document.querySelector('.dark-mode-toggle');
-    if (!toggle) return;
-
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme === 'dark' || (!currentTheme && prefersDark)) {
-        document.body.classList.add('dark-mode');
-    }
-
-    toggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-        localStorage.setItem('theme', theme);
-    });
 }
