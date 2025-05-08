@@ -1,206 +1,125 @@
-document.addEventListener("DOMContentLoaded", async () => {
-// Элементы интерфейса
-const wordContainer = document.getElementById("word-content");
-const wordTitle = document.getElementById("word-title");
-const wordPage = document.getElementById("word-page");
-const searchInput = document.getElementById("search-input");
-const searchButton = document.querySelector(".search-button");
-const backLink = document.getElementById("back-link");
-const suggestions = document.getElementById("suggestions");
-const categorySelect = document.getElementById("category-select");
-const app = document.getElementById("app");
+document.addEventListener("DOMContentLoaded", () => {
+  const wordContainer = document.getElementById("word-content");
+  const wordTitle = document.getElementById("word-title");
+  const wordPage = document.getElementById("word-page");
+  const searchInput = document.getElementById("search-input");
+  const suggestionsContainer = document.getElementById("suggestions");
+  const backLink = document.getElementById("back-link");
+  const categorySelect = document.getElementById("category-select");
 
+  let words = [];
+  let filteredWords = [];
 
+  // Функция загрузки слов из файла (или базы данных)
+  async function loadWords() {
+    try {
+      const response = await fetch("data/words.json"); // Путь к файлу с данными
+      const data = await response.json();
+      words = data.words; // Массив слов
+      filteredWords = words; // Изначально показываем все слова
+      initWordOfTheDay();
+    } catch (err) {
+      console.error("Ошибка загрузки словаря:", err);
+    }
+  }
 
-// Загрузка данных
-async function loadWords() {
-try {
-const response = await fetch("data/words.json");
-const data = await response.json();
-words = data.words;
-initWordOfTheDay();
-updateSuggestions();
-} catch (err) {
-console.error("Ошибка загрузки словаря:", err);
-wordContainer.innerHTML = "Ошибка загрузки словаря. Пожалуйста, попробуйте позже.";
-}
-}
-// Подсветка совпадений
-function highlight(text, query) {
-if (!query) return text;
-const index = text.toLowerCase().indexOf(query.toLowerCase());
-if (index >= 0) {
-return text.substring(0, index) +
-'<mark>' + text.substring(index, index + query.length) + '</mark>' +
-text.substring(index + query.length);
-}
-return text;
-}
+  // Функция для инициализации "Слова дня"
+  function initWordOfTheDay() {
+    const wordOfTheDay = words[Math.floor(Math.random() * words.length)];
+    const wotdTitle = document.getElementById("wotd-title");
+    const wotdDefinition = document.getElementById("wotd-definition");
+    const wotdLink = document.getElementById("wotd-link");
 
-// Инициализация "Слова дня"
-function initWordOfTheDay() {
-if (!words.length) return;
+    if (wotdTitle) wotdTitle.textContent = wordOfTheDay.word;
+    if (wotdDefinition) wotdDefinition.textContent = wordOfTheDay.definition;
+    if (wotdLink) wotdLink.href = `#${encodeURIComponent(wordOfTheDay.word)}`;
+  }
 
-```
-const today = new Date().toISOString().split("T")[0];
-const storedWord = JSON.parse(localStorage.getItem("wordOfTheDay") || "{}");
+  // Функция для отображения слова на странице
+  function showWord(word) {
+    const wordData = words.find(w => w.word.toLowerCase() === word.toLowerCase());
 
-let wordOfTheDay;
-if (storedWord.date === today) {
-  wordOfTheDay = storedWord.word;
-} else {
-  // Выбираем случайное слово
-  wordOfTheDay = words[Math.floor(Math.random() * words.length)];
-  localStorage.setItem("wordOfTheDay", JSON.stringify({
-    date: today,
-    word: wordOfTheDay
-  }));
-}
+    if (!wordData) {
+      wordTitle.textContent = word;
+      wordContainer.innerHTML = "<p>Слово не найдено. Попробуйте другое слово.</p>";
+      wordPage.classList.remove("hidden");
+      document.body.classList.add("hidden");
+      return;
+    }
 
-const title = document.getElementById("wotd-title");
-const definition = document.getElementById("wotd-definition");
-const link = document.getElementById("wotd-link");
+    wordTitle.textContent = wordData.word;
+    wordContainer.innerHTML = `
+      <p><em>${wordData.transcription || ''}</em></p>
+      ${wordData.definitions.map(def => `
+        <div class="definition-block">
+          <p><strong>${def.meaning}</strong></p>
+          <ul>${def.examples.map(ex => `<li>${ex}</li>`).join("")}</ul>
+        </div>
+      `).join("")}
+      ${wordData.tags ? `<p class="tags"><strong>Теги:</strong> ${wordData.tags.join(", ")}</p>` : ""}
+      <p class="rating">❤️ ${wordData.rating || 0} | Добавлено: ${wordData.date_added}</p>
+    `;
 
-if (title) title.textContent = wordOfTheDay.word;
-if (definition) definition.textContent = wordOfTheDay.definition;
-if (link) link.setAttribute("href", "#" + encodeURIComponent(wordOfTheDay.word));
-```
+    wordPage.classList.remove("hidden");
+    document.body.classList.add("hidden");
+  }
 
-}
+  // Обработчик для перехода по хешу
+  window.addEventListener("hashchange", () => {
+    const word = decodeURIComponent(location.hash.slice(1));
+    if (word) {
+      showWord(word);
+    } else {
+      wordPage.classList.add("hidden");
+      document.body.classList.remove("hidden");
+    }
+  });
 
+  // Обработчик ввода в поле поиска
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
 
-// Показать страницу слова
-function showWord(word) {
-const wordData = words.find(w => w.word.toLowerCase() === word.toLowerCase());
+    // Фильтруем слова по категории и поисковому запросу
+    filteredWords = words.filter(word => {
+      const matchesCategory = categorySelect.value === "all" || word.category === categorySelect.value;
+      const matchesQuery = word.word.toLowerCase().includes(query) || word.definition.toLowerCase().includes(query);
+      return matchesCategory && matchesQuery;
+    });
 
-```
-if (!wordData) {
-  wordTitle.textContent = word;
-  wordContainer.innerHTML = "<p>Слово не найдено. Попробуйте другое слово.</p>";
-  wordPage.classList.remove("hidden");
-  app.classList.add("hidden");
-  return;
-}
+    // Обновляем подсказки
+    updateSuggestions();
+  });
 
-wordTitle.textContent = wordData.word;
-wordContainer.innerHTML = `
-  <p><em>${wordData.transcription || ''}</em></p>
-  ${wordData.definitions.map(def => `
-    <div class="definition-block">
-      <p><strong>${def.meaning}</strong></p>
-      <ul>${def.examples.map(ex => `<li>${ex}</li>`).join("")}</ul>
-    </div>
-  `).join("")}
-  ${wordData.tags ? `<p class="tags"><strong>Теги:</strong> ${wordData.tags.join(", ")}</p>` : ""}
-  <p class="rating">❤️ ${wordData.rating || 0} | Добавлено: ${wordData.date_added}</p>
-`;
+  // Обновление подсказок в поиске
+  function updateSuggestions() {
+    suggestionsContainer.innerHTML = "";
+    filteredWords.slice(0, 5).forEach(word => {
+      const suggestion = document.createElement("div");
+      suggestion.classList.add("suggestion");
+      suggestion.textContent = word.word;
+      suggestion.addEventListener("click", () => {
+        searchInput.value = word.word;
+        showWord(word.word);
+        location.hash = word.word; // Обновляем хеш в URL
+      });
+      suggestionsContainer.appendChild(suggestion);
+    });
+  }
 
-wordPage.classList.remove("hidden");
-app.classList.add("hidden");
-searchInput.value = wordData.word;
-```
+  // Обработчик для категории выбора
+  categorySelect.addEventListener("change", () => {
+    const category = categorySelect.value;
+    filteredWords = category === "all" ? words : words.filter(word => word.category === category);
+    updateSuggestions(); // Обновить подсказки с новым фильтром
+  });
 
+  // Кнопка "Назад" для возвращения на главную страницу
+  backLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    wordPage.classList.add("hidden");
+    document.body.classList.remove("hidden");
+  });
 
-// Обработчики событий
-function handleHashChange() {
-const word = decodeURIComponent(location.hash.slice(1));
-if (word) {
-showWord(word);
-} else {
-wordPage.classList.add("hidden");
-app.classList.remove("hidden");
-}
-}
-
-function searchHandler() {
-const query = searchInput.value.trim();
-if (query) {
-location.hash = encodeURIComponent(query);
-}
-}
-
-// Инициализация
-searchInput.addEventListener("input", updateSuggestions);
-categorySelect.addEventListener("change", updateSuggestions);
-searchButton.addEventListener("click", searchHandler);
-searchInput.addEventListener("keypress", (e) => {
-if (e.key === "Enter") searchHandler();
-});
-
-suggestions.addEventListener("click", (e) => {
-const suggestion = e.target.closest(".suggestion");
-if (suggestion) {
-const word = suggestion.dataset.word;
-location.hash = encodeURIComponent(word);
-}
-});
-
-backLink.addEventListener("click", (e) => {
-e.preventDefault();
-history.replaceState(null, "", " ");
-wordPage.classList.add("hidden");
-app.classList.remove("hidden");
-searchInput.value = "";
-searchInput.focus();
-});
-
-window\.addEventListener("hashchange", handleHashChange);
-
-// Загрузка данных
-loadWords();
-  loadWords().then(handleHashChange);
-
-});
-// Анимация при фокусе/ховере на селекторе
-categorySelect.addEventListener('focus', () => {
-categorySelect.parentElement.style.transform = 'translateY(-2px)';
-categorySelect.parentElement.style.boxShadow = '0 8px 40px rgba(0, 0, 0, 0.2)';
-});
-
-categorySelect.addEventListener('blur', () => {
-categorySelect.parentElement.style.transform = '';
-categorySelect.parentElement.style.boxShadow = '';
-});
-
-categorySelect.addEventListener('mouseenter', () => {
-categorySelect.parentElement.style.transform = 'translateY(-2px)';
-});
-
-categorySelect.addEventListener('mouseleave', () => {
-if (document.activeElement !== categorySelect) {
-categorySelect.parentElement.style.transform = '';
-}
-});
-// В функции renderSuggestions обновите стиль подсказок
-function renderSuggestions(words) {
-const suggestionsContainer = document.getElementById('suggestions');
-suggestionsContainer.innerHTML = words.map(word => `     <div class="suggestion" data-word="${word.word}">       <strong>${highlight(word.word, searchInput.value)}</strong>       <span>${word.definition}</span>     </div>
-  `).join('');
-
-suggestionsContainer.classList.toggle('show', words.length > 0);
-
-if (words.length > 0) {
-document.querySelector('.search-input-wrapper').style.borderRadius = '20px 20px 0 0';
-} else {
-document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
-}
-}
-
-// Плавное появление
-suggestions.classList.toggle('show', words.length > 0);
-
-// Расширяем поисковую строку
-if (words.length > 0) {
-document.querySelector('.search-input-wrapper').style.borderRadius = '20px 20px 0 0';
-} else {
-document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
-}
-}
-
-// Добавьте обработчик закрытия подсказок
-document.addEventListener('click', (e) => {
-if (!e.target.closest('.search-input-wrapper')) {
-suggestions.classList.remove('show');
-document.querySelector('.search-input-wrapper').style.borderRadius = '40px';
-}
+  // Загрузка слов при старте
+  loadWords();
 });
