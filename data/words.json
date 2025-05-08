@@ -1,237 +1,190 @@
-{
-  "words": [
-    {
-      "word": "goated",
-      "definition": "очень крутой",
-      "category": "status",
-      "transcription": "[гоутэд]",
-      "date_added": "2025-05-07",
-      "tags": ["похвала", "сленг"],
-      "rating": 7,
-      "definitions": [
-        {
-          "meaning": "максимально крутой, топовый",
-          "examples": ["Этот трек просто goated."]
-        }
-      ]
-    },
-    {
-      "word": "nailed it",
-      "definition": "отлично справился",
-      "category": "status",
-      "transcription": "[нэйлд ит]",
-      "date_added": "2025-05-07",
-      "tags": ["успех", "оценка"],
-      "rating": 6,
-      "definitions": [
-        {
-          "meaning": "отлично выполнил задачу",
-          "examples": ["Ты nailed it на этом выступлении."]
-        }
-      ]
-    },
-    {
-      "word": "huzz",
-      "definition": "красивый",
-      "category": "status",
-      "transcription": "[хъюз]",
-      "date_added": "2025-05-07",
-      "tags": ["внешность", "позитив"],
-      "rating": 5,
-      "definitions": [
-        {
-          "meaning": "внешне привлекательный",
-          "examples": ["Он просто huzz."]
-        }
-      ]
-    },
-    {
-      "word": "chuzz",
-      "definition": "некрасивый",
-      "category": "status",
-      "transcription": "[чъюз]",
-      "date_added": "2025-05-07",
-      "tags": ["внешность", "негатив"],
-      "rating": 4,
-      "definitions": [
-        {
-          "meaning": "внешне непривлекательный",
-          "examples": ["Он чутка chuzz, но классный."]
-        }
-      ]
-    },
-    {
-      "word": "chopped",
-      "definition": "выглядит плохо",
-      "category": "status",
-      "transcription": "[чопт]",
-      "date_added": "2025-05-07",
-      "tags": ["внешность", "сленг"],
-      "rating": 5,
-      "definitions": [
-        {
-          "meaning": "выглядеть неудачно",
-          "examples": ["После вечеринки я был совсем chopped."]
-        }
-      ]
-    },
-    {
-      "word": "check",
-      "definition": "проверь, посмотри",
-      "category": "social",
-      "transcription": "[чек]",
-      "date_added": "2025-05-07",
-      "tags": ["команда", "разговор"],
-      "rating": 4,
-      "definitions": [
-        {
-          "meaning": "посмотри на что-то / проверь",
-          "examples": ["Check этот мем!", "Check свой телефон."]
-        }
-      ]
-    },
-    {
-      "word": "im cooked",
-      "definition": "мне капец",
-      "category": "emotion",
-      "transcription": "[айм кукт]",
-      "date_added": "2025-05-07",
-      "tags": ["усталость", "сленг"],
-      "rating": 6,
-      "definitions": [
-        {
-          "meaning": "очень устал или в беде",
-          "examples": ["После экзамена я просто cooked."]
-        }
-      ]
-    },
-    {
-      "word": "you cooked",
-      "definition": "ты крутой, молодец",
-      "category": "status",
-      "transcription": "[ю кукт]",
-      "date_added": "2025-05-07",
-      "tags": ["похвала", "ирония"],
-      "rating": 6,
-      "definitions": [
-        {
-          "meaning": "молодец, справился",
-          "examples": ["You cooked эту презентацию!"]
-        }
-      ]
-    },
-    {
-      "word": "you're cooked",
-      "definition": "тебе капец",
-      "category": "emotion",
-      "transcription": "[юр кукт]",
-      "date_added": "2025-05-07",
-      "tags": ["угроза", "прикол"],
-      "rating": 5,
-      "definitions": [
-        {
-          "meaning": "тебе конец / ты попал",
-          "examples": ["Когда мама узнает — you're cooked."]
-        }
-      ]
-    },
-    {
-      "word": "cap",
-      "definition": "враньё",
-      "category": "status",
-      "transcription": "[кэп]",
-      "date_added": "2025-05-07",
-      "tags": ["лживость", "сленг"],
-      "rating": 6,
-      "definitions": [
-        {
-          "meaning": "неправда, ложь",
-          "examples": ["Это cap, он так не делал."]
-        },
-        {
-          "meaning": "no cap — говорю правду",
-          "examples": ["Это было круто, no cap."]
-        },
-        {
-          "meaning": "you're capping — ты врёшь",
-          "examples": ["Ты явно capping."]
-        }
-      ]
-    },
-    {
-      "word": "yapping",
-      "definition": "много говорить не по делу",
-      "category": "social",
-      "transcription": "[япин]",
-      "date_added": "2025-05-07",
-      "tags": ["речь", "негатив"],
-      "rating": 4,
-      "definitions": [
-        {
-          "meaning": "болтать без остановки",
-          "examples": ["Хватит yapping!"]
-        }
-      ]
-    },
-    {
-      "word": "rizz",
-      "definition": "умение флиртовать, харизма",
-      "category": "character",
-      "transcription": "[риз]",
-      "date_added": "2025-05-07",
-      "tags": ["флирт", "характер"],
-      "rating": 7,
-      "definitions": [
-        {
-          "meaning": "привлекательность и уверенность в общении",
-          "examples": ["У него full rizz."]
-        }
-      ]
-    },
-    {
-      "word": "opp",
-      "definition": "враг",
-      "category": "character",
-      "transcription": "[оп]",
-      "date_added": "2025-05-07",
-      "tags": ["вражда", "отношения"],
-      "rating": 5,
-      "definitions": [
-        {
-          "meaning": "недруг, противник",
-          "examples": ["Не верь ему, он opp."]
-        }
-      ]
-    },
-    {
-      "word": "lock in",
-      "definition": "сфокусируйся",
-      "category": "emotion",
-      "transcription": "[лок ин]",
-      "date_added": "2025-05-07",
-      "tags": ["мотивация", "настрой"],
-      "rating": 6,
-      "definitions": [
-        {
-          "meaning": "соберись и сосредоточься",
-          "examples": ["Lock in, экзамен через час!"]
-        }
-      ]
-    },
-    {
-      "word": "hit it off",
-      "definition": "поладить с кем-то",
-      "category": "character",
-      "transcription": "[хит ит оф]",
-      "date_added": "2025-05-07",
-      "tags": ["дружба", "отношения"],
-      "rating": 6,
-      "definitions": [
-        {
-          "meaning": "быстро найти общий язык",
-          "examples": ["Мы с ней сразу hit it off."]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "word": "goated",
+    "definition": "очень крутой",
+    "category": "status",
+    "tags": ["похвала", "сленг"],
+    "definitions": [
+      {
+        "meaning": "максимально крутой, топовый",
+        "examples": ["Этот трек просто goated."]
+      }
+    ]
+  },
+  {
+    "word": "nailed it",
+    "definition": "отлично справился",
+    "category": "status",
+    "tags": ["успех", "оценка"],
+    "definitions": [
+      {
+        "meaning": "отлично выполнил задачу",
+        "examples": ["Ты nailed it на этом выступлении."]
+      }
+    ]
+  },
+  {
+    "word": "huzz",
+    "definition": "красивый",
+    "category": "status",
+    "tags": ["внешность", "позитив"],
+    "definitions": [
+      {
+        "meaning": "внешне привлекательный",
+        "examples": ["Он просто huzz."]
+      }
+    ]
+  },
+  {
+    "word": "chuzz",
+    "definition": "некрасивый",
+    "category": "status",
+    "tags": ["внешность", "негатив"],
+    "definitions": [
+      {
+        "meaning": "внешне непривлекательный",
+        "examples": ["Он чутка chuzz, но классный."]
+      }
+    ]
+  },
+  {
+    "word": "chopped",
+    "definition": "выглядит плохо",
+    "category": "status",
+    "tags": ["внешность", "сленг"],
+    "definitions": [
+      {
+        "meaning": "выглядеть неудачно",
+        "examples": ["После вечеринки я был совсем chopped."]
+      }
+    ]
+  },
+  {
+    "word": "check",
+    "definition": "проверь, посмотри",
+    "category": "social",
+    "tags": ["команда", "разговор"],
+    "definitions": [
+      {
+        "meaning": "посмотри на что-то / проверь",
+        "examples": ["Check этот мем!", "Check свой телефон."]
+      }
+    ]
+  },
+  {
+    "word": "im cooked",
+    "definition": "мне капец",
+    "category": "emotion",
+    "tags": ["усталость", "сленг"],
+    "definitions": [
+      {
+        "meaning": "очень устал или в беде",
+        "examples": ["После экзамена я просто cooked."]
+      }
+    ]
+  },
+  {
+    "word": "you cooked",
+    "definition": "ты крутой, молодец",
+    "category": "status",
+    "tags": ["похвала", "ирония"],
+    "definitions": [
+      {
+        "meaning": "молодец, справился",
+        "examples": ["You cooked эту презентацию!"]
+      }
+    ]
+  },
+  {
+    "word": "you're cooked",
+    "definition": "тебе капец",
+    "category": "emotion",
+    "tags": ["угроза", "прикол"],
+    "definitions": [
+      {
+        "meaning": "тебе конец / ты попал",
+        "examples": ["Когда мама узнает — you're cooked."]
+      }
+    ]
+  },
+  {
+    "word": "cap",
+    "definition": "враньё",
+    "category": "status",
+    "tags": ["лживость", "сленг"],
+    "definitions": [
+      {
+        "meaning": "неправда, ложь",
+        "examples": ["Это cap, он так не делал."]
+      },
+      {
+        "meaning": "no cap — говорю правду",
+        "examples": ["Это было круто, no cap."]
+      },
+      {
+        "meaning": "you're capping — ты врёшь",
+        "examples": ["Ты явно capping."]
+      }
+    ]
+  },
+  {
+    "word": "yapping",
+    "definition": "много говорить не по делу",
+    "category": "social",
+    "tags": ["речь", "негатив"],
+    "definitions": [
+      {
+        "meaning": "болтать без остановки",
+        "examples": ["Хватит yapping!"]
+      }
+    ]
+  },
+  {
+    "word": "rizz",
+    "definition": "умение флиртовать, харизма",
+    "category": "character",
+    "tags": ["флирт", "характер"],
+    "definitions": [
+      {
+        "meaning": "привлекательность и уверенность в общении",
+        "examples": ["У него full rizz."]
+      }
+    ]
+  },
+  {
+    "word": "opp",
+    "definition": "враг",
+    "category": "character",
+    "tags": ["вражда", "отношения"],
+    "definitions": [
+      {
+        "meaning": "недруг, противник",
+        "examples": ["Не верь ему, он opp."]
+      }
+    ]
+  },
+  {
+    "word": "lock in",
+    "definition": "сфокусируйся",
+    "category": "emotion",
+    "tags": ["мотивация", "настрой"],
+    "definitions": [
+      {
+        "meaning": "соберись и сосредоточься",
+        "examples": ["Lock in, экзамен через час!"]
+      }
+    ]
+  },
+  {
+    "word": "hit it off",
+    "definition": "поладить с кем-то",
+    "category": "character",
+    "tags": ["дружба", "отношения"],
+    "definitions": [
+      {
+        "meaning": "быстро найти общий язык",
+        "examples": ["Мы с ней сразу hit it off."]
+      }
+    ]
+  }
+]
