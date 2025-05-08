@@ -14,27 +14,31 @@ document.querySelector('.dark-mode-toggle').addEventListener('click', toggleDark
 const categoryButton = document.getElementById('categoryButton');
 const categoryOptions = document.getElementById('categoryOptions');
 
-const toggleCategoryMenu = (event) => {
-  event.stopPropagation();
-  categoryOptions.classList.toggle('show');
-};
+// Проверка на существование элементов
+if (categoryButton && categoryOptions) {
+  const toggleCategoryMenu = (event) => {
+    event.stopPropagation();
+    categoryOptions.classList.toggle('show');
+  };
 
-// Закрытие меню при клике вне окна
-const closeCategoryMenu = (event) => {
-  if (!categoryOptions.contains(event.target) && !categoryButton.contains(event.target)) {
-    categoryOptions.classList.remove('show');
-  }
-};
+  // Закрытие меню при клике вне окна
+  const closeCategoryMenu = (event) => {
+    if (!categoryOptions.contains(event.target) && !categoryButton.contains(event.target)) {
+      categoryOptions.classList.remove('show');
+    }
+  };
 
-// Выбор категории
-const selectCategory = (event) => {
-  const selectedCategory = event.target.value;
-  if (selectedCategory) {
-    console.log(`Выбрана категория: ${selectedCategory}`); // Здесь вы можете добавить логику для обработки выбранной категории
-    categoryOptions.classList.remove('show');
-  }
-};
+  // Выбор категории
+  const selectCategory = (event) => {
+    const selectedCategory = event.target.value;
+    if (selectedCategory) {
+      console.log(`Выбрана категория: ${selectedCategory}`); // Здесь вы можете добавить логику для обработки выбранной категории
+      categoryOptions.classList.remove('show');
+    }
+  };
 
-categoryButton.addEventListener('click', toggleCategoryMenu);
-document.addEventListener('click', closeCategoryMenu);
-categoryOptions.addEventListener('click', selectCategory);
+  // Привязка событий
+  categoryButton.addEventListener('click', toggleCategoryMenu);
+  document.addEventListener('click', closeCategoryMenu);
+  categoryOptions.addEventListener('click', selectCategory);
+}
