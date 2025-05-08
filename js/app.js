@@ -1,13 +1,14 @@
 // Глобальные переменные
-let wordsData = {};
+let wordsData = [];
 let currentWordOfTheDay = null;
 
 // Загрузка данных
 async function loadWordsData() {
     try {
         const response = await fetch('data/words.json');
-        wordsData = await response.json();
-        console.log('Данные загружены, слов:', Object.keys(wordsData).length);
+        const data = await response.json();
+        wordsData = data.words; // Получаем массив слов из объекта
+        console.log('Данные загружены, слов:', wordsData.length);
     } catch (error) {
         console.error('Ошибка загрузки words.json:', error);
     }
@@ -20,19 +21,18 @@ document.addEventListener('DOMContentLoaded', async function() {
     initSearch();
     initRouting();
     
-    // Проверяем хэш при загрузке (на случай, если пользователь зашёл по прямой ссылке)
-    setTimeout(checkHash, 100); // Небольшая задержка для надёжности
+    // Проверяем хэш при загрузке
+    setTimeout(checkHash, 100);
 });
 
 // Слово дня
 function initWordOfTheDay() {
-    if (!wordsData) return;
+    if (!wordsData || wordsData.length === 0) return;
 
     const today = new Date();
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    const words = Object.keys(wordsData);
-    const index = Math.floor(seededRandom(seed) * words.length);
-    currentWordOfTheDay = words[index];
+    const index = Math.floor(seededRandom(seed) * wordsData.length % wordsData.length;
+    currentWordOfTheDay = wordsData[index];
     
     updateWordOfTheDayUI(currentWordOfTheDay);
 }
@@ -42,18 +42,17 @@ function seededRandom(seed) {
     return x - Math.floor(x);
 }
 
-function updateWordOfTheDayUI(word) {
-    if (!word || !wordsData[word]) return;
+function updateWordOfTheDayUI(wordObj) {
+    if (!wordObj) return;
     
-    const wordData = wordsData[word];
-    document.getElementById('wotd-title').textContent = word;
-    document.getElementById('wotd-definition').textContent = wordData.definition;
+    document.getElementById('wotd-title').textContent = wordObj.word;
+    document.getElementById('wotd-definition').textContent = wordObj.definition;
     
     const wotdLink = document.getElementById('wotd-link');
-    wotdLink.href = `#word/${encodeURIComponent(word)}`;
+    wotdLink.href = `#word/${encodeURIComponent(wordObj.word)}`;
     wotdLink.onclick = function(e) {
         e.preventDefault();
-        window.location.hash = `word/${encodeURIComponent(word)}`;
+        window.location.hash = `word/${encodeURIComponent(wordObj.word)}`;
     };
 }
 
@@ -62,6 +61,7 @@ function initSearch() {
     const searchInput = document.getElementById('search-input');
     const suggestionsContainer = document.getElementById('suggestions');
     const searchButton = document.querySelector('.search-button');
+    const categorySelect = document.getElementById('category-select');
     
     if (!searchInput) {
         console.error('Элемент search-input не найден!');
@@ -70,7 +70,7 @@ function initSearch() {
 
     searchInput.addEventListener('input', function() {
         const query = this.value.trim().toLowerCase();
-        const category = document.getElementById('category-select').value;
+        const category = categorySelect.value;
         
         if (!query) {
             suggestionsContainer.innerHTML = '';
@@ -78,10 +78,10 @@ function initSearch() {
             return;
         }
         
-        const filteredWords = Object.keys(wordsData).filter(word => {
-            const wordMatch = word.toLowerCase().includes(query);
-            const definitionMatch = wordsData[word].definition.toLowerCase().includes(query);
-            const categoryMatch = category === 'all' || wordsData[word].category === category;
+        const filteredWords = wordsData.filter(item => {
+            const wordMatch = item.word.toLowerCase().includes(query);
+            const definitionMatch = item.definition.toLowerCase().includes(query);
+            const categoryMatch = category === 'all' || item.category === category;
             return (wordMatch || definitionMatch) && categoryMatch;
         }).slice(0, 5);
         
@@ -109,6 +109,13 @@ function initSearch() {
     searchButton.addEventListener('click', function() {
         performSearch(searchInput.value.trim());
     });
+
+    // Фильтрация по категории
+    categorySelect.addEventListener('change', function() {
+        if (searchInput.value.trim().length > 0) {
+            searchInput.dispatchEvent(new Event('input'));
+        }
+    });
 }
 
 function showSuggestions(words) {
@@ -120,11 +127,11 @@ function showSuggestions(words) {
         return;
     }
     
-    words.forEach(word => {
+    words.forEach(wordObj => {
         const suggestion = document.createElement('div');
         suggestion.className = 'suggestion-item';
-        suggestion.textContent = word;
-        suggestion.setAttribute('data-word', word);
+        suggestion.textContent = wordObj.word;
+        suggestion.setAttribute('data-word', wordObj.word);
         suggestionsContainer.appendChild(suggestion);
     });
     
@@ -137,19 +144,13 @@ function performSearch(query) {
     // Закрываем подсказки
     document.getElementById('suggestions').classList.remove('visible');
     
-    // Проверяем, есть ли точное совпадение со словом
-    if (wordsData[query]) {
-        window.location.hash = `word/${encodeURIComponent(query)}`;
-        return;
-    }
-    
-    // Ищем частичные совпадения
-    const foundWord = Object.keys(wordsData).find(word => 
-        word.toLowerCase() === query.toLowerCase()
+    // Ищем точное совпадение
+    const foundWord = wordsData.find(item => 
+        item.word.toLowerCase() === query.toLowerCase()
     );
     
     if (foundWord) {
-        window.location.hash = `word/${encodeURIComponent(foundWord)}`;
+        window.location.hash = `word/${encodeURIComponent(foundWord.word)}`;
     } else {
         alert('Слово не найдено. Попробуйте другой запрос.');
     }
@@ -181,7 +182,8 @@ function checkHash() {
 }
 
 function showWordPage(word) {
-    if (!wordsData[word]) {
+    const wordObj = wordsData.find(item => item.word === word);
+    if (!wordObj) {
         showMainPage();
         return;
     }
@@ -189,28 +191,54 @@ function showWordPage(word) {
     document.querySelector('.main').classList.add('hidden');
     document.getElementById('word-page').classList.remove('hidden');
     
-    const wordData = wordsData[word];
-    document.getElementById('word-title').textContent = word;
+    document.getElementById('word-title').textContent = wordObj.word;
     
     const wordContent = document.getElementById('word-content');
     wordContent.innerHTML = `
-        <div class="word-definition">
-            <p>${wordData.definition}</p>
+        <div class="word-meta">
+            <span class="transcription">${wordObj.transcription || ''}</span>
+            <span class="category-tag">${getCategoryEmoji(wordObj.category)} ${getCategoryName(wordObj.category)}</span>
+            ${wordObj.rating ? `<span class="rating">Рейтинг: ${'★'.repeat(wordObj.rating)}</span>` : ''}
         </div>
-        ${wordData.examples ? `
-        <div class="word-examples">
-            <h3>Примеры:</h3>
-            <ul>
-                ${wordData.examples.map(ex => `<li>${ex}</li>`).join('')}
-            </ul>
+        
+        <div class="word-definition">
+            <h3>Основное значение:</h3>
+            <p>${wordObj.definition}</p>
+        </div>
+        
+        ${wordObj.definitions && wordObj.definitions.length > 0 ? `
+        <div class="additional-definitions">
+            <h3>Дополнительные значения:</h3>
+            ${wordObj.definitions.map(def => `
+                <div class="definition-item">
+                    <p><strong>${def.meaning}</strong></p>
+                    ${def.examples && def.examples.length > 0 ? `
+                    <div class="examples">
+                        <h4>Примеры:</h4>
+                        <ul>
+                            ${def.examples.map(ex => `<li>${ex}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                </div>
+            `).join('')}
         </div>
         ` : ''}
-        <div class="word-category">
-            <span class="category-tag">${getCategoryEmoji(wordData.category)} ${getCategoryName(wordData.category)}</span>
+        
+        ${wordObj.tags && wordObj.tags.length > 0 ? `
+        <div class="word-tags">
+            <h3>Теги:</h3>
+            <div class="tags-container">
+                ${wordObj.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+        </div>
+        ` : ''}
+        
+        <div class="word-footer">
+            <small>Добавлено: ${wordObj.date_added || 'неизвестно'}</small>
         </div>
     `;
     
-    // Прокрутка вверх и фокус на заголовок для accessibility
     window.scrollTo(0, 0);
     document.getElementById('word-title').focus();
 }
