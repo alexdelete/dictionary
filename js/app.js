@@ -9,7 +9,8 @@ const backLink = document.getElementById("back-link");
 const suggestions = document.getElementById("suggestions");
 const categorySelect = document.getElementById("category-select");
 const app = document.getElementById("app");
-categorySelect.addEventListener('focus');
+
+
 
 // Загрузка данных
 async function loadWords() {
@@ -67,23 +68,6 @@ if (link) link.setAttribute("href", "#" + encodeURIComponent(wordOfTheDay.word))
 
 }
 
-// Обновление подсказок
-function updateSuggestions() {
-const query = searchInput.value.toLowerCase();
-const selectedCategory = categorySelect.value;
-
-```
-const filtered = words.filter(word => {
-  const matchesQuery = word.word.toLowerCase().includes(query) || 
-                     word.definition.toLowerCase().includes(query);
-  const matchesCategory = selectedCategory === 'all' || word.category === selectedCategory;
-  return matchesQuery && matchesCategory;
-}).slice(0, 5);
-
-renderSuggestions(filtered);
-```
-
-}
 
 // Показать страницу слова
 function showWord(word) {
@@ -165,6 +149,8 @@ window\.addEventListener("hashchange", handleHashChange);
 
 // Загрузка данных
 loadWords();
+  loadWords().then(handleHashChange);
+
 });
 // Анимация при фокусе/ховере на селекторе
 categorySelect.addEventListener('focus', () => {
