@@ -100,7 +100,6 @@ app.classList.add("hidden");
 searchInput.value = wordData.word;
 ```
 
-}
 
 // Обработчики событий
 function handleHashChange() {
