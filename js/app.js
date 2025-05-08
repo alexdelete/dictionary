@@ -87,7 +87,7 @@ renderSuggestions(filtered);
 
 // Показать страницу слова
 function showWord(word) {
-const wordData = words.find(w => w\.word.toLowerCase() === word.toLowerCase());
+const wordData = words.find(w => w.word.toLowerCase() === word.toLowerCase());
 
 ```
 if (!wordData) {
