@@ -40,37 +40,36 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearMain() {
     if (mainContainer) mainContainer.innerHTML = "";
   }
-function displayWord(word) {
-  if (!mainContainer) return;
 
-  const examplesHtml = word.definitions.map(def => `
-    <div>
-      <p><strong>${def.meaning}</strong></p>
-      <ul>
-        ${def.examples.map(ex => `<li>💬 ${ex}</li>`).join("")}
-      </ul>
-    </div>
-  `).join("");
+  function displayWord(word) {
+    if (!mainContainer) return;
 
-  mainContainer.innerHTML = `
-    <div class="card large">
-      <h2>${word.word}</h2>
-      <p class="definition">${word.definition}</p>
-      <h3>Примеры:</h3>
-      ${examplesHtml}
-      <a class="more-link back-to-list" href="#">Назад к списку</a>
-    </div>
-  `;
+    const examplesHtml = word.definitions.map(def => `
+      <div>
+        <p><strong>${def.meaning}</strong></p>
+        <ul>
+          ${def.examples.map(ex => `<li>💬 ${ex}</li>`).join("")}
+        </ul>
+      </div>
+    `).join("");
 
-  // Добавляем обработчик "назад"
-  document.querySelector(".back-to-list").addEventListener("click", (e) => {
-    e.preventDefault();
-    history.replaceState(null, "", " ");
-    clearMain();
-    renderCategory("all"); // ← если хочешь, можешь заменить "all" на запомненную категорию
-  });
-}
+    mainContainer.innerHTML = `
+      <div class="card large">
+        <h2>${word.word}</h2>
+        <p class="definition">${word.definition}</p>
+        <h3>Примеры:</h3>
+        ${examplesHtml}
+        <a class="more-link back-to-list" href="#">Назад к списку</a>
+      </div>
+    `;
 
+    document.querySelector(".back-to-list").addEventListener("click", (e) => {
+      e.preventDefault();
+      history.replaceState(null, "", " ");
+      clearMain();
+      renderCategory("all");
+    });
+  }
 
   function showNotFound(term) {
     if (!mainContainer) return;
@@ -113,16 +112,11 @@ function displayWord(word) {
   document.querySelectorAll("#categoryOptions button").forEach(btn => {
     btn.addEventListener("click", () => {
       const value = btn.value;
-
       renderCategory(value);
       history.replaceState(null, "", " ");
-
-      if (value === "all") {
-        searchInput.placeholder = "Найти слово...";
-      } else {
-        searchInput.placeholder = `🔍 Поиск в категории: ${categoryLabel(value)}`;
-      }
-
+      searchInput.placeholder = value === "all"
+        ? "Найти слово..."
+        : `🔍 Поиск в категории: ${categoryLabel(value)}`;
       categoryOptions.classList.remove("visible");
     });
   });
