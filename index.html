@@ -27,12 +27,15 @@
     <section class="search-section">
       <div class="container">
         <div class="search-wrapper">
-          <div class="category-select-wrapper">
-<button id="categoryButton" class="main-button">Категории</button>
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-             <div id="categoryOptions" class="category-options">
+        <div class="category-select-wrapper">
+  <button id="categoryButton" class="main-button">
+    Категории
+    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  
+  <div id="categoryOptions" class="category-options">
     <button value="all">📚 Все слова</button>
     <button value="emotion">😊 Эмоции</button>
     <button value="social">💬 Общение</button>
@@ -40,6 +43,7 @@
     <button value="status">⭐ Оценка</button>
   </div>
 </div>
+
           <div class="search-input-wrapper">
             <input type="text" placeholder="Найти слово..." class="search-input" autocomplete="off">
             <button class="search-button" aria-label="Поиск">
