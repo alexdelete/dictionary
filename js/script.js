@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   let allWords = [];
+  let currentCategory = "all"; // отслеживаем выбранную категорию
 
   const searchInput = document.querySelector(".search-input");
   const searchButton = document.querySelector(".search-button");
@@ -9,9 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetch("data/words.json")
     .then(res => {
-      if (!res.ok) {
-        throw new Error(`Ошибка загрузки: ${res.status}`);
-      }
+      if (!res.ok) throw new Error(`Ошибка загрузки: ${res.status}`);
       return res.json();
     })
     .then(data => {
@@ -67,13 +66,12 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       history.replaceState(null, "", " ");
       clearMain();
-      renderCategory("all");
+      renderCategory(currentCategory); // ← теперь возвращаемся в текущую категорию
     });
   }
 
   function showNotFound(term) {
     if (!mainContainer) return;
-
     mainContainer.innerHTML = `
       <div class="error">
         <h2>Слово «${term}» не найдено</h2>
@@ -109,38 +107,57 @@ document.addEventListener("DOMContentLoaded", () => {
     `).join("");
   }
 
-  let currentCategory = "all"; // глобально отслеживаем текущую категорию
-
-categoryButton.addEventListener("click", () => {
-  categoryOptions.classList.toggle("visible");
-});
-
-document.querySelectorAll("#categoryOptions button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const value = btn.value;
-    currentCategory = value; // обновляем выбранную категорию
-
-    renderCategory(value);
-    history.replaceState(null, "", " ");
-
-    searchInput.placeholder = value === "all"
-      ? "Найти слово..."
-      : `🔍 Поиск в категории: ${categoryLabel(value)}`;
-
-    categoryOptions.classList.remove("visible");
+  // Показать/скрыть список категорий
+  categoryButton.addEventListener("click", () => {
+    categoryOptions.classList.toggle("visible");
   });
-});
 
+  // Обработчики кнопок категорий
+  document.querySelectorAll("#categoryOptions button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const value = btn.value;
+      currentCategory = value;
 
+      renderCategory(value);
+      history.replaceState(null, "", " ");
+
+      searchInput.placeholder = value === "all"
+        ? "Найти слово..."
+        : `🔍 Поиск в категории: ${categoryLabel(value)}`;
+
+      categoryOptions.classList.remove("visible");
+    });
+  });
+
+  // Поиск
   searchButton.addEventListener("click", () => {
     const term = searchInput.value.trim().toLowerCase();
-    const match = allWords.find(w => w.word.toLowerCase() === term);
+    const match = allWords.find(w =>
+      (currentCategory === "all" || w.category === currentCategory) &&
+      w.word.toLowerCase() === term
+    );
+
     if (match) {
       location.hash = `#${encodeURIComponent(match.word)}`;
       removeSuggestions();
     } else {
       showNotFound(term);
     }
+  });
+
+  // Подсказки
+  searchInput.addEventListener("input", () => {
+    const term = searchInput.value.trim().toLowerCase();
+    if (term.length < 2) return removeSuggestions();
+
+    const suggestions = allWords
+      .filter(w =>
+        (currentCategory === "all" || w.category === currentCategory) &&
+        w.word.toLowerCase().includes(term)
+      )
+      .slice(0, 5);
+
+    showSuggestions(suggestions);
   });
 
   function showSuggestions(words) {
@@ -197,8 +214,4 @@ document.querySelectorAll("#categoryOptions button").forEach(btn => {
       default: return cat;
     }
   }
-
-  categoryButton.addEventListener("click", () => {
-    categoryOptions.classList.toggle("visible");
-  });
 });
