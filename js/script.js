@@ -1,227 +1,187 @@
-let allWords = [];
+можешь обновить мой js
+let allWords = \[];
 
-// Загрузка данных
 fetch("data/words.json")
-  .then(res => res.json())
-  .then(data => {
-    allWords = data;
-    console.log(`Загружено ${allWords.length} слов`);
-    if (location.hash.length > 1) handleHash();
-  })
-  .catch(err => console.error("Ошибка загрузки слов:", err));
+.then(res => res.json())
+.then(data => {
+allWords = data;
+console.log(`Загружено ${allWords.length} слов`);
+if (location.hash.length > 1) handleHash(); // <--- вот так
+});
 
-// Обработчики событий
-window.addEventListener("hashchange", handleHash);
-document.addEventListener('DOMContentLoaded', initApp);
+window\.addEventListener("hashchange", handleHash);
 
-function initApp() {
-  // Инициализация кнопки категорий
-// ⬇ Показ и скрытие выпадающего списка категорий
-const categoryButton = document.getElementById("categoryButton");
-const categoryOptions = document.getElementById("categoryOptions");
-
-if (categoryButton && categoryOptions) {
-  categoryButton.addEventListener("click", (e) => {
-    e.stopPropagation();
-    categoryButton.classList.toggle("active");
-    categoryOptions.classList.toggle("show"); // Используем "show" вместо "visible"
-  });
-
-  // Закрытие при клике вне меню
-  document.addEventListener("click", (e) => {
-    if (!categoryOptions.contains(e.target) {
-      categoryButton.classList.remove("active");
-      categoryOptions.classList.remove("show");
-    }
-  });
-
-  // Обработка выбора категории
-  document.querySelectorAll("#categoryOptions button").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const value = btn.value;
-      renderCategory(value);
-      
-      // Обновление placeholder
-      const searchInput = document.querySelector(".search-input");
-      if (searchInput) {
-        searchInput.placeholder = value === "all" 
-          ? "Найти слово..." 
-          : `🔍 Поиск в категории: ${categoryLabel(value)}`;
-      }
-      
-      // Скрытие меню
-      categoryButton.classList.remove("active");
-      categoryOptions.classList.remove("show");
-    });
-  });
-}
-  // Инициализация поиска
-  const searchInput = document.querySelector(".search-input");
-  const searchButton = document.querySelector(".search-button");
-  
-  if (searchInput && searchButton) {
-    searchInput.addEventListener("input", handleSearchInput);
-    searchButton.addEventListener("click", handleSearchSubmit);
-    searchInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") handleSearchSubmit();
-    });
-  }
-}
-
-// 🔗 Обработка хэша
+// 🔗 Обработка хэша — #слово
 function handleHash() {
-  const key = decodeURIComponent(location.hash.slice(1)).toLowerCase();
-  if (!key) return clearMain();
+const key = decodeURIComponent(location.hash.slice(1)).toLowerCase();
+if (!key) return clearMain(); // Главная без слов
 
-  const word = allWords.find(w => w.word.toLowerCase() === key);
-  if (word) {
-    displayWord(word);
-  } else {
-    showNotFound(key);
-  }
+const word = allWords.find(w => w\.word.toLowerCase() === key);
+if (word) {
+displayWord(word);
+} else {
+showNotFound(key);
+}
 }
 
-// 🧹 Очистка основной зоны
+// 🧹 Очистить основную зону
 function clearMain() {
-  const container = document.querySelector(".main");
-  if (container) container.innerHTML = "";
+const container = document.querySelector(".main");
+if (container) container.innerHTML = "";
 }
 
 // 🧾 Показ одного слова
 function displayWord(word) {
-  const container = document.querySelector(".main");
-  if (!container) return;
+const container = document.querySelector(".main");
+if (!container) return;
 
-  const examplesHtml = word.definitions?.map(def => `
-    <div>
-      <p><strong>${def.meaning}</strong></p>
-      <ul>
-        ${def.examples?.map(ex => `<li>💬 ${ex}</li>`).join("") || ''}
-      </ul>
-    </div>
-  `).join("") || '';
+const examplesHtml = word.definitions.map(def => `    <div>       <p><strong>${def.meaning}</strong></p>       <ul>
+        ${def.examples.map(ex =>`<li>💬 \${ex}</li>`).join("")}       </ul>     </div>
+  `).join("");
 
-  container.innerHTML = `
-    <div class="card large">
-      <h2>${word.word}</h2>
-      <p class="definition">${word.definition}</p>
-      ${examplesHtml ? `<h3>Примеры:</h3>${examplesHtml}` : ''}
-      <a class="more-link" href="#">← Назад к списку</a>
-    </div>
+container.innerHTML = `     <div class="card large">       <h2>${word.word}</h2>       <p class="definition">${word.definition}</p>       <h3>Примеры:</h3>
+      ${examplesHtml}       <a class="more-link" href="#">← Назад к списку</a>     </div>
   `;
 }
 
-// ❌ Слово не найдено
+// ❌ Если слово не найдено
 function showNotFound(term) {
-  const container = document.querySelector(".main");
-  if (!container) return;
+const container = document.querySelector(".main");
+if (!container) return;
 
-  container.innerHTML = `
-    <div class="error">
-      <h2>Слово «${term}» не найдено</h2>
-      <p>Проверьте написание или <a href="#">вернитесь на главную</a>.</p>
-    </div>
+container.innerHTML = `     <div class="error">       <h2>Слово «${term}» не найдено</h2>       <p>Проверьте написание или <a href="#">вернитесь на главную</a>.</p>     </div>
   `;
 }
 
 // 📂 Показ слов по категории
 function renderCategory(category) {
-  const container = document.querySelector(".main");
-  if (!container) return;
+const container = document.querySelector(".main");
+if (!container) return;
 
-  const filtered = category === "all" 
-    ? allWords 
-    : allWords.filter(w => w.category === category);
+const filtered = category === "all"
+? \[]
+: allWords.filter(w => w\.category === category);
 
-  if (!filtered.length) {
-    container.innerHTML = `
-      <div class="word-not-found">
-        <h2>${category === "all" ? "Нет слов в базе" : "Нет слов в категории"}</h2>
-        <p>Попробуйте выбрать другую категорию.</p>
-      </div>
+if (filtered.length === 0) {
+container.innerHTML = `       <div class="word-not-found">         <h2>Нет слов в категории</h2>         <p>Попробуйте выбрать другую категорию.</p>       </div>
     `;
-    return;
-  }
-
-  container.innerHTML = `
-    <div class="cards">
-      ${filtered.map(word => `
-        <div class="card small">
-          <p class="card-label">${categoryLabel(word.category)}</p>
-          <h2 class="word-title">${word.word}</h2>
-          <p class="definition">${word.definition}</p>
-          <a class="more-link" href="#${encodeURIComponent(word.word)}">Подробнее</a>
-        </div>
-      `).join("")}
-    </div>
-  `;
+return;
 }
 
-// 🔍 Обработка поиска
-function handleSearchInput() {
-  const term = this.value.trim().toLowerCase();
-  if (term.length < 2) return removeSuggestions();
-
-  const suggestions = allWords
-    .filter(w => w.word.toLowerCase().includes(term))
-    .slice(0, 5);
-
-  showSuggestions(suggestions);
+container.innerHTML = filtered.map(word => `     <div class="card small">       <p class="card-label">${categoryLabel(word.category)}</p>       <h2 class="word-title">${word.word}</h2>       <p class="definition">${word.definition}</p>       <a class="more-link" href="#${encodeURIComponent(word.word)}">Подробнее</a>     </div>
+  `).join("");
 }
 
-function handleSearchSubmit() {
-  const term = document.querySelector(".search-input")?.value.trim().toLowerCase();
-  if (!term) return;
+// 🗂 Категории — обработчик
+document.querySelectorAll("#categoryOptions button").forEach(btn => {
+btn.addEventListener("click", () => {
+const value = btn.value;
 
-  const match = allWords.find(w => w.word.toLowerCase() === term);
-  if (match) {
-    location.hash = `#${encodeURIComponent(match.word)}`;
-    removeSuggestions();
-  } else {
-    showNotFound(term);
-  }
+```
+// 🖼 Рендерим
+renderCategory(value);
+history.replaceState(null, "", " "); // удаляем хэш
+
+// ✏️ Обновляем placeholder
+if (value === "all") {
+  searchInput.placeholder = "Найти слово...";
+} else {
+  searchInput.placeholder = `🔍 Поиск в категории: ${categoryLabel(value)}`;
 }
 
-// 💬 Подсказки поиска
+// ❌ Скрываем меню
+categoryOptions.classList.remove("visible");
+```
+
+});
+});
+
+// 🔍 Поиск и кнопка
+const searchInput = document.querySelector(".search-input");
+const searchButton = document.querySelector(".search-button");
+
+searchInput.addEventListener("input", () => {
+const term = searchInput.value.trim().toLowerCase();
+if (term.length < 2) return removeSuggestions();
+
+const suggestions = allWords
+.filter(w => w\.word.toLowerCase().includes(term))
+.slice(0, 5);
+
+showSuggestions(suggestions);
+});
+
+searchButton.addEventListener("click", () => {
+const term = searchInput.value.trim().toLowerCase();
+const match = allWords.find(w => w\.word.toLowerCase() === term);
+if (match) {
+location.hash = `#${encodeURIComponent(match.word)}`;
+removeSuggestions();
+} else {
+showNotFound(term);
+}
+});
+
+// 💬 Подсказки
 function showSuggestions(words) {
-  removeSuggestions();
-  if (!words.length) return;
+removeSuggestions();
 
-  const list = document.createElement("div");
-  list.className = "suggestions";
-  
-  words.forEach(word => {
-    const item = document.createElement("div");
-    item.className = "suggestion-item";
-    item.innerHTML = `
-      <span>${word.word}</span>
-      <small>${categoryLabel(word.category)}</small>
-    `;
-    item.addEventListener("click", () => {
-      document.querySelector(".search-input").value = word.word;
-      location.hash = `#${encodeURIComponent(word.word)}`;
-      removeSuggestions();
-    });
-    list.appendChild(item);
-  });
+const list = document.createElement("div");
+list.className = "suggestions";
+Object.assign(list.style, {
+position: "absolute",
+top: "100%",
+left: "0",
+right: "0",
+background: "white",
+border: "1px solid #ccc",
+borderRadius: "8px",
+zIndex: "10",
+maxHeight: "200px",
+overflowY: "auto",
+boxShadow: "0 4px 20px rgba(0,0,0,0.1)"
+});
 
-  document.querySelector(".search-input-wrapper").appendChild(list);
+words.forEach(word => {
+const item = document.createElement("div");
+item.textContent = word.word;
+Object.assign(item.style, {
+padding: "10px 16px",
+cursor: "pointer",
+transition: "background 0.2s"
+});
+item.addEventListener("mouseover", () => item.style.background = "#f2f2f2");
+item.addEventListener("mouseout", () => item.style.background = "white");
+item.addEventListener("click", () => {
+searchInput.value = word.word;
+location.hash = `#${encodeURIComponent(word.word)}`;
+removeSuggestions();
+});
+list.appendChild(item);
+});
+
+document.querySelector(".search-input-wrapper").appendChild(list);
 }
 
 function removeSuggestions() {
-  const existing = document.querySelector(".suggestions");
-  if (existing) existing.remove();
+const existing = document.querySelector(".suggestions");
+if (existing) existing.remove();
 }
 
-// 🎭 Метки категорий
+// 🎭 Категории с иконками
 function categoryLabel(cat) {
-  const labels = {
-    emotion: "😊 Эмоции",
-    social: "💬 Общение",
-    character: "👤 Отношения",
-    status: "⭐ Оценка",
-    all: "📚 Все слова"
-  };
-  return labels[cat] || cat;
+switch (cat) {
+case "emotion": return "😊 Эмоции";
+case "social": return "💬 Общение";
+case "character": return "👤 Отношения";
+case "status": return "⭐ Оценка";
+default: return cat;
 }
+}
+// ⬇ Показ и скрытие выпадающего списка категорий
+const categoryButton = document.getElementById("categoryButton");
+const categoryOptions = document.getElementById("categoryOptions");
+
+categoryButton.addEventListener("click", () => {
+categoryOptions.classList.toggle("visible");
+});
