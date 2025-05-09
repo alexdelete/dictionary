@@ -9,19 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainContainer = document.querySelector(".main");
 
   fetch("data/words.json")
-    .then(res => {
-      if (!res.ok) {
-        throw new Error("Ошибка загрузки: " + res.status);
-      }
-      return res.json();
-    })
-    .then(data => {
-  allWords = data;
-  console.log(`Загружено ${allWords.length} слов`);
-})
-    .catch(error => {
-      console.error("Не удалось загрузить слова:", error);
-    });
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("Ошибка загрузки: " + res.status);
+    }
+    return res.json();
+  })
+  .then(data => {
+    allWords = data;
+    console.log(`Загружено ${allWords.length} слов`);
+    // Убрали вызов renderCategory
+  })
+  .catch(error => {
+    console.error("Не удалось загрузить слова:", error);
+  });
+
 
   window.addEventListener("hashchange", handleHash);
 
