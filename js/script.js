@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 fetch("data/words.json")
   .then(res => {
-    if (!res.ok) throw new Error(`Ошибка загрузки: ${res.status}`);
+    if (!res.ok) {
+      throw new Error("Ошибка загрузки: " + res.status);
+    }
     return res.json();
   })
   .then(data => {
