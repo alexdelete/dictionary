@@ -5,8 +5,9 @@ fetch("data/words.json")
   .then(data => {
     allWords = data;
     console.log(`Загружено ${allWords.length} слов`);
-    handleHash(); // Только если есть #слово
+    if (location.hash.length > 1) handleHash(); // <--- вот так
   });
+
 
 window.addEventListener("hashchange", handleHash);
 
