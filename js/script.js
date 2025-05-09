@@ -3,18 +3,27 @@ const WORDS_JSON_PATH = 'data/words.json';
 
 // Глобальные переменные
 let words = [];
-let currentSearchTerm = '';
 
 // DOM-элементы
-const wordContainer = document.getElementById('word-container');
-const wordTitle = document.getElementById('word-title');
-const wordDefinition = document.getElementById('word-definition');
-const backLink = document.getElementById('back-link');
-const categoryButton = document.getElementById('categoryButton');
-const categoryOptions = document.getElementById('categoryOptions');
-const searchInput = document.querySelector('.search-input');
-const searchButton = document.querySelector('.search-button');
-const mainContent = document.querySelector('.main');
+const elements = {
+  wordContainer: document.querySelector('.word-container'),
+  wordTitle: document.querySelector('.word-title'),
+  wordDefinition: document.querySelector('.word-definition'),
+  backLink: document.querySelector('.back-link'),
+  categoryButton: document.querySelector('.category-button'),
+  categoryOptions: document.querySelector('.category-options'),
+  searchInput: document.querySelector('.search-input'),
+  searchButton: document.querySelector('.search-button'),
+  mainContent: document.querySelector('.main'),
+  cards: document.querySelector('.cards')
+};
+
+// ======== Проверка элементов ========
+const checkElements = () => {
+  for (const [key, element] of Object.entries(elements)) {
+    if (!element) console.warn(`Элемент ${key} не найден в DOM`);
+  }
+};
 
 // ======== Темный режим ========
 const toggleDarkMode = () => {
@@ -22,25 +31,32 @@ const toggleDarkMode = () => {
   localStorage.setItem('dark-mode', isDark);
 };
 
-if (localStorage.getItem('dark-mode') === 'true' || 
-    (!localStorage.getItem('dark-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.classList.add('dark');
-}
+const initDarkMode = () => {
+  if (localStorage.getItem('dark-mode') === 'true' || 
+      (!localStorage.getItem('dark-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  }
 
-document.querySelector('.dark-mode-toggle').addEventListener('click', toggleDarkMode);
+  const darkModeToggle = document.querySelector('.dark-mode-toggle');
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+  }
+};
 
 // ======== Меню категорий ========
-if (categoryButton && categoryOptions) {
+const initCategoryMenu = () => {
+  if (!elements.categoryButton || !elements.categoryOptions) return;
+
   const toggleCategoryMenu = (event) => {
     event.stopPropagation();
-    categoryOptions.classList.toggle('show');
-    categoryButton.classList.toggle('active');
+    elements.categoryOptions.classList.toggle('show');
+    elements.categoryButton.classList.toggle('active');
   };
 
   const closeCategoryMenu = (event) => {
-    if (!categoryOptions.contains(event.target) && !categoryButton.contains(event.target)) {
-      categoryOptions.classList.remove('show');
-      categoryButton.classList.remove('active');
+    if (!elements.categoryOptions.contains(event.target) && !elements.categoryButton.contains(event.target)) {
+      elements.categoryOptions.classList.remove('show');
+      elements.categoryButton.classList.remove('active');
     }
   };
 
@@ -48,16 +64,15 @@ if (categoryButton && categoryOptions) {
     const selectedCategory = event.target.value;
     if (selectedCategory) {
       console.log(`Выбрана категория: ${selectedCategory}`);
-      categoryOptions.classList.remove('show');
-      categoryButton.classList.remove('active');
-      // Здесь можно добавить фильтрацию по категориям
+      elements.categoryOptions.classList.remove('show');
+      elements.categoryButton.classList.remove('active');
     }
   };
 
-  categoryButton.addEventListener('click', toggleCategoryMenu);
+  elements.categoryButton.addEventListener('click', toggleCategoryMenu);
   document.addEventListener('click', closeCategoryMenu);
-  categoryOptions.addEventListener('click', selectCategory);
-}
+  elements.categoryOptions.addEventListener('click', selectCategory);
+};
 
 // ======== Загрузка слов из JSON ========
 const loadWords = async () => {
@@ -79,18 +94,12 @@ const performSearch = (term) => {
     return;
   }
 
-  // Ищем точное совпадение сначала
-  let foundWord = words.find(word => 
+  const foundWord = words.find(word => 
     word.word.toLowerCase() === term.toLowerCase()
+  ) || words.find(word => 
+    word.word.toLowerCase().includes(term.toLowerCase()) ||
+    (word.definition && word.definition.toLowerCase().includes(term.toLowerCase()))
   );
-
-  // Если нет точного совпадения, ищем частичное
-  if (!foundWord) {
-    foundWord = words.find(word => 
-      word.word.toLowerCase().includes(term.toLowerCase()) ||
-      (word.definition && word.definition.toLowerCase().includes(term.toLowerCase()))
-    );
-  }
 
   if (foundWord) {
     window.location.hash = encodeURIComponent(foundWord.word.toLowerCase());
@@ -99,34 +108,51 @@ const performSearch = (term) => {
   }
 };
 
-// ======== Управление хэш-навигацией ========
-const updatePage = () => {
-  const hash = decodeURIComponent(window.location.hash.substring(1)).toLowerCase();
-  currentSearchTerm = hash;
-
-  if (!hash) {
-    showMainPage();
-    return;
-  }
-
-  showWordPage(hash);
-};
-
+// ======== Управление страницами ========
 const showMainPage = () => {
-  wordContainer.classList.add('hidden');
-  mainContent.classList.remove('hidden');
-  if (searchInput) searchInput.value = '';
+  if (elements.wordContainer) elements.wordContainer.classList.add('hidden');
+  if (elements.mainContent) elements.mainContent.classList.remove('hidden');
+  if (elements.searchInput) elements.searchInput.value = '';
 };
 
-const showWordPage = (wordHash) => {
-  const word = findWordByHash(wordHash);
-  
-  if (!word) {
-    showNotFound(wordHash);
+const showWordPage = (word) => {
+  if (!elements.wordTitle || !elements.wordDefinition) {
+    console.error('Не найдены элементы для отображения слова');
     return;
   }
 
-  displayWord(word);
+  elements.wordTitle.textContent = word.word;
+  elements.wordDefinition.textContent = word.definition;
+  
+  if (elements.searchInput) elements.searchInput.value = word.word;
+  if (elements.wordContainer) elements.wordContainer.classList.remove('hidden');
+  if (elements.mainContent) elements.mainContent.classList.add('hidden');
+};
+
+const showNotFound = (term) => {
+  if (!elements.wordContainer) return;
+
+  elements.wordContainer.innerHTML = `
+    <div class="word-not-found">
+      <h2>Слово "${term}" не найдено</h2>
+      <p>Попробуйте другое слово или вернитесь на <a href="#" class="back-link">главную страницу</a></p>
+    </div>
+  `;
+  elements.wordContainer.classList.remove('hidden');
+  if (elements.mainContent) elements.mainContent.classList.add('hidden');
+
+  document.querySelector('.back-link')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.hash = '';
+  });
+};
+
+const showError = (message) => {
+  if (!elements.wordContainer) return;
+
+  elements.wordContainer.innerHTML = `<p class="error">${message}</p>`;
+  elements.wordContainer.classList.remove('hidden');
+  if (elements.mainContent) elements.mainContent.classList.add('hidden');
 };
 
 const findWordByHash = (hash) => {
@@ -136,69 +162,57 @@ const findWordByHash = (hash) => {
   );
 };
 
-const displayWord = (word) => {
-  wordTitle.textContent = word.word;
-  wordDefinition.textContent = word.definition;
-  
-  if (searchInput) searchInput.value = word.word;
-  
-  wordContainer.classList.remove('hidden');
-  mainContent.classList.add('hidden');
-};
+const updatePage = () => {
+  const hash = decodeURIComponent(window.location.hash.substring(1)).toLowerCase();
 
-const showNotFound = (term) => {
-  wordContainer.innerHTML = `
-    <div class="word-not-found">
-      <h2>Слово "${term}" не найдено</h2>
-      <p>Попробуйте другое слово или вернитесь на <a href="#" id="back-link">главную страницу</a></p>
-    </div>
-  `;
-  wordContainer.classList.remove('hidden');
-  mainContent.classList.add('hidden');
-  
-  // Добавляем обработчик для новой кнопки "Назад"
-  document.getElementById('back-link').addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.hash = '';
-  });
-};
+  if (!hash) {
+    showMainPage();
+    return;
+  }
 
-const showError = (message) => {
-  wordContainer.innerHTML = `<p class="error">${message}</p>`;
-  wordContainer.classList.remove('hidden');
-  mainContent.classList.add('hidden');
+  const word = findWordByHash(hash);
+  if (word) {
+    showWordPage(word);
+  } else {
+    showNotFound(hash);
+  }
 };
 
 // ======== Инициализация ========
-const init = async () => {
-  await loadWords();
-  
-  // Инициализация поиска
-  if (searchButton && searchInput) {
-    searchButton.addEventListener('click', () => {
-      performSearch(searchInput.value);
+const initSearch = () => {
+  if (elements.searchButton && elements.searchInput) {
+    elements.searchButton.addEventListener('click', () => {
+      performSearch(elements.searchInput.value);
     });
 
-    searchInput.addEventListener('keypress', (e) => {
+    elements.searchInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        performSearch(searchInput.value);
+        performSearch(elements.searchInput.value);
       }
     });
   }
+};
 
-  // Обработка кнопки "Назад"
-  if (backLink) {
-    backLink.addEventListener('click', (e) => {
+const initBackLink = () => {
+  if (elements.backLink) {
+    elements.backLink.addEventListener('click', (e) => {
       e.preventDefault();
       window.location.hash = '';
     });
   }
+};
 
-  // Первоначальное обновление страницы
+const init = async () => {
+  checkElements();
+  initDarkMode();
+  initCategoryMenu();
+  initSearch();
+  initBackLink();
+  
+  await loadWords();
   updatePage();
 
-  // Следим за изменениями хэша
   window.addEventListener('hashchange', updatePage);
 };
 
-init();
+document.addEventListener('DOMContentLoaded', init);
