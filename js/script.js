@@ -8,19 +8,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoryOptions = document.getElementById("categoryOptions");
   const mainContainer = document.querySelector(".main");
 
-  fetch("data/words.json")
-    .then(res => {
-      if (!res.ok) throw new Error(Ошибка загрузки: ${res.status});
-      return res.json();
-    })
-    .then(data => {
-      allWords = data;
-      console.log(Загружено ${allWords.length} слов);
-      if (location.hash.length > 1) handleHash();
-    })
-    .catch(error => {
-      console.error("Не удалось загрузить слова:", error);
-    });
+fetch("data/words.json")
+  .then(res => {
+    if (!res.ok) throw new Error(`Ошибка загрузки: ${res.status}`);
+    return res.json();
+  })
+  .then(data => {
+    allWords = data;
+    console.log(`Загружено ${allWords.length} слов`);
+  })
+  .catch(error => {
+    console.error("Не удалось загрузить слова:", error);
+  });
+
 
   window.addEventListener("hashchange", handleHash);
 
