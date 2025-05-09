@@ -39,7 +39,7 @@ function renderWordsByCategory() {
       card.innerHTML = `
         <h3 class="word-title">${word.word}</h3>
         <p class="definition">${word.definition}</p>
-        <a href="index.html#${encodeURIComponent(word.word)}" class="more-link">Подробнее →</a>
+        <a href="index.html#${encodeURIComponent(word.word)}" class="more-link">Подробнее</a>
       `;
       list.appendChild(card);
     });
