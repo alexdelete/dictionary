@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetch("data/words.json")
     .then(res => {
-      if (!res.ok) throw new Error(`Ошибка загрузки: ${res.status}`);
+      if (!res.ok) throw new Error(Ошибка загрузки: ${res.status});
       return res.json();
     })
     .then(data => {
       allWords = data;
-      console.log(`Загружено ${allWords.length} слов`);
+      console.log(Загружено ${allWords.length} слов);
       if (location.hash.length > 1) handleHash();
     })
     .catch(error => {
@@ -43,16 +43,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayWord(word) {
     if (!mainContainer) return;
 
-    const examplesHtml = word.definitions.map(def => `
+    const examplesHtml = word.definitions.map(def => 
       <div>
         <p><strong>${def.meaning}</strong></p>
         <ul>
-          ${def.examples.map(ex => `<li>💬 ${ex}</li>`).join("")}
+          ${def.examples.map(ex => <li>💬 ${ex}</li>).join("")}
         </ul>
       </div>
-    `).join("");
+    ).join("");
 
-    mainContainer.innerHTML = `
+    mainContainer.innerHTML = 
       <div class="card large">
         <h2>${word.word}</h2>
         <p class="definition">${word.definition}</p>
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ${examplesHtml}
         <a class="more-link back-to-list" href="#">Назад к списку</a>
       </div>
-    `;
+    ;
 
     document.querySelector(".back-to-list").addEventListener("click", (e) => {
       e.preventDefault();
@@ -72,12 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showNotFound(term) {
     if (!mainContainer) return;
-    mainContainer.innerHTML = `
+    mainContainer.innerHTML = 
       <div class="error">
         <h2>Слово «${term}» не найдено</h2>
         <p>Проверьте написание или <a href="#">вернитесь на главную</a>.</p>
       </div>
-    `;
+    ;
   }
 
   function renderCategory(category) {
@@ -88,29 +88,28 @@ document.addEventListener("DOMContentLoaded", () => {
       : allWords.filter(w => w.category === category);
 
     if (filtered.length === 0) {
-      mainContainer.innerHTML = `
+      mainContainer.innerHTML = 
         <div class="word-not-found">
           <h2>Нет слов в категории</h2>
           <p>Попробуйте выбрать другую категорию.</p>
         </div>
-      `;
+      ;
       return;
     }
 
-    mainContainer.innerHTML = filtered.map(word => `
+    mainContainer.innerHTML = filtered.map(word => 
       <div class="card small">
         <p class="card-label">${categoryLabel(word.category)}</p>
         <h2 class="word-title">${word.word}</h2>
         <p class="definition">${word.definition}</p>
         <a class="more-link" href="#${encodeURIComponent(word.word)}">Подробнее</a>
       </div>
-    `).join("");
+    ).join("");
   }
 
   // Показать/скрыть список категорий
   categoryButton.addEventListener("click", () => {
-    categoryOptions.classList.toggle("show"); // Изменено с "visible" на "show"
-    categoryButton.classList.toggle("active"); // Анимация стрелки
+    categoryOptions.classList.toggle("visible");
   });
 
   // Обработчики кнопок категорий
@@ -124,9 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       searchInput.placeholder = value === "all"
         ? "Найти слово..."
-        : `🔍 Поиск в категории: ${categoryLabel(value)}`;
+        : 🔍 Поиск в категории: ${categoryLabel(value)};
 
-      categoryOptions.classList.remove("show"); // Закрыть меню после выбора категории
+      categoryOptions.classList.remove("visible");
     });
   });
 
@@ -139,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (match) {
-      location.hash = `#${encodeURIComponent(match.word)}`;
+      location.hash = #${encodeURIComponent(match.word)};
       removeSuggestions();
     } else {
       showNotFound(term);
@@ -192,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
       item.addEventListener("mouseout", () => item.style.background = "white");
       item.addEventListener("click", () => {
         searchInput.value = word.word;
-        location.hash = `#${encodeURIComponent(word.word)}`;
+        location.hash = #${encodeURIComponent(word.word)};
         removeSuggestions();
       });
       list.appendChild(item);
@@ -216,4 +215,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
-
