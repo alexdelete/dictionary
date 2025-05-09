@@ -502,3 +502,10 @@ header {
 .button-link:hover {
   background-color: #4338ca;
 }
+.category-select {
+  margin-left: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
