@@ -3,6 +3,7 @@ const WORDS_JSON_PATH = 'data/words.json';
 
 // Глобальные переменные
 let words = []; // Для хранения слов из JSON
+let currentSearchTerm = ''; // Для хранения текущего поискового запроса
 
 // DOM-элементы
 const wordContainer = document.getElementById('word-container');
@@ -11,6 +12,9 @@ const wordDefinition = document.getElementById('word-definition');
 const backLink = document.getElementById('back-link');
 const categoryButton = document.getElementById('categoryButton');
 const categoryOptions = document.getElementById('categoryOptions');
+const searchInput = document.querySelector('.search-input');
+const searchButton = document.querySelector('.search-button');
+const mainContent = document.querySelector('.main');
 
 // ======== Темный режим ========
 const toggleDarkMode = () => {
@@ -19,7 +23,7 @@ const toggleDarkMode = () => {
 };
 
 // Инициализация темного режима
-if (localStorage.getItem('dark-mode') === 'true' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+if (localStorage.getItem('dark-mode') === 'true' || (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('dark-mode'))) {
   document.documentElement.classList.add('dark');
 }
 
@@ -27,25 +31,26 @@ document.querySelector('.dark-mode-toggle').addEventListener('click', toggleDark
 
 // ======== Меню категорий ========
 if (categoryButton && categoryOptions) {
-  // Открытие/закрытие меню категорий
   const toggleCategoryMenu = (event) => {
     event.stopPropagation();
     categoryOptions.classList.toggle('show');
+    categoryButton.classList.toggle('active');
   };
 
-  // Закрытие меню при клике вне его
   const closeCategoryMenu = (event) => {
     if (!categoryOptions.contains(event.target) && !categoryButton.contains(event.target)) {
       categoryOptions.classList.remove('show');
+      categoryButton.classList.remove('active');
     }
   };
 
-  // Выбор категории
   const selectCategory = (event) => {
     const selectedCategory = event.target.value;
     if (selectedCategory) {
       console.log(`Выбрана категория: ${selectedCategory}`);
       categoryOptions.classList.remove('show');
+      categoryButton.classList.remove('active');
+      // Здесь можно добавить фильтрацию по категориям
     }
   };
 
@@ -59,48 +64,104 @@ const loadWords = async () => {
   try {
     const response = await fetch(WORDS_JSON_PATH);
     words = await response.json();
+    console.log('Слова успешно загружены:', words.length);
   } catch (error) {
     console.error('Ошибка загрузки файла words.json:', error);
+    // Можно показать пользователю сообщение об ошибке
+    wordContainer.innerHTML = '<p class="error">Не удалось загрузить словарь. Пожалуйста, попробуйте позже.</p>';
+  }
+};
+
+// ======== Поиск и навигация ========
+const performSearch = (term) => {
+  if (!term.trim()) {
+    window.location.hash = '';
+    return;
+  }
+
+  const foundWord = words.find(word => 
+    word.word.toLowerCase().includes(term.toLowerCase()) ||
+    (word.definition && word.definition.toLowerCase().includes(term.toLowerCase()))
+  );
+
+  if (foundWord) {
+    window.location.hash = encodeURIComponent(foundWord.word.toLowerCase());
+  } else {
+    // Если слово не найдено, можно показать сообщение
+    alert('Слово не найдено в словаре');
+    // Или создать элемент для отображения сообщения в интерфейсе
+    // wordContainer.innerHTML = `<p class="not-found">Слово "${term}" не найдено</p>`;
   }
 };
 
 // ======== Управление хэш-навигацией ========
 const updatePage = () => {
-  const hash = decodeURIComponent(window.location.hash.substring(1)); // Получаем хэш без #
-  
+  const hash = decodeURIComponent(window.location.hash.substring(1));
+  currentSearchTerm = hash;
+
   if (!hash) {
-    // Если хэш пустой — возвращаемся на главную страницу
+    // Главная страница
     wordContainer.classList.add('hidden');
-    document.querySelector('.main').classList.remove('hidden');
+    mainContent.classList.remove('hidden');
+    if (searchInput) searchInput.value = '';
     return;
   }
 
   // Ищем слово по хэшу
-  const word = words.find((item) => item.word.toLowerCase() === hash.toLowerCase());
+  const word = words.find(item => 
+    item.word.toLowerCase() === hash.toLowerCase() ||
+    item.word.toLowerCase().replace(/\s+/g, '-') === hash.toLowerCase()
+  );
+
   if (!word) {
-    alert('Слово не найдено!');
+    wordContainer.innerHTML = `
+      <div class="word-not-found">
+        <h2>Слово "${hash}" не найдено</h2>
+        <p>Попробуйте поискать другое слово или вернитесь на <a href="#" id="back-link">главную страницу</a></p>
+      </div>
+    `;
+    wordContainer.classList.remove('hidden');
+    mainContent.classList.add('hidden');
     return;
   }
 
-  // Обновляем содержимое страницы
+  // Обновляем содержимое страницы слова
   wordTitle.textContent = word.word;
   wordDefinition.textContent = word.definition;
+  if (searchInput) searchInput.value = word.word;
+  
   wordContainer.classList.remove('hidden');
-  document.querySelector('.main').classList.add('hidden');
+  mainContent.classList.add('hidden');
 };
 
 // ======== Инициализация ========
 const init = async () => {
-  await loadWords(); // Загрузка слов из JSON
-  updatePage(); // Обновление страницы на основе хэша
+  await loadWords();
+  
+  // Инициализация поиска
+  if (searchButton && searchInput) {
+    searchButton.addEventListener('click', () => {
+      performSearch(searchInput.value.trim());
+    });
 
-  window.addEventListener('hashchange', updatePage); // Обновление при изменении хэша
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch(searchInput.value.trim());
+      }
+    });
+  }
 
-  // Кнопка "Назад" для возврата на главную страницу
-  backLink.addEventListener('click', (event) => {
-    event.preventDefault();
-    window.location.hash = ''; // Удаляем хэш
+  // Обработка кнопки "Назад"
+  backLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.hash = '';
   });
+
+  // Первоначальное обновление страницы
+  updatePage();
+
+  // Следим за изменениями хэша
+  window.addEventListener('hashchange', updatePage);
 };
 
 init();
