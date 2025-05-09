@@ -512,4 +512,20 @@ header {
   border: 1px solid #ccc;
   font-size: 14px;
 }
+.view-all-button {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 12px 24px;
+  background-color: #2d2dff;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.view-all-button:hover {
+  background-color: #1a1aff;
+}
 
