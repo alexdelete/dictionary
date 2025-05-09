@@ -16,11 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return res.json();
     })
     .then(data => {
-      allWords = data;
-      console.log(`Загружено ${allWords.length} слов`);
-if (currentCategory && currentCategory !== "null") {
-  renderCategory(currentCategory);
-    })
+  allWords = data;
+  console.log(`Загружено ${allWords.length} слов`);
+})
     .catch(error => {
       console.error("Не удалось загрузить слова:", error);
     });
