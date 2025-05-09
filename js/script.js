@@ -40,30 +40,37 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearMain() {
     if (mainContainer) mainContainer.innerHTML = "";
   }
+function displayWord(word) {
+  if (!mainContainer) return;
 
-  function displayWord(word) {
-    if (!mainContainer) return;
+  const examplesHtml = word.definitions.map(def => `
+    <div>
+      <p><strong>${def.meaning}</strong></p>
+      <ul>
+        ${def.examples.map(ex => `<li>💬 ${ex}</li>`).join("")}
+      </ul>
+    </div>
+  `).join("");
 
-    const examplesHtml = word.definitions.map(def => `
-      <div>
-        <p><strong>${def.meaning}</strong></p>
-        <ul>
-          ${def.examples.map(ex => `<li>💬 ${ex}</li>`).join("")}
-        </ul>
-      </div>
-    `).join("");
+  mainContainer.innerHTML = `
+    <div class="card large">
+      <h2>${word.word}</h2>
+      <p class="definition">${word.definition}</p>
+      <h3>Примеры:</h3>
+      ${examplesHtml}
+      <a class="more-link back-to-list" href="#">← Назад к списку</a>
+    </div>
+  `;
 
-    mainContainer.innerHTML = `
-      <div class="card large">
-        <h2>${word.word}</h2>
-        <p class="definition">${word.definition}</p>
-        <h3>Примеры:</h3>
-        ${examplesHtml}
-<a class="more-link back-to-list" href="#">← Назад к списку</a>
+  // Добавляем обработчик "назад"
+  document.querySelector(".back-to-list").addEventListener("click", (e) => {
+    e.preventDefault();
+    history.replaceState(null, "", " ");
+    clearMain();
+    renderCategory("all"); // ← если хочешь, можешь заменить "all" на запомненную категорию
+  });
+}
 
-      </div>
-    `;
-  }
 
   function showNotFound(term) {
     if (!mainContainer) return;
