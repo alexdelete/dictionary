@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   let allWords = [];
-  let currentCategory = "all"; // отслеживаем выбранную категорию
+  let currentCategory = "all";
 
   const searchInput = document.querySelector(".search-input");
   const searchButton = document.querySelector(".search-button");
@@ -8,21 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoryOptions = document.getElementById("categoryOptions");
   const mainContainer = document.querySelector(".main");
 
-fetch("data/words.json")
-  .then(res => {
-    if (!res.ok) {
-      throw new Error("Ошибка загрузки: " + res.status);
-    }
-    return res.json();
-  })
-  .then(data => {
-    allWords = data;
-    console.log(`Загружено ${allWords.length} слов`);
-  })
-  .catch(error => {
-    console.error("Не удалось загрузить слова:", error);
-  });
-
+  fetch("data/words.json")
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Ошибка загрузки: " + res.status);
+      }
+      return res.json();
+    })
+    .then(data => {
+      allWords = data;
+      console.log(`Загружено ${allWords.length} слов`);
+      renderCategory(currentCategory); // начальная отрисовка
+    })
+    .catch(error => {
+      console.error("Не удалось загрузить слова:", error);
+    });
 
   window.addEventListener("hashchange", handleHash);
 
@@ -45,16 +45,16 @@ fetch("data/words.json")
   function displayWord(word) {
     if (!mainContainer) return;
 
-    const examplesHtml = word.definitions.map(def => 
+    const examplesHtml = word.definitions.map(def => `
       <div>
         <p><strong>${def.meaning}</strong></p>
         <ul>
-          ${def.examples.map(ex => <li>💬 ${ex}</li>).join("")}
+          ${def.examples.map(ex => `<li>💬 ${ex}</li>`).join("")}
         </ul>
       </div>
-    ).join("");
+    `).join("");
 
-    mainContainer.innerHTML = 
+    mainContainer.innerHTML = `
       <div class="card large">
         <h2>${word.word}</h2>
         <p class="definition">${word.definition}</p>
@@ -62,24 +62,24 @@ fetch("data/words.json")
         ${examplesHtml}
         <a class="more-link back-to-list" href="#">Назад к списку</a>
       </div>
-    ;
+    `;
 
     document.querySelector(".back-to-list").addEventListener("click", (e) => {
       e.preventDefault();
       history.replaceState(null, "", " ");
       clearMain();
-      renderCategory(currentCategory); // ← теперь возвращаемся в текущую категорию
+      renderCategory(currentCategory);
     });
   }
 
   function showNotFound(term) {
     if (!mainContainer) return;
-    mainContainer.innerHTML = 
+    mainContainer.innerHTML = `
       <div class="error">
         <h2>Слово «${term}» не найдено</h2>
         <p>Проверьте написание или <a href="#">вернитесь на главную</a>.</p>
       </div>
-    ;
+    `;
   }
 
   function renderCategory(category) {
@@ -90,31 +90,31 @@ fetch("data/words.json")
       : allWords.filter(w => w.category === category);
 
     if (filtered.length === 0) {
-      mainContainer.innerHTML = 
+      mainContainer.innerHTML = `
         <div class="word-not-found">
           <h2>Нет слов в категории</h2>
           <p>Попробуйте выбрать другую категорию.</p>
         </div>
-      ;
+      `;
       return;
     }
 
-    mainContainer.innerHTML = filtered.map(word => 
+    mainContainer.innerHTML = filtered.map(word => `
       <div class="card small">
         <p class="card-label">${categoryLabel(word.category)}</p>
         <h2 class="word-title">${word.word}</h2>
         <p class="definition">${word.definition}</p>
         <a class="more-link" href="#${encodeURIComponent(word.word)}">Подробнее</a>
       </div>
-    ).join("");
+    `).join("");
   }
 
-  // Показать/скрыть список категорий
-  categoryButton.addEventListener("click", () => {
-    categoryOptions.classList.toggle("visible");
-  });
+  if (categoryButton) {
+    categoryButton.addEventListener("click", () => {
+      categoryOptions.classList.toggle("visible");
+    });
+  }
 
-  // Обработчики кнопок категорий
   document.querySelectorAll("#categoryOptions button").forEach(btn => {
     btn.addEventListener("click", () => {
       const value = btn.value;
@@ -125,13 +125,12 @@ fetch("data/words.json")
 
       searchInput.placeholder = value === "all"
         ? "Найти слово..."
-        : 🔍 Поиск в категории: ${categoryLabel(value)};
+        : `🔍 Поиск в категории: ${categoryLabel(value)}`;
 
       categoryOptions.classList.remove("visible");
     });
   });
 
-  // Поиск
   searchButton.addEventListener("click", () => {
     const term = searchInput.value.trim().toLowerCase();
     const match = allWords.find(w =>
@@ -140,14 +139,13 @@ fetch("data/words.json")
     );
 
     if (match) {
-      location.hash = #${encodeURIComponent(match.word)};
+      location.hash = `#${encodeURIComponent(match.word)}`;
       removeSuggestions();
     } else {
       showNotFound(term);
     }
   });
 
-  // Подсказки
   searchInput.addEventListener("input", () => {
     const term = searchInput.value.trim().toLowerCase();
     if (term.length < 2) return removeSuggestions();
@@ -193,7 +191,7 @@ fetch("data/words.json")
       item.addEventListener("mouseout", () => item.style.background = "white");
       item.addEventListener("click", () => {
         searchInput.value = word.word;
-        location.hash = #${encodeURIComponent(word.word)};
+        location.hash = `#${encodeURIComponent(word.word)}`;
         removeSuggestions();
       });
       list.appendChild(item);
