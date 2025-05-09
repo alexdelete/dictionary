@@ -2,8 +2,8 @@
 const WORDS_JSON_PATH = 'data/words.json';
 
 // Глобальные переменные
-let words = []; // Для хранения слов из JSON
-let currentSearchTerm = ''; // Для хранения текущего поискового запроса
+let words = [];
+let currentSearchTerm = '';
 
 // DOM-элементы
 const wordContainer = document.getElementById('word-container');
@@ -22,8 +22,8 @@ const toggleDarkMode = () => {
   localStorage.setItem('dark-mode', isDark);
 };
 
-// Инициализация темного режима
-if (localStorage.getItem('dark-mode') === 'true' || (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('dark-mode'))) {
+if (localStorage.getItem('dark-mode') === 'true' || 
+    (!localStorage.getItem('dark-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.classList.add('dark');
 }
 
@@ -64,72 +64,107 @@ const loadWords = async () => {
   try {
     const response = await fetch(WORDS_JSON_PATH);
     words = await response.json();
-    console.log('Слова успешно загружены:', words.length);
+    console.log(`Загружено ${words.length} слов`);
   } catch (error) {
-    console.error('Ошибка загрузки файла words.json:', error);
-    // Можно показать пользователю сообщение об ошибке
-    wordContainer.innerHTML = '<p class="error">Не удалось загрузить словарь. Пожалуйста, попробуйте позже.</p>';
+    console.error('Ошибка загрузки words.json:', error);
+    showError('Не удалось загрузить словарь. Пожалуйста, попробуйте позже.');
   }
 };
 
 // ======== Поиск и навигация ========
 const performSearch = (term) => {
-  if (!term.trim()) {
+  term = term.trim();
+  if (!term) {
     window.location.hash = '';
     return;
   }
 
-  const foundWord = words.find(word => 
-    word.word.toLowerCase().includes(term.toLowerCase()) ||
-    (word.definition && word.definition.toLowerCase().includes(term.toLowerCase()))
+  // Ищем точное совпадение сначала
+  let foundWord = words.find(word => 
+    word.word.toLowerCase() === term.toLowerCase()
   );
+
+  // Если нет точного совпадения, ищем частичное
+  if (!foundWord) {
+    foundWord = words.find(word => 
+      word.word.toLowerCase().includes(term.toLowerCase()) ||
+      (word.definition && word.definition.toLowerCase().includes(term.toLowerCase()))
+    );
+  }
 
   if (foundWord) {
     window.location.hash = encodeURIComponent(foundWord.word.toLowerCase());
   } else {
-    // Если слово не найдено, можно показать сообщение
-    alert('Слово не найдено в словаре');
-    // Или создать элемент для отображения сообщения в интерфейсе
-    // wordContainer.innerHTML = `<p class="not-found">Слово "${term}" не найдено</p>`;
+    showNotFound(term);
   }
 };
 
 // ======== Управление хэш-навигацией ========
 const updatePage = () => {
-  const hash = decodeURIComponent(window.location.hash.substring(1));
+  const hash = decodeURIComponent(window.location.hash.substring(1)).toLowerCase();
   currentSearchTerm = hash;
 
   if (!hash) {
-    // Главная страница
-    wordContainer.classList.add('hidden');
-    mainContent.classList.remove('hidden');
-    if (searchInput) searchInput.value = '';
+    showMainPage();
     return;
   }
 
-  // Ищем слово по хэшу
-  const word = words.find(item => 
-    item.word.toLowerCase() === hash.toLowerCase() ||
-    item.word.toLowerCase().replace(/\s+/g, '-') === hash.toLowerCase()
-  );
+  showWordPage(hash);
+};
 
+const showMainPage = () => {
+  wordContainer.classList.add('hidden');
+  mainContent.classList.remove('hidden');
+  if (searchInput) searchInput.value = '';
+};
+
+const showWordPage = (wordHash) => {
+  const word = findWordByHash(wordHash);
+  
   if (!word) {
-    wordContainer.innerHTML = `
-      <div class="word-not-found">
-        <h2>Слово "${hash}" не найдено</h2>
-        <p>Попробуйте поискать другое слово или вернитесь на <a href="#" id="back-link">главную страницу</a></p>
-      </div>
-    `;
-    wordContainer.classList.remove('hidden');
-    mainContent.classList.add('hidden');
+    showNotFound(wordHash);
     return;
   }
 
-  // Обновляем содержимое страницы слова
+  displayWord(word);
+};
+
+const findWordByHash = (hash) => {
+  return words.find(word => 
+    word.word.toLowerCase() === hash ||
+    word.word.toLowerCase().replace(/\s+/g, '-') === hash
+  );
+};
+
+const displayWord = (word) => {
   wordTitle.textContent = word.word;
   wordDefinition.textContent = word.definition;
+  
   if (searchInput) searchInput.value = word.word;
   
+  wordContainer.classList.remove('hidden');
+  mainContent.classList.add('hidden');
+};
+
+const showNotFound = (term) => {
+  wordContainer.innerHTML = `
+    <div class="word-not-found">
+      <h2>Слово "${term}" не найдено</h2>
+      <p>Попробуйте другое слово или вернитесь на <a href="#" id="back-link">главную страницу</a></p>
+    </div>
+  `;
+  wordContainer.classList.remove('hidden');
+  mainContent.classList.add('hidden');
+  
+  // Добавляем обработчик для новой кнопки "Назад"
+  document.getElementById('back-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.hash = '';
+  });
+};
+
+const showError = (message) => {
+  wordContainer.innerHTML = `<p class="error">${message}</p>`;
   wordContainer.classList.remove('hidden');
   mainContent.classList.add('hidden');
 };
@@ -141,21 +176,23 @@ const init = async () => {
   // Инициализация поиска
   if (searchButton && searchInput) {
     searchButton.addEventListener('click', () => {
-      performSearch(searchInput.value.trim());
+      performSearch(searchInput.value);
     });
 
     searchInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        performSearch(searchInput.value.trim());
+        performSearch(searchInput.value);
       }
     });
   }
 
   // Обработка кнопки "Назад"
-  backLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.hash = '';
-  });
+  if (backLink) {
+    backLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.hash = '';
+    });
+  }
 
   // Первоначальное обновление страницы
   updatePage();
