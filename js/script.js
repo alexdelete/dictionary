@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   let allWords = [];
-  let currentCategory = "all";
+  let currentCategory = "null";
 
   const searchInput = document.querySelector(".search-input");
   const searchButton = document.querySelector(".search-button");
