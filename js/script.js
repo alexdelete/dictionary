@@ -101,10 +101,23 @@ function renderCategory(category) {
 document.querySelectorAll("#categoryOptions button").forEach(btn => {
   btn.addEventListener("click", () => {
     const value = btn.value;
+
+    // 🖼 Рендерим
     renderCategory(value);
-    history.replaceState(null, "", " "); // удаляем хэш из адреса
+    history.replaceState(null, "", " "); // удаляем хэш
+
+    // ✏️ Обновляем placeholder
+    if (value === "all") {
+      searchInput.placeholder = "Найти слово...";
+    } else {
+      searchInput.placeholder = `🔍 Поиск в категории: ${categoryLabel(value)}`;
+    }
+
+    // ❌ Скрываем меню
+    categoryOptions.classList.remove("visible");
   });
 });
+
 
 // 🔍 Поиск и кнопка
 const searchInput = document.querySelector(".search-input");
@@ -188,4 +201,11 @@ function categoryLabel(cat) {
     default: return cat;
   }
 }
+// ⬇ Показ и скрытие выпадающего списка категорий
+const categoryButton = document.getElementById("categoryButton");
+const categoryOptions = document.getElementById("categoryOptions");
+
+categoryButton.addEventListener("click", () => {
+  categoryOptions.classList.toggle("visible");
+});
 
