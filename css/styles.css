@@ -487,3 +487,18 @@ header {
   margin: 40px auto;
   border-left: 4px solid #ff4444;
 }
+.button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  background-color: #4f46e5;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.button-link:hover {
+  background-color: #4338ca;
+}
