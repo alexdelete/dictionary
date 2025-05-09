@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
       allWords = data;
       console.log(`Загружено ${allWords.length} слов`);
-      renderCategory(currentCategory); // начальная отрисовка
+if (currentCategory && currentCategory !== "null") {
+  renderCategory(currentCategory);
     })
     .catch(error => {
       console.error("Не удалось загрузить слова:", error);
