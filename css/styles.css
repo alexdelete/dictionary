@@ -92,8 +92,10 @@ header {
   margin: 0 auto;
 }
 
+/* Обновленные стили для кнопки категорий */
 .category-select-wrapper {
   position: relative;
+  z-index: 10;
 }
 
 .category-button {
@@ -110,6 +112,7 @@ header {
   align-items: center;
   gap: 8px;
   transition: var(--transition);
+  min-width: 140px;
 }
 
 .category-button:hover {
