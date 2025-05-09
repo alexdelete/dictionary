@@ -512,3 +512,183 @@ header {
   border: 1px solid #ccc;
   font-size: 14px;
 }
+/* Добавьте эти медиа-запросы в конец вашего CSS файла */
+
+/* Адаптация для телефонов (до 480px) */
+@media (max-width: 480px) {
+  :root {
+    --border-radius: 10px;
+  }
+  
+  .container {
+    padding: 0 12px;
+  }
+  
+  /* Хедер */
+  header {
+    padding: 20px 0;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .logo-container {
+    gap: 8px;
+  }
+  
+  .logo-image {
+    height: 36px;
+    width: 36px;
+  }
+  
+  .logo-text {
+    font-size: 22px;
+  }
+  
+  /* Секция поиска */
+  .search-section {
+    padding: 20px;
+    margin: 24px 0;
+  }
+  
+  .search-wrapper {
+    gap: 12px;
+  }
+  
+  .category-button {
+    padding: 10px 16px;
+    font-size: 14px;
+    min-width: 120px;
+  }
+  
+  .search-input {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .search-button {
+    padding: 0 16px;
+  }
+  
+  /* Карточки */
+  .cards {
+    gap: 16px;
+    margin: 24px 0;
+  }
+  
+  .card {
+    padding: 24px;
+  }
+  
+  .card.large, .card.small {
+    grid-column: span 1;
+  }
+  
+  .total {
+    font-size: 36px;
+  }
+  
+  .word-title {
+    font-size: 24px;
+  }
+  
+  .definition {
+    font-size: 16px;
+  }
+  
+  /* Секция "О проекте" */
+  .about {
+    margin: 40px 0;
+    padding: 24px;
+  }
+  
+  .about h3 {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+  
+  .about p {
+    font-size: 16px;
+  }
+  
+  .about-list li {
+    padding-left: 24px;
+    font-size: 15px;
+  }
+  
+  .about-list li::before {
+    width: 14px;
+    height: 14px;
+    top: 6px;
+  }
+  
+  /* Футер */
+  .footer {
+    margin-top: 60px;
+    padding: 24px;
+    font-size: 14px;
+  }
+  
+  /* Кнопка темного режима */
+  .dark-mode-toggle {
+    width: 48px;
+    height: 48px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  /* Категории - полная ширина на мобильных */
+  .category-select-wrapper {
+    width: 100%;
+  }
+  
+  .category-button {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .category-options {
+    min-width: 100%;
+  }
+  
+  /* Поиск - адаптация */
+  .search-input-wrapper {
+    min-width: 100%;
+  }
+  
+  /* Улучшение отступов */
+  .label, .card-label {
+    font-size: 14px;
+  }
+  
+  .more-link {
+    font-size: 14px;
+  }
+}
+
+/* Дополнительные улучшения для очень маленьких экранов */
+@media (max-width: 360px) {
+  :root {
+    --border-radius: 8px;
+  }
+  
+  .container {
+    padding: 0 10px;
+  }
+  
+  .search-section {
+    padding: 16px;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+  
+  .total {
+    font-size: 32px;
+  }
+  
+  .word-title {
+    font-size: 22px;
+  }
+}
