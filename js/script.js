@@ -16,44 +16,46 @@ document.addEventListener('DOMContentLoaded', initApp);
 
 function initApp() {
   // Инициализация кнопки категорий
-  const categoryButton = document.getElementById("categoryButton");
-  const categoryOptions = document.getElementById("categoryOptions");
-  
-  if (categoryButton && categoryOptions) {
-    categoryButton.addEventListener("click", (e) => {
-      e.stopPropagation();
-      categoryButton.classList.toggle("active");
-      categoryOptions.classList.toggle("show");
-    });
+// ⬇ Показ и скрытие выпадающего списка категорий
+const categoryButton = document.getElementById("categoryButton");
+const categoryOptions = document.getElementById("categoryOptions");
 
-    // Закрытие при клике вне меню
-    document.addEventListener("click", () => {
+if (categoryButton && categoryOptions) {
+  categoryButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    categoryButton.classList.toggle("active");
+    categoryOptions.classList.toggle("show"); // Используем "show" вместо "visible"
+  });
+
+  // Закрытие при клике вне меню
+  document.addEventListener("click", (e) => {
+    if (!categoryOptions.contains(e.target) {
+      categoryButton.classList.remove("active");
+      categoryOptions.classList.remove("show");
+    }
+  });
+
+  // Обработка выбора категории
+  document.querySelectorAll("#categoryOptions button").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const value = btn.value;
+      renderCategory(value);
+      
+      // Обновление placeholder
+      const searchInput = document.querySelector(".search-input");
+      if (searchInput) {
+        searchInput.placeholder = value === "all" 
+          ? "Найти слово..." 
+          : `🔍 Поиск в категории: ${categoryLabel(value)}`;
+      }
+      
+      // Скрытие меню
       categoryButton.classList.remove("active");
       categoryOptions.classList.remove("show");
     });
-
-    // Обработка выбора категории
-    document.querySelectorAll("#categoryOptions button").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const value = btn.value;
-        renderCategory(value);
-        
-        // Обновление placeholder
-        const searchInput = document.querySelector(".search-input");
-        if (searchInput) {
-          searchInput.placeholder = value === "all" 
-            ? "Найти слово..." 
-            : `🔍 Поиск в категории: ${categoryLabel(value)}`;
-        }
-        
-        // Скрытие меню
-        categoryButton.classList.remove("active");
-        categoryOptions.classList.remove("show");
-      });
-    });
-  }
-
+  });
+}
   // Инициализация поиска
   const searchInput = document.querySelector(".search-input");
   const searchButton = document.querySelector(".search-button");
