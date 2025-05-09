@@ -123,16 +123,45 @@ document.querySelectorAll("#categoryOptions button").forEach(btn => {
 const searchInput = document.querySelector(".search-input");
 const searchButton = document.querySelector(".search-button");
 
+const categorySelect = document.querySelector(".category-select");
+
 searchInput.addEventListener("input", () => {
   const term = searchInput.value.trim().toLowerCase();
+  const selectedCategory = categorySelect.value;
+
   if (term.length < 2) return removeSuggestions();
 
-  const suggestions = allWords
-    .filter(w => w.word.toLowerCase().includes(term))
-    .slice(0, 5);
+  let suggestions = allWords.filter(w =>
+    w.word.toLowerCase().includes(term)
+  );
 
-  showSuggestions(suggestions);
+  if (selectedCategory !== "all") {
+    suggestions = suggestions.filter(w => w.category === selectedCategory);
+  }
+
+  showSuggestions(suggestions.slice(0, 5));
 });
+
+searchButton.addEventListener("click", () => {
+  const term = searchInput.value.trim().toLowerCase();
+  const selectedCategory = categorySelect.value;
+
+  let match = allWords.find(w => w.word.toLowerCase() === term);
+
+  if (selectedCategory !== "all") {
+    match = allWords.find(w =>
+      w.word.toLowerCase() === term && w.category === selectedCategory
+    );
+  }
+
+  if (match) {
+    location.hash = `#${encodeURIComponent(match.word)}`;
+    removeSuggestions();
+  } else {
+    showNotFound(term);
+  }
+});
+
 
 searchButton.addEventListener("click", () => {
   const term = searchInput.value.trim().toLowerCase();
