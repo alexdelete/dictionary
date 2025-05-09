@@ -1,24 +1,19 @@
 let allWords = [];
 
-// Загрузка JSON и инициализация
 fetch("data/words.json")
   .then(res => res.json())
   .then(data => {
     allWords = data;
     console.log(`Загружено ${allWords.length} слов`);
-    renderAll();
-    handleHash();
+    handleHash(); // Только если есть #слово
   });
 
 window.addEventListener("hashchange", handleHash);
 
-// 🔗 Обработка перехода по хэшу
+// 🔗 Обработка хэша — #слово
 function handleHash() {
   const key = decodeURIComponent(location.hash.slice(1)).toLowerCase();
-  if (!key) {
-    renderAll();
-    return;
-  }
+  if (!key) return clearMain(); // Главная без слов
 
   const word = allWords.find(w => w.word.toLowerCase() === key);
   if (word) {
@@ -28,13 +23,16 @@ function handleHash() {
   }
 }
 
-// 🧾 Отображение одного слова
+// 🧹 Очистить основную зону
+function clearMain() {
+  const container = document.querySelector(".main");
+  if (container) container.innerHTML = "";
+}
+
+// 🧾 Показ одного слова
 function displayWord(word) {
   const container = document.querySelector(".main");
-  if (!container) {
-    console.warn("Не найдены элементы для отображения слова");
-    return;
-  }
+  if (!container) return;
 
   const examplesHtml = word.definitions.map(def => `
     <div>
@@ -69,14 +67,24 @@ function showNotFound(term) {
   `;
 }
 
-// 📚 Показ всех слов или по категории
-function renderAll(category = "all") {
+// 📂 Показ слов по категории
+function renderCategory(category) {
   const container = document.querySelector(".main");
   if (!container) return;
 
   const filtered = category === "all"
-    ? allWords
+    ? []
     : allWords.filter(w => w.category === category);
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="word-not-found">
+        <h2>Нет слов в категории</h2>
+        <p>Попробуйте выбрать другую категорию.</p>
+      </div>
+    `;
+    return;
+  }
 
   container.innerHTML = filtered.map(word => `
     <div class="card small">
@@ -88,15 +96,16 @@ function renderAll(category = "all") {
   `).join("");
 }
 
-// 🗂 Выбор категории
+// 🗂 Категории — обработчик
 document.querySelectorAll("#categoryOptions button").forEach(btn => {
   btn.addEventListener("click", () => {
     const value = btn.value;
-    renderAll(value);
+    renderCategory(value);
+    history.replaceState(null, "", " "); // удаляем хэш из адреса
   });
 });
 
-// 🔍 Поиск
+// 🔍 Поиск и кнопка
 const searchInput = document.querySelector(".search-input");
 const searchButton = document.querySelector(".search-button");
 
@@ -116,12 +125,13 @@ searchButton.addEventListener("click", () => {
   const match = allWords.find(w => w.word.toLowerCase() === term);
   if (match) {
     location.hash = `#${encodeURIComponent(match.word)}`;
+    removeSuggestions();
   } else {
     showNotFound(term);
   }
 });
 
-// 💬 Автоподсказки
+// 💬 Подсказки
 function showSuggestions(words) {
   removeSuggestions();
 
@@ -167,7 +177,7 @@ function removeSuggestions() {
   if (existing) existing.remove();
 }
 
-// 🎭 Название категории с эмодзи
+// 🎭 Категории с иконками
 function categoryLabel(cat) {
   switch (cat) {
     case "emotion": return "😊 Эмоции";
@@ -177,3 +187,4 @@ function categoryLabel(cat) {
     default: return cat;
   }
 }
+
