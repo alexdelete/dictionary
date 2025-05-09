@@ -109,7 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Показать/скрыть список категорий
   categoryButton.addEventListener("click", () => {
-    categoryOptions.classList.toggle("visible");
+    categoryOptions.classList.toggle("show"); // Изменено с "visible" на "show"
+    categoryButton.classList.toggle("active"); // Анимация стрелки
   });
 
   // Обработчики кнопок категорий
@@ -125,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "Найти слово..."
         : `🔍 Поиск в категории: ${categoryLabel(value)}`;
 
-      categoryOptions.classList.remove("visible");
+      categoryOptions.classList.remove("show"); // Закрыть меню после выбора категории
     });
   });
 
@@ -215,3 +216,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
