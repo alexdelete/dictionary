@@ -5,9 +5,8 @@ fetch("data/words.json")
   .then(data => {
     allWords = data;
     console.log(Загружено ${allWords.length} слов);
-    if (location.hash.length > 1) handleHash(); // <--- вот так
+    handleHash(); // Только если есть #слово
   });
-
 
 window.addEventListener("hashchange", handleHash);
 
@@ -101,67 +100,25 @@ function renderCategory(category) {
 document.querySelectorAll("#categoryOptions button").forEach(btn => {
   btn.addEventListener("click", () => {
     const value = btn.value;
-
-    // 🖼 Рендерим
     renderCategory(value);
-    history.replaceState(null, "", " "); // удаляем хэш
-
-    // ✏️ Обновляем placeholder
-    if (value === "all") {
-      searchInput.placeholder = "Найти слово...";
-    } else {
-      searchInput.placeholder = 🔍 Поиск в категории: ${categoryLabel(value)};
-    }
-
-    // ❌ Скрываем меню
-    categoryOptions.classList.remove("visible");
+    history.replaceState(null, "", " "); // удаляем хэш из адреса
   });
 });
-
 
 // 🔍 Поиск и кнопка
 const searchInput = document.querySelector(".search-input");
 const searchButton = document.querySelector(".search-button");
 
-const categorySelect = document.querySelector(".category-select");
-
 searchInput.addEventListener("input", () => {
   const term = searchInput.value.trim().toLowerCase();
-  const selectedCategory = categorySelect.value;
-
   if (term.length < 2) return removeSuggestions();
 
-  let suggestions = allWords.filter(w =>
-    w.word.toLowerCase().includes(term)
-  );
+  const suggestions = allWords
+    .filter(w => w.word.toLowerCase().includes(term))
+    .slice(0, 5);
 
-  if (selectedCategory !== "all") {
-    suggestions = suggestions.filter(w => w.category === selectedCategory);
-  }
-
-  showSuggestions(suggestions.slice(0, 5));
+  showSuggestions(suggestions);
 });
-
-searchButton.addEventListener("click", () => {
-  const term = searchInput.value.trim().toLowerCase();
-  const selectedCategory = categorySelect.value;
-
-  let match = allWords.find(w => w.word.toLowerCase() === term);
-
-  if (selectedCategory !== "all") {
-    match = allWords.find(w =>
-      w.word.toLowerCase() === term && w.category === selectedCategory
-    );
-  }
-
-  if (match) {
-    location.hash = #${encodeURIComponent(match.word)};
-    removeSuggestions();
-  } else {
-    showNotFound(term);
-  }
-});
-
 
 searchButton.addEventListener("click", () => {
   const term = searchInput.value.trim().toLowerCase();
@@ -230,10 +187,3 @@ function categoryLabel(cat) {
     default: return cat;
   }
 }
-// ⬇ Показ и скрытие выпадающего списка категорий
-const categoryButton = document.getElementById("categoryButton");
-const categoryOptions = document.getElementById("categoryOptions");
-
-categoryButton.addEventListener("click", () => {
-  categoryOptions.classList.toggle("visible");
-});
