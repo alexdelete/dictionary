@@ -109,28 +109,28 @@ document.addEventListener("DOMContentLoaded", () => {
     `).join("");
   }
 
-  document.querySelectorAll("#categoryOptions button").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const value = btn.value;
-      renderCategory(value);
-      history.replaceState(null, "", " ");
-      searchInput.placeholder = value === "all"
-        ? "Найти слово..."
-        : `🔍 Поиск в категории: ${categoryLabel(value)}`;
-      categoryOptions.classList.remove("visible");
-    });
+  let currentCategory = "all"; // глобально отслеживаем текущую категорию
+
+categoryButton.addEventListener("click", () => {
+  categoryOptions.classList.toggle("visible");
+});
+
+document.querySelectorAll("#categoryOptions button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const value = btn.value;
+    currentCategory = value; // обновляем выбранную категорию
+
+    renderCategory(value);
+    history.replaceState(null, "", " ");
+
+    searchInput.placeholder = value === "all"
+      ? "Найти слово..."
+      : `🔍 Поиск в категории: ${categoryLabel(value)}`;
+
+    categoryOptions.classList.remove("visible");
   });
+});
 
-  searchInput.addEventListener("input", () => {
-    const term = searchInput.value.trim().toLowerCase();
-    if (term.length < 2) return removeSuggestions();
-
-    const suggestions = allWords
-      .filter(w => w.word.toLowerCase().includes(term))
-      .slice(0, 5);
-
-    showSuggestions(suggestions);
-  });
 
   searchButton.addEventListener("click", () => {
     const term = searchInput.value.trim().toLowerCase();
