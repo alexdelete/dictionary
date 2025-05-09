@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   let allWords = [];
-  let currentCategory = "null";
+  let currentCategory = "all";  // Начальная категория для отображения всех слов
 
   const searchInput = document.querySelector(".search-input");
   const searchButton = document.querySelector(".search-button");
@@ -9,21 +9,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainContainer = document.querySelector(".main");
 
   fetch("data/words.json")
-  .then(res => {
-    if (!res.ok) {
-      throw new Error("Ошибка загрузки: " + res.status);
-    }
-    return res.json();
-  })
-  .then(data => {
-    allWords = data;
-    console.log(`Загружено ${allWords.length} слов`);
-    // Убрали вызов renderCategory
-  })
-  .catch(error => {
-    console.error("Не удалось загрузить слова:", error);
-  });
-
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Ошибка загрузки: " + res.status);
+      }
+      return res.json();
+    })
+    .then(data => {
+      allWords = data;
+      console.log(`Загружено ${allWords.length} слов`);
+      renderCategory("all");  // Показать все слова при загрузке
+    })
+    .catch(error => {
+      console.error("Не удалось загрузить слова:", error);
+    });
 
   window.addEventListener("hashchange", handleHash);
 
@@ -134,13 +133,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   searchButton.addEventListener("click", () => {
     const term = searchInput.value.trim().toLowerCase();
-    const match = allWords.find(w =>
+    const matches = allWords.filter(w =>
       (currentCategory === "all" || w.category === currentCategory) &&
-      w.word.toLowerCase() === term
+      w.word.toLowerCase().includes(term)  // Поиск по подстроке
     );
 
-    if (match) {
-      location.hash = `#${encodeURIComponent(match.word)}`;
+    if (matches.length > 0) {
+      location.hash = `#${encodeURIComponent(matches[0].word)}`;
       removeSuggestions();
     } else {
       showNotFound(term);
