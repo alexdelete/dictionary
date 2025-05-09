@@ -59,7 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="definition">${word.definition}</p>
         <h3>Примеры:</h3>
         ${examplesHtml}
-        <a class="more-link" href="#">← Назад к списку</a>
+<a class="more-link back-to-list" href="#">← Назад к списку</a>
+
       </div>
     `;
   }
