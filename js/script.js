@@ -1,4 +1,3 @@
-// Загружаем данные один раз
 let allWords = [];
 
 fetch("data/words.json")
@@ -6,17 +5,17 @@ fetch("data/words.json")
   .then(data => {
     allWords = data;
     renderAll();
-    handleHash(); // если открыт #слово
+    handleHash();
   });
 
 window.addEventListener("hashchange", handleHash);
 
-// 🧠 Обработка хэша (например, #cap)
+// 🔗 Обработка перехода по #слову
 function handleHash() {
-  const key = decodeURIComponent(location.hash.slice(1));
+  const key = decodeURIComponent(location.hash.slice(1)).toLowerCase();
   if (!key) return renderAll();
 
-  const word = allWords.find(w => w.key === key);
+  const word = allWords.find(w => w.word.toLowerCase() === key);
   if (word) {
     displayWord(word);
   } else {
@@ -24,19 +23,31 @@ function handleHash() {
   }
 }
 
-// 🧾 Показ одного слова
+// 📄 Отображение одного слова
 function displayWord(word) {
   const container = document.querySelector(".main");
+
+  const examplesHtml = word.definitions.map(def => `
+    <div>
+      <p><strong>${def.meaning}</strong></p>
+      <ul>
+        ${def.examples.map(ex => `<li>💬 ${ex}</li>`).join("")}
+      </ul>
+    </div>
+  `).join("");
+
   container.innerHTML = `
     <div class="card large">
-      <h2>${word.term}</h2>
-      <p>${word.definition}</p>
+      <h2>${word.word}</h2>
+      <p class="definition">${word.definition}</p>
+      <h3>Примеры:</h3>
+      ${examplesHtml}
       <a class="more-link" href="#">← Назад к списку</a>
     </div>
   `;
 }
 
-// 🚫 Слово не найдено
+// ❌ Слово не найдено
 function showNotFound(term) {
   const container = document.querySelector(".main");
   container.innerHTML = `
@@ -47,7 +58,7 @@ function showNotFound(term) {
   `;
 }
 
-// 📚 Отрисовать все слова
+// 📚 Отображение всех слов или по категории
 function renderAll(category = "all") {
   const container = document.querySelector(".main");
   const filtered = category === "all"
@@ -56,15 +67,15 @@ function renderAll(category = "all") {
 
   container.innerHTML = filtered.map(word => `
     <div class="card small">
-      <p class="card-label">${word.category}</p>
-      <h2 class="word-title">${word.term}</h2>
+      <p class="card-label">${categoryLabel(word.category)}</p>
+      <h2 class="word-title">${word.word}</h2>
       <p class="definition">${word.definition}</p>
-      <a class="more-link" href="#${word.key}">Подробнее</a>
+      <a class="more-link" href="#${encodeURIComponent(word.word)}">Подробнее</a>
     </div>
   `).join("");
 }
 
-// 🗂 Обработка категорий
+// 🗂 Категории — обработка
 document.querySelectorAll("#categoryOptions button").forEach(btn => {
   btn.addEventListener("click", () => {
     const value = btn.value;
@@ -72,7 +83,7 @@ document.querySelectorAll("#categoryOptions button").forEach(btn => {
   });
 });
 
-// 🔍 Подсказки по поиску
+// 🔍 Поиск + переход по слову
 const searchInput = document.querySelector(".search-input");
 const searchButton = document.querySelector(".search-button");
 
@@ -81,7 +92,7 @@ searchInput.addEventListener("input", () => {
   if (term.length < 2) return removeSuggestions();
 
   const suggestions = allWords
-    .filter(w => w.term.toLowerCase().includes(term))
+    .filter(w => w.word.toLowerCase().includes(term))
     .slice(0, 5);
 
   showSuggestions(suggestions);
@@ -89,15 +100,15 @@ searchInput.addEventListener("input", () => {
 
 searchButton.addEventListener("click", () => {
   const term = searchInput.value.trim().toLowerCase();
-  const match = allWords.find(w => w.term.toLowerCase() === term);
+  const match = allWords.find(w => w.word.toLowerCase() === term);
   if (match) {
-    location.hash = `#${match.key}`;
+    location.hash = `#${encodeURIComponent(match.word)}`;
   } else {
     showNotFound(term);
   }
 });
 
-// 💬 Подсказки HTML
+// 🔽 Подсказки
 function showSuggestions(words) {
   removeSuggestions();
 
@@ -113,15 +124,23 @@ function showSuggestions(words) {
   list.style.zIndex = "10";
   list.style.maxHeight = "200px";
   list.style.overflowY = "auto";
+  list.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
 
   words.forEach(word => {
     const item = document.createElement("div");
-    item.textContent = word.term;
+    item.textContent = word.word;
     item.style.padding = "10px 16px";
     item.style.cursor = "pointer";
+    item.style.transition = "background 0.2s";
+    item.addEventListener("mouseover", () => {
+      item.style.background = "#f2f2f2";
+    });
+    item.addEventListener("mouseout", () => {
+      item.style.background = "white";
+    });
     item.addEventListener("click", () => {
-      searchInput.value = word.term;
-      location.hash = `#${word.key}`;
+      searchInput.value = word.word;
+      location.hash = `#${encodeURIComponent(word.word)}`;
       removeSuggestions();
     });
     list.appendChild(item);
@@ -134,3 +153,15 @@ function removeSuggestions() {
   const existing = document.querySelector(".suggestions");
   if (existing) existing.remove();
 }
+
+// 🎭 Метка категории (можно расширить)
+function categoryLabel(cat) {
+  switch (cat) {
+    case "emotion": return "😊 Эмоции";
+    case "social": return "💬 Общение";
+    case "character": return "👤 Отношения";
+    case "status": return "⭐ Оценка";
+    default: return cat;
+  }
+}
+
