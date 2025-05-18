@@ -2,196 +2,6 @@
   {
     "word": "goated",
     "definition": "очень крутой",
-    "category": "status",
-    "tags": ["похвала", "сленг"],
-    "definitions": [
-      {
-        "meaning": "максимально крутой, топовый",
-        "examples": ["Этот трек просто goated."]
-      }
-    ]
-  },
-  {
-    "word": "nailed it",
-    "definition": "отлично справился",
-    "category": "status",
-    "tags": ["успех", "оценка"],
-    "definitions": [
-      {
-        "meaning": "отлично выполнил задачу",
-        "examples": ["Ты nailed it на этом выступлении."]
-      }
-    ]
-  },
-  {
-    "word": "huzz",
-    "definition": "красивый",
-    "category": "status",
-    "tags": ["внешность", "позитив"],
-    "definitions": [
-      {
-        "meaning": "внешне привлекательный",
-        "examples": ["Он просто huzz."]
-      }
-    ]
-  },
-  {
-    "word": "chuzz",
-    "definition": "некрасивый",
-    "category": "status",
-    "tags": ["внешность", "негатив"],
-    "definitions": [
-      {
-        "meaning": "внешне непривлекательный",
-        "examples": ["Он чутка chuzz, но классный."]
-      }
-    ]
-  },
-  {
-    "word": "chopped",
-    "definition": "выглядит плохо",
-    "category": "status",
-    "tags": ["внешность", "сленг"],
-    "definitions": [
-      {
-        "meaning": "выглядеть неудачно",
-        "examples": ["После вечеринки я был совсем chopped."]
-      }
-    ]
-  },
-  {
-    "word": "check",
-    "definition": "проверь, посмотри",
-    "category": "social",
-    "tags": ["команда", "разговор"],
-    "definitions": [
-      {
-        "meaning": "посмотри на что-то / проверь",
-        "examples": ["Check этот мем!", "Check свой телефон."]
-      }
-    ]
-  },
-  {
-    "word": "im cooked",
-    "definition": "мне капец",
-    "category": "emotion",
-    "tags": ["усталость", "сленг"],
-    "definitions": [
-      {
-        "meaning": "очень устал или в беде",
-        "examples": ["После экзамена я просто cooked."]
-      }
-    ]
-  },
-  {
-    "word": "you cooked",
-    "definition": "ты крутой, молодец",
-    "category": "status",
-    "tags": ["похвала", "ирония"],
-    "definitions": [
-      {
-        "meaning": "молодец, справился",
-        "examples": ["You cooked эту презентацию!"]
-      }
-    ]
-  },
-  {
-    "word": "you're cooked",
-    "definition": "тебе капец",
-    "category": "emotion",
-    "tags": ["угроза", "прикол"],
-    "definitions": [
-      {
-        "meaning": "тебе конец / ты попал",
-        "examples": ["Когда мама узнает — you're cooked."]
-      }
-    ]
-  },
-  {
-    "word": "cap",
-    "definition": "враньё",
-    "category": "status",
-    "tags": ["лживость", "сленг"],
-    "definitions": [
-      {
-        "meaning": "неправда, ложь",
-        "examples": ["Это cap, он так не делал."]
-      },
-      {
-        "meaning": "no cap — говорю правду",
-        "examples": ["Это было круто, no cap."]
-      },
-      {
-        "meaning": "you're capping — ты врёшь",
-        "examples": ["Ты явно capping."]
-      }
-    ]
-  },
-  {
-    "word": "yapping",
-    "definition": "много говорить не по делу",
-    "category": "social",
-    "tags": ["речь", "негатив"],
-    "definitions": [
-      {
-        "meaning": "болтать без остановки",
-        "examples": ["Хватит yapping!"]
-      }
-    ]
-  },
-  {
-    "word": "rizz",
-    "definition": "умение флиртовать, харизма",
-    "category": "character",
-    "tags": ["флирт", "характер"],
-    "definitions": [
-      {
-        "meaning": "привлекательность и уверенность в общении",
-        "examples": ["У него full rizz."]
-      }
-    ]
-  },
-  {
-    "word": "opp",
-    "definition": "враг",
-    "category": "character",
-    "tags": ["вражда", "отношения"],
-    "definitions": [
-      {
-        "meaning": "недруг, противник",
-        "examples": ["Не верь ему, он opp."]
-      }
-    ]
-  },
-  {
-    "word": "lock in",
-    "definition": "сфокусируйся",
-    "category": "emotion",
-    "tags": ["мотивация", "настрой"],
-    "definitions": [
-      {
-        "meaning": "соберись и сосредоточься",
-        "examples": ["Lock in, экзамен через час!"]
-      }
-    ]
-  },
-  {
-    "word": "hit it off",
-    "definition": "поладить с кем-то",
-    "category": "character",
-    "tags": ["дружба", "отношения"],
-    "definitions": [
-      {
-        "meaning": "быстро найти общий язык",
-        "examples": ["Мы с ней сразу hit it off."]
-      }
-    ]
-  }
-]
-[
-  {
-    "word": "goated",
-    "definition": "очень крутой",
     "transcription": "/ˈɡoʊtɪd/",
     "category": "status",
     "definitions": [
@@ -200,6 +10,223 @@
         "examples": [
           "He's the goated player in the team.",
           "Он — топовый игрок в команде."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "nailed it",
+    "definition": "отлично справился",
+    "transcription": "/neɪld ɪt/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "отлично выполнил задачу",
+        "examples": [
+          "You nailed it on this presentation!",
+          "Ты nailed it на этом выступлении."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "huzz",
+    "definition": "красивый",
+    "transcription": "/hʌz/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "внешне привлекательный",
+        "examples": [
+          "He's just huzz.",
+          "Он просто huzz."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "chuzz",
+    "definition": "некрасивый",
+    "transcription": "/tʃʌz/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "внешне непривлекательный",
+        "examples": [
+          "He's a bit chuzz but cool.",
+          "Он чутка chuzz, но классный."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "chopped",
+    "definition": "выглядит плохо",
+    "transcription": "/tʃɒpt/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "выглядеть неудачно",
+        "examples": [
+          "After the party I was totally chopped.",
+          "После вечеринки я был совсем chopped."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "check",
+    "definition": "проверь, посмотри",
+    "transcription": "/tʃek/",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "посмотри на что-то / проверь",
+        "examples": [
+          "Check this meme!",
+          "Check этот мем!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "im cooked",
+    "definition": "мне капец",
+    "transcription": "/aɪm kʊkt/",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "очень устал или в беде",
+        "examples": [
+          "After the exam I'm just cooked.",
+          "После экзамена я просто cooked."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "you cooked",
+    "definition": "ты крутой, молодец",
+    "transcription": "/ju kʊkt/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "молодец, справился",
+        "examples": [
+          "You cooked this presentation!",
+          "You cooked эту презентацию!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "you're cooked",
+    "definition": "тебе капец",
+    "transcription": "/jʊə kʊkt/",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "тебе конец / ты попал",
+        "examples": [
+          "When mom finds out — you're cooked.",
+          "Когда мама узнает — you're cooked."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "cap",
+    "definition": "враньё",
+    "transcription": "/kæp/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "неправда, ложь",
+        "examples": [
+          "That's cap, he didn't do it.",
+          "Это cap, он так не делал."
+        ]
+      },
+      {
+        "meaning": "no cap — говорю правду",
+        "examples": [
+          "It was awesome, no cap.",
+          "Это было круто, no cap."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "yapping",
+    "definition": "много говорить не по делу",
+    "transcription": "/ˈjæpɪŋ/",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "болтать без остановки",
+        "examples": [
+          "Stop yapping!",
+          "Хватит yapping!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "rizz",
+    "definition": "умение флиртовать, харизма",
+    "transcription": "/rɪz/",
+    "category": "character",
+    "definitions": [
+      {
+        "meaning": "привлекательность и уверенность в общении",
+        "examples": [
+          "He's got full rizz.",
+          "У него full rizz."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "opp",
+    "definition": "враг",
+    "transcription": "/ɒp/",
+    "category": "character",
+    "definitions": [
+      {
+        "meaning": "недруг, противник",
+        "examples": [
+          "Don't trust him, he's opp.",
+          "Не верь ему, он opp."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "lock in",
+    "definition": "сфокусируйся",
+    "transcription": "/lɒk ɪn/",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "соберись и сосредоточься",
+        "examples": [
+          "Lock in, the exam is in an hour!",
+          "Lock in, экзамен через час!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "hit it off",
+    "definition": "поладить с кем-то",
+    "transcription": "/hɪt ɪt ɒf/",
+    "category": "character",
+    "definitions": [
+      {
+        "meaning": "быстро найти общий язык",
+        "examples": [
+          "We hit it off immediately.",
+          "Мы с ней сразу hit it off."
         ]
       }
     ]
@@ -231,13 +258,6 @@
           "Use this keyboard hack to save time.",
           "Используй этот хак с клавиатурой, чтобы сэкономить время."
         ]
-      },
-      {
-        "meaning": "взлом компьютерной системы",
-        "examples": [
-          "His account was hacked last week.",
-          "Его аккаунт взломали на прошлой неделе."
-        ]
       }
     ]
   },
@@ -265,7 +285,7 @@
       {
         "meaning": "сокращение от 'before anyone else'",
         "examples": [
-          "I’m going out with bae tonight.",
+          "I'm going out with bae tonight.",
           "Я иду сегодня гулять со своей половинкой."
         ]
       }
@@ -297,13 +317,6 @@
         "examples": [
           "Her streetwear fit is amazing.",
           "Ее уличный образ потрясающий."
-        ]
-      },
-      {
-        "meaning": "совместная работа артистов",
-        "examples": [
-          "Their collab fit was unexpected.",
-          "Их совместный трек стал неожиданностью."
         ]
       }
     ]
@@ -422,7 +435,7 @@
       {
         "meaning": "острая реакция на стресс",
         "examples": [
-          "Don’t panic, everything’s under control.",
+          "Don't panic, everything's under control.",
           "Не паникуй, всё под контролем."
         ]
       }
@@ -482,7 +495,7 @@
       {
         "meaning": "человек, вызывающий конфликты в сети",
         "examples": [
-          "Don’t feed the trolls.",
+          "Don't feed the trolls.",
           "Не корми троллей."
         ]
       }
@@ -587,7 +600,7 @@
       {
         "meaning": "продолжать действие",
         "examples": [
-          "Let’s roll!",
+          "Let's roll!",
           "Погнали!"
         ]
       }
@@ -652,13 +665,11 @@
         ]
       }
     ]
-  }
-]
-[
+  },
   {
     "word": "crush",
     "definition": "краш, симпатия",
-    "transcription": "[крэш]",
+    "transcription": "/krʌʃ/",
     "category": "emotion",
     "definitions": [
       {
@@ -673,7 +684,7 @@
   {
     "word": "fail",
     "definition": "фейл, неудача",
-    "transcription": "[фейл]",
+    "transcription": "/feɪl/",
     "category": "status",
     "definitions": [
       {
@@ -688,7 +699,7 @@
   {
     "word": "lol",
     "definition": "лол, смешно",
-    "transcription": "[лол]",
+    "transcription": "/lɒl/",
     "category": "emotion",
     "definitions": [
       {
@@ -703,7 +714,7 @@
   {
     "word": "hype",
     "definition": "хайп, ажиотаж",
-    "transcription": "[хайп]",
+    "transcription": "/haɪp/",
     "category": "social",
     "definitions": [
       {
@@ -718,7 +729,7 @@
   {
     "word": "boost",
     "definition": "буст, усиление",
-    "transcription": "[буст]",
+    "transcription": "/buːst/",
     "category": "status",
     "definitions": [
       {
@@ -731,24 +742,9 @@
     ]
   },
   {
-    "word": "troll",
-    "definition": "троллить",
-    "transcription": "[тролить]",
-    "category": "character",
-    "definitions": [
-      {
-        "meaning": "намеренно провоцировать в интернете",
-        "examples": [
-          "He loves to troll people online.",
-          "Он обожает троллить людей в интернете."
-        ]
-      }
-    ]
-  },
-  {
     "word": "snap",
     "definition": "снэп, моментальное фото",
-    "transcription": "[снэп]",
+    "transcription": "/snæp/",
     "category": "social",
     "definitions": [
       {
@@ -763,7 +759,7 @@
   {
     "word": "skill",
     "definition": "скилл, навык",
-    "transcription": "[скил]",
+    "transcription": "/skɪl/",
     "category": "status",
     "definitions": [
       {
@@ -778,7 +774,7 @@
   {
     "word": "chill",
     "definition": "чилл, расслабление",
-    "transcription": "[чил]",
+    "transcription": "/tʃɪl/",
     "category": "emotion",
     "definitions": [
       {
@@ -793,7 +789,7 @@
   {
     "word": "selfie",
     "definition": "селфи",
-    "transcription": "[селфи]",
+    "transcription": "/ˈselfi/",
     "category": "social",
     "definitions": [
       {
@@ -808,7 +804,7 @@
   {
     "word": "flex",
     "definition": "флексить, хвастаться",
-    "transcription": "[флексить]",
+    "transcription": "/fleks/",
     "category": "character",
     "definitions": [
       {
@@ -823,7 +819,7 @@
   {
     "word": "badge",
     "definition": "бейдж, значок",
-    "transcription": "[бэйдж]",
+    "transcription": "/bædʒ/",
     "category": "status",
     "definitions": [
       {
@@ -838,7 +834,7 @@
   {
     "word": "creep",
     "definition": "крип, странный тип",
-    "transcription": "[крип]",
+    "transcription": "/kriːp/",
     "category": "character",
     "definitions": [
       {
@@ -853,7 +849,7 @@
   {
     "word": "story",
     "definition": "сторис, история",
-    "transcription": "[сторис]",
+    "transcription": "/ˈstɔːri/",
     "category": "social",
     "definitions": [
       {
@@ -868,7 +864,7 @@
   {
     "word": "glitch",
     "definition": "глитч, сбой",
-    "transcription": "[глитч]",
+    "transcription": "/ɡlɪtʃ/",
     "category": "status",
     "definitions": [
       {
@@ -883,7 +879,7 @@
   {
     "word": "trend",
     "definition": "тренд, мода",
-    "transcription": "[тренд]",
+    "transcription": "/trend/",
     "category": "social",
     "definitions": [
       {
@@ -898,7 +894,7 @@
   {
     "word": "double",
     "definition": "дабл, двойной",
-    "transcription": "[дабл]",
+    "transcription": "/ˈdʌbəl/",
     "category": "status",
     "definitions": [
       {
@@ -913,7 +909,7 @@
   {
     "word": "vibe",
     "definition": "вайб, атмосфера",
-    "transcription": "[вайб]",
+    "transcription": "/vaɪb/",
     "category": "emotion",
     "definitions": [
       {
@@ -928,7 +924,7 @@
   {
     "word": "meme",
     "definition": "мем",
-    "transcription": "[мем]",
+    "transcription": "/miːm/",
     "category": "social",
     "definitions": [
       {
@@ -943,7 +939,7 @@
   {
     "word": "copy",
     "definition": "копировать",
-    "transcription": "[копировать]",
+    "transcription": "/ˈkɒpi/",
     "category": "status",
     "definitions": [
       {
@@ -956,24 +952,9 @@
     ]
   },
   {
-    "word": "code",
-    "definition": "код, программировать",
-    "transcription": "[код]",
-    "category": "status",
-    "definitions": [
-      {
-        "meaning": "писать программный код",
-        "examples": [
-          "I need to write some code.",
-          "Мне нужно написать код."
-        ]
-      }
-    ]
-  },
-  {
     "word": "post",
     "definition": "пост, публикация",
-    "transcription": "[пост]",
+    "transcription": "/pəʊst/",
     "category": "social",
     "definitions": [
       {
@@ -988,7 +969,7 @@
   {
     "word": "screenshot",
     "definition": "скрин, снимок экрана",
-    "transcription": "[скрин]",
+    "transcription": "/ˈskriːnʃɒt/",
     "category": "status",
     "definitions": [
       {
@@ -1003,7 +984,7 @@
   {
     "word": "zoom",
     "definition": "зум, видеозвонок",
-    "transcription": "[зум]",
+    "transcription": "/zuːm/",
     "category": "social",
     "definitions": [
       {
@@ -1018,7 +999,7 @@
   {
     "word": "diss",
     "definition": "диз, оскорбление",
-    "transcription": "[диз]",
+    "transcription": "/dɪs/",
     "category": "social",
     "definitions": [
       {
@@ -1031,24 +1012,9 @@
     ]
   },
   {
-    "word": "check",
-    "definition": "чек, проверять",
-    "transcription": "[чек]",
-    "category": "status",
-    "definitions": [
-      {
-        "meaning": "убедиться в чём-либо",
-        "examples": [
-          "Can you check this out?",
-          "Можешь это чекнуть?"
-        ]
-      }
-    ]
-  },
-  {
     "word": "real",
     "definition": "реал, настоящий",
-    "transcription": "[риал]",
+    "transcription": "/rɪəl/",
     "category": "status",
     "definitions": [
       {
@@ -1063,7 +1029,7 @@
   {
     "word": "top",
     "definition": "топ, лучший",
-    "transcription": "[топ]",
+    "transcription": "/tɒp/",
     "category": "status",
     "definitions": [
       {
@@ -1078,7 +1044,7 @@
   {
     "word": "cool",
     "definition": "крутой",
-    "transcription": "[крутой]",
+    "transcription": "/kuːl/",
     "category": "status",
     "definitions": [
       {
@@ -1093,7 +1059,7 @@
   {
     "word": "go",
     "definition": "гоу, идти",
-    "transcription": "[гоу]",
+    "transcription": "/ɡəʊ/",
     "category": "social",
     "definitions": [
       {
