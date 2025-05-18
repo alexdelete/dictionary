@@ -188,3 +188,469 @@
     ]
   }
 ]
+[
+  {
+    "word": "goated",
+    "definition": "очень крутой",
+    "transcription": "/ˈɡoʊtɪd/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "максимально крутой, топовый",
+        "examples": [
+          "He's the goated player in the team.",
+          "Он — топовый игрок в команде."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "zoomer",
+    "definition": "зумер (молодежь 1990-х – 2010-х)",
+    "transcription": "/ˈzuːmər/",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "представитель поколения, активно использующего технологии",
+        "examples": [
+          "Zoomers prefer short videos like TikTok.",
+          "Зумеры предпочитают короткие видео, например, в TikTok."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "hack",
+    "definition": "хак, ловкий способ",
+    "transcription": "/hæk/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "умный или нестандартный способ решения проблемы",
+        "examples": [
+          "Use this keyboard hack to save time.",
+          "Используй этот хак с клавиатурой, чтобы сэкономить время."
+        ]
+      },
+      {
+        "meaning": "взлом компьютерной системы",
+        "examples": [
+          "His account was hacked last week.",
+          "Его аккаунт взломали на прошлой неделе."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "sync",
+    "definition": "синхронизация",
+    "transcription": "/sɪŋk/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "объединение данных между устройствами",
+        "examples": [
+          "Make sure your files are in sync.",
+          "Убедись, что файлы синхронизированы."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "bae",
+    "definition": "возлюбленный/возлюбленная",
+    "transcription": "/beɪ/",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "сокращение от 'before anyone else'",
+        "examples": [
+          "I’m going out with bae tonight.",
+          "Я иду сегодня гулять со своей половинкой."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "drop",
+    "definition": "выпуск (музыки, коллекции)",
+    "transcription": "/drɒp/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "официальный выход нового продукта",
+        "examples": [
+          "The artist dropped a new single.",
+          "Артист выпустил новый сингл."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "fit",
+    "definition": "стильный образ, коллаборация",
+    "transcription": "/fɪt/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "удачный наряд",
+        "examples": [
+          "Her streetwear fit is amazing.",
+          "Ее уличный образ потрясающий."
+        ]
+      },
+      {
+        "meaning": "совместная работа артистов",
+        "examples": [
+          "Their collab fit was unexpected.",
+          "Их совместный трек стал неожиданностью."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "clip",
+    "definition": "быстро создавать контент",
+    "transcription": "/klɪp/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "легко монтировать видео/музыку",
+        "examples": [
+          "She can clip a TikTok in minutes.",
+          "Она может сделать TikTok за минуты."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "turbo",
+    "definition": "очень быстрый",
+    "transcription": "/ˈtɜːrboʊ/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "интенсивный или скоростной",
+        "examples": [
+          "This car is turbo!",
+          "Эта машина — просто турбо!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "squad",
+    "definition": "команда, группа друзей",
+    "transcription": "/skwɒd/",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "близкий круг общения",
+        "examples": [
+          "My squad always supports me.",
+          "Моя компания всегда меня поддерживает."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "gadget",
+    "definition": "гаджет, технологичное устройство",
+    "transcription": "/ˈɡædʒɪt/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "умное устройство",
+        "examples": [
+          "This gadget saves me hours of work.",
+          "Этот гаджет экономит мне часы работы."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "like",
+    "definition": "лайк, одобрение",
+    "transcription": "/laɪk/",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "выражение поддержки в соцсетях",
+        "examples": [
+          "Give this post a like!",
+          "Поставь лайк этому посту!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "code",
+    "definition": "писать код, программировать",
+    "transcription": "/koʊd/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "создавать программное обеспечение",
+        "examples": [
+          "He codes apps for fun.",
+          "Он пишет приложения для удовольствия."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "mix",
+    "definition": "смешивать стили/элементы",
+    "transcription": "/mɪks/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "комбинировать что-то",
+        "examples": [
+          "This song mixes jazz and hip-hop.",
+          "Эта песня смешивает джаз и хип-хоп."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "panic",
+    "definition": "паника, сильная тревога",
+    "transcription": "/ˈpænɪk/",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "острая реакция на стресс",
+        "examples": [
+          "Don’t panic, everything’s under control.",
+          "Не паникуй, всё под контролем."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "farm",
+    "definition": "фармить, зарабатывать в играх",
+    "transcription": "/fɑːrm/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "повторяющиеся действия для ресурсов",
+        "examples": [
+          "I farm gold in this game every night.",
+          "Я фармлю золото в этой игре каждую ночь."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "smart",
+    "definition": "умный, технологичный",
+    "transcription": "/smɑːrt/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "интеллектуальный или продвинутый",
+        "examples": [
+          "Smart devices make life easier.",
+          "Умные устройства упрощают жизнь."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "bomb",
+    "definition": "что-то потрясающее",
+    "transcription": "/bɒm/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "очень успешное или крутое",
+        "examples": [
+          "This new album is a bomb!",
+          "Этот новый альбом — просто бомба!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "troll",
+    "definition": "тролль, провокатор",
+    "transcription": "/troʊl/",
+    "category": "character",
+    "definitions": [
+      {
+        "meaning": "человек, вызывающий конфликты в сети",
+        "examples": [
+          "Don’t feed the trolls.",
+          "Не корми троллей."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "viral",
+    "definition": "вирусный контент",
+    "transcription": "/ˈvaɪrəl/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "быстро распространяющийся в интернете",
+        "examples": [
+          "This video went viral yesterday.",
+          "Это видео стало вирусным вчера."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "spam",
+    "definition": "спам, навязчивые сообщения",
+    "transcription": "/spæm/",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "нежелательная рассылка",
+        "examples": [
+          "My inbox is full of spam.",
+          "Моя почта завалена спамом."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "team",
+    "definition": "команда",
+    "transcription": "/tiːm/",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "группа людей с общей целью",
+        "examples": [
+          "Our team won the championship.",
+          "Наша команда выиграла чемпионат."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "smooth",
+    "definition": "гладкий, без проблем",
+    "transcription": "/smuːð/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "лёгкий и приятный процесс",
+        "examples": [
+          "The project went very smooth.",
+          "Проект прошёл очень гладко."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "flash",
+    "definition": "мгновенный, вспышка",
+    "transcription": "/flæʃ/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "что-то очень быстрое",
+        "examples": [
+          "It was a flash decision.",
+          "Это было мгновенное решение."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "quest",
+    "definition": "квест, задача",
+    "transcription": "/kwest/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "приключение или миссия",
+        "examples": [
+          "Life is like a quest.",
+          "Жизнь — как квест."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "roll",
+    "definition": "двигаться, катиться",
+    "transcription": "/roʊl/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "продолжать действие",
+        "examples": [
+          "Let’s roll!",
+          "Погнали!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "hard",
+    "definition": "тяжёлый, сложный",
+    "transcription": "/hɑːrd/",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "требующий усилий",
+        "examples": [
+          "This exam was really hard.",
+          "Этот экзамен был очень сложным."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "set",
+    "definition": "набор, комплект",
+    "transcription": "/set/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "группа связанных предметов",
+        "examples": [
+          "I bought a new LEGO set.",
+          "Я купил новый набор LEGO."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "level",
+    "definition": "уровень",
+    "transcription": "/ˈlevəl/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "степень мастерства или сложности",
+        "examples": [
+          "I reached level 50 in the game.",
+          "Я достиг 50-го уровня в игре."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "fresh",
+    "definition": "свежий, новый",
+    "transcription": "/freʃ/",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "актуальный или стильный",
+        "examples": [
+          "Your sneakers look fresh!",
+          "Твои кроссовки выглядят свежо!"
+        ]
+      }
+    ]
+  }
+]
