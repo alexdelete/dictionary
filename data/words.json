@@ -654,3 +654,455 @@
     ]
   }
 ]
+[
+  {
+    "word": "crush",
+    "definition": "краш, симпатия",
+    "transcription": "[крэш]",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "объект симпатии или влюблённости",
+        "examples": [
+          "I have a crush on my classmate.",
+          "У меня есть краш на одноклассника."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "fail",
+    "definition": "фейл, неудача",
+    "transcription": "[фейл]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "полный провал",
+        "examples": [
+          "That was a total fail.",
+          "Это был полный фейл."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "lol",
+    "definition": "лол, смешно",
+    "transcription": "[лол]",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "выражение смеха в интернете",
+        "examples": [
+          "I can't stop laughing, lol!",
+          "Не могу остановиться смеяться, лол!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "hype",
+    "definition": "хайп, ажиотаж",
+    "transcription": "[хайп]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "повышенное внимание вокруг чего-либо",
+        "examples": [
+          "There's so much hype around this movie.",
+          "Вокруг этого фильма так много хайпа."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "boost",
+    "definition": "буст, усиление",
+    "transcription": "[буст]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "прилив энергии или улучшение",
+        "examples": [
+          "I need a boost of energy.",
+          "Мне нужен буст энергии."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "troll",
+    "definition": "троллить",
+    "transcription": "[тролить]",
+    "category": "character",
+    "definitions": [
+      {
+        "meaning": "намеренно провоцировать в интернете",
+        "examples": [
+          "He loves to troll people online.",
+          "Он обожает троллить людей в интернете."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "snap",
+    "definition": "снэп, моментальное фото",
+    "transcription": "[снэп]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "быстрое фото или сообщение",
+        "examples": [
+          "She sent me a snap.",
+          "Она прислала мне снэп."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "skill",
+    "definition": "скилл, навык",
+    "transcription": "[скил]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "умение в определённой области",
+        "examples": [
+          "He has great gaming skills.",
+          "У него отличные навыки в играх."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "chill",
+    "definition": "чилл, расслабление",
+    "transcription": "[чил]",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "спокойное времяпрепровождение",
+        "examples": [
+          "Let's just chill and relax.",
+          "Давай просто чилим и отдыхаем."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "selfie",
+    "definition": "селфи",
+    "transcription": "[селфи]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "фотография самого себя",
+        "examples": [
+          "I took a cute selfie.",
+          "Я сделала милое селфи."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "flex",
+    "definition": "флексить, хвастаться",
+    "transcription": "[флексить]",
+    "category": "character",
+    "definitions": [
+      {
+        "meaning": "демонстрировать свои достижения",
+        "examples": [
+          "He likes to flex his new car.",
+          "Он любит флексить своей новой машиной."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "badge",
+    "definition": "бейдж, значок",
+    "transcription": "[бэйдж]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "знак отличия или достижения",
+        "examples": [
+          "I earned a badge for my achievements.",
+          "Я получил бейдж за свои достижения."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "creep",
+    "definition": "крип, странный тип",
+    "transcription": "[крип]",
+    "category": "character",
+    "definitions": [
+      {
+        "meaning": "подозрительный или неприятный человек",
+        "examples": [
+          "That guy is such a creep.",
+          "Этот парень такой крип."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "story",
+    "definition": "сторис, история",
+    "transcription": "[сторис]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "кратковременная публикация в соцсетях",
+        "examples": [
+          "Did you see her latest story?",
+          "Ты видела её последнюю сторис?"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "glitch",
+    "definition": "глитч, сбой",
+    "transcription": "[глитч]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "техническая ошибка или баг",
+        "examples": [
+          "There was a glitch in the game.",
+          "В игре произошёл глитч."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "trend",
+    "definition": "тренд, мода",
+    "transcription": "[тренд]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "популярное направление",
+        "examples": [
+          "This fashion trend is everywhere.",
+          "Этот модный тренд повсюду."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "double",
+    "definition": "дабл, двойной",
+    "transcription": "[дабл]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "удвоенная версия чего-либо",
+        "examples": [
+          "I ordered a double espresso.",
+          "Я заказал дабл эспрессо."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "vibe",
+    "definition": "вайб, атмосфера",
+    "transcription": "[вайб]",
+    "category": "emotion",
+    "definitions": [
+      {
+        "meaning": "эмоциональная обстановка",
+        "examples": [
+          "I love the vibe of this place.",
+          "Мне нравится вайб этого места."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "meme",
+    "definition": "мем",
+    "transcription": "[мем]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "вирусное изображение или шутка",
+        "examples": [
+          "This meme is hilarious!",
+          "Этот мем просто смешной!"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "copy",
+    "definition": "копировать",
+    "transcription": "[копировать]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "воспроизводить чужой стиль",
+        "examples": [
+          "Don't copy my style.",
+          "Не копируй мой стиль."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "code",
+    "definition": "код, программировать",
+    "transcription": "[код]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "писать программный код",
+        "examples": [
+          "I need to write some code.",
+          "Мне нужно написать код."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "post",
+    "definition": "пост, публикация",
+    "transcription": "[пост]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "сообщение в соцсетях",
+        "examples": [
+          "I just made a new post.",
+          "Я только что сделал новый пост."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "screenshot",
+    "definition": "скрин, снимок экрана",
+    "transcription": "[скрин]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "изображение с экрана устройства",
+        "examples": [
+          "Can you send me a screenshot?",
+          "Можешь прислать мне скрин?"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "zoom",
+    "definition": "зум, видеозвонок",
+    "transcription": "[зум]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "платформа для видеоконференций",
+        "examples": [
+          "Let's have a Zoom call.",
+          "Давай устроим зум-звонок."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "diss",
+    "definition": "диз, оскорбление",
+    "transcription": "[диз]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "пренебрежительное высказывание",
+        "examples": [
+          "That was a serious diss.",
+          "Это был серьёзный диз."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "check",
+    "definition": "чек, проверять",
+    "transcription": "[чек]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "убедиться в чём-либо",
+        "examples": [
+          "Can you check this out?",
+          "Можешь это чекнуть?"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "real",
+    "definition": "реал, настоящий",
+    "transcription": "[риал]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "истинный или подлинный",
+        "examples": [
+          "That's a real problem.",
+          "Это реальная проблема."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "top",
+    "definition": "топ, лучший",
+    "transcription": "[топ]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "высший уровень качества",
+        "examples": [
+          "This is a top restaurant.",
+          "Это топ ресторан."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "cool",
+    "definition": "крутой",
+    "transcription": "[крутой]",
+    "category": "status",
+    "definitions": [
+      {
+        "meaning": "отличный или впечатляющий",
+        "examples": [
+          "That's a cool idea.",
+          "Это крутая идея."
+        ]
+      }
+    ]
+  },
+  {
+    "word": "go",
+    "definition": "гоу, идти",
+    "transcription": "[гоу]",
+    "category": "social",
+    "definitions": [
+      {
+        "meaning": "предложение начать действовать",
+        "examples": [
+          "Let's go to the movies.",
+          "Давай гоу в кино."
+        ]
+      }
+    ]
+  }
+]
